@@ -5,7 +5,8 @@ import { DatasetSchema, PlanSchema } from "@marsrutai/shared";
 import { buildPlan, type OptimizeToursResponse } from "./response.js";
 
 const fx = (f: string) => JSON.parse(readFileSync(new URL(`../../fixtures/api/${f}`, import.meta.url), "utf8"));
-const dataset = DatasetSchema.parse(fx("dataset.json"));
+// Įrašyta reali užklausa/atsakymas sukurti be ėjimo laiko, todėl jis čia išjungtas.
+const dataset = DatasetSchema.parse({ ...fx("dataset.json"), settings: { walkMinutes: 0 } });
 const response = fx("response.json") as OptimizeToursResponse;
 const NOW = new Date("2026-11-07T10:00:00Z");
 

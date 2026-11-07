@@ -7,6 +7,7 @@ import PDFDocument from "pdfkit";
 import QRCode from "qrcode";
 import {
   courierNavLinks,
+  walkMinutesOf,
   type NavLink,
   PRIORITY_COLORS,
   PRIORITY_LABELS,
@@ -269,6 +270,13 @@ export function remarkCell(stop: Stop, pkg: Package | undefined): CellInput {
 function drawRouteTable(ctx: Ctx): void {
   const { doc, left, tz } = ctx;
   sectionTitle(ctx, "Maršrutas");
+  const walk = walkMinutesOf(ctx.plan.dataset);
+  if (walk > 0) {
+    note(
+      ctx,
+      `Atvykimas – kada pastatote automobilį prie adreso. Kiekvienai stotelei įskaičiuota ${walk} min nueiti iki kliento ir pareiti atgal, plius perdavimo laikas.`,
+    );
+  }
   const columns: Column[] = [
     { header: "Eil. nr.", width: 32, align: "center" },
     { header: "Atvykimas", width: 52, align: "center" },

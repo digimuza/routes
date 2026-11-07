@@ -54,6 +54,12 @@ Klientas daugiausia veža **fiziniams asmenims** ir **autoservisams** (`recipien
 - Fiziniai asmenys: smulkūs siuntiniai 0.5–15 kg, aptarnavimas 3–6 min, butų numeriai adresuose.
 - PDF ir dashboard autoservisą pažymi atskirai.
 
+### 3.1b Ėjimas iki kliento
+Prie kiekvieno pristatymo pridedama **10 min** nueiti nuo automobilio iki kliento ir pareiti
+(`Dataset.settings.walkMinutes`, numatyta 10, 0–60). Stotelės trukmė = ėjimas + `serviceMinutes`;
+ją naudoja ir Google API (`VisitRequest.duration`), ir mock. `arrival` – automobilio pastatymas
+prie adreso; laiko langas taikomas šiam momentui. PDF tai paaiškina virš maršruto lentelės.
+
 ### 3.2 Kurjeriai
 10 kurjerių, kiekvienas:
 - `id`, `name`, telefonas (rodymui).

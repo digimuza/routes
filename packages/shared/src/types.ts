@@ -59,12 +59,33 @@ export const CourierSchema = z.object({
 });
 export type Courier = z.infer<typeof CourierSchema>;
 
+/** Numatytasis laikas nueiti nuo automobilio iki kliento ir pareiti atgal, minutėmis. */
+export const DEFAULT_WALK_MINUTES = 10;
+
+export const ScenarioSettingsSchema = z.object({
+  /** Pridedama prie kiekvieno pristatymo: nueiti iki kliento ir pareiti (numatyta 10 min). */
+  walkMinutes: z.number().min(0).max(60).optional(),
+});
+export type ScenarioSettings = z.infer<typeof ScenarioSettingsSchema>;
+
 export const DatasetSchema = z.object({
   depot: DepotSchema,
   couriers: z.array(CourierSchema),
   packages: z.array(PackageSchema),
+  /** Neprivalomas: be jo naudojamos numatytosios reikšmės. */
+  settings: ScenarioSettingsSchema.optional(),
 });
 export type Dataset = z.infer<typeof DatasetSchema>;
+
+export const walkMinutesOf = (dataset: Pick<Dataset, "settings">): number =>
+  dataset.settings?.walkMinutes ?? DEFAULT_WALK_MINUTES;
+
+/**
+ * Kiek laiko kurjeris praleidžia stotelėje: ėjimas iki kliento ir atgal + perdavimas.
+ * Šią trukmę naudoja abu optimizatoriai, todėl `departure = arrival + wait + stopMinutes`.
+ */
+export const stopMinutesOf = (dataset: Pick<Dataset, "settings">, pkg: { serviceMinutes?: number }): number =>
+  walkMinutesOf(dataset) + (pkg.serviceMinutes ?? 5);
 
 // ---------------- Plan: vienintelė sąsaja tarp CLI, PDF ir dashboard ----------------
 
