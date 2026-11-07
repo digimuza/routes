@@ -1,0 +1,13 @@
+{
+  "name": "@marsrutai/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "gen-data": "tsx scripts/gen-data.ts",
+    "demo": "tsx src/index.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": { "@marsrutai/shared": "*", "zod": "^3.23.8" },
+  "devDependencies": { "tsx": "^4.19.2", "typescript": "^5.6.3", "@types/node": "^22.9.0" }
+}

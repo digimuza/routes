@@ -1,0 +1,235 @@
+{
+  "generatedAt": "2026-11-07T12:00:00+02:00",
+  "mode": "mock",
+  "dataset": {
+    "depot": {
+      "id": "D1",
+      "name": "Sandėlis Vilnius",
+      "address": "Savanorių pr. 178, Vilnius",
+      "location": {
+        "lat": 54.672,
+        "lng": 25.241
+      },
+      "date": "2026-11-10",
+      "timezone": "Europe/Vilnius",
+      "open": "08:00",
+      "close": "18:00"
+    },
+    "couriers": [
+      {
+        "id": "C01",
+        "name": "Jonas Petraitis",
+        "phone": "+37060000001",
+        "vehicle": "Furgonas",
+        "capacityKg": 150,
+        "shiftStart": "08:00",
+        "shiftEnd": "18:00",
+        "costPerHour": 12,
+        "costPerKm": 0.3,
+        "color": "#1e88e5"
+      },
+      {
+        "id": "C02",
+        "name": "Rūta Žemaitė",
+        "phone": "+37060000002",
+        "vehicle": "Lengvasis",
+        "capacityKg": 80,
+        "shiftStart": "08:00",
+        "shiftEnd": "18:00",
+        "costPerHour": 12,
+        "costPerKm": 0.25,
+        "color": "#43a047"
+      }
+    ],
+    "packages": [
+      {
+        "id": "PKG-001",
+        "recipient": "UAB Šviesa",
+        "address": "Gedimino pr. 9, Vilnius",
+        "location": {
+          "lat": 54.6872,
+          "lng": 25.2797
+        },
+        "priority": 1,
+        "window": {
+          "start": "09:00",
+          "end": "11:00"
+        },
+        "weightKg": 12,
+        "serviceMinutes": 5
+      },
+      {
+        "id": "PKG-002",
+        "recipient": "Aistė Kazlauskienė",
+        "address": "Žirmūnų g. 68, Vilnius",
+        "location": {
+          "lat": 54.7105,
+          "lng": 25.299
+        },
+        "priority": 2,
+        "window": {
+          "start": "10:00",
+          "end": "14:00"
+        },
+        "weightKg": 4,
+        "serviceMinutes": 5
+      },
+      {
+        "id": "PKG-003",
+        "recipient": "Kavinė „Ąžuolas“",
+        "address": "Pylimo g. 21, Vilnius",
+        "location": {
+          "lat": 54.6791,
+          "lng": 25.2775
+        },
+        "priority": 3,
+        "window": {
+          "start": "12:00",
+          "end": "17:00"
+        },
+        "weightKg": 8,
+        "serviceMinutes": 5
+      },
+      {
+        "id": "PKG-004",
+        "recipient": "Mindaugas Čepulis",
+        "address": "Antakalnio g. 40, Vilnius",
+        "location": {
+          "lat": 54.699,
+          "lng": 25.316
+        },
+        "priority": 1,
+        "window": {
+          "start": "09:00",
+          "end": "12:00"
+        },
+        "weightKg": 20,
+        "serviceMinutes": 5
+      },
+      {
+        "id": "PKG-005",
+        "recipient": "UAB Ūkis",
+        "address": "Ukmergės g. 220, Vilnius",
+        "location": {
+          "lat": 54.732,
+          "lng": 25.242
+        },
+        "priority": 3,
+        "window": {
+          "start": "13:00",
+          "end": "18:00"
+        },
+        "weightKg": 35,
+        "serviceMinutes": 5
+      }
+    ]
+  },
+  "routes": [
+    {
+      "courierId": "C01",
+      "start": "2026-11-10T08:30:00+02:00",
+      "end": "2026-11-10T11:05:00+02:00",
+      "stops": [
+        {
+          "seq": 1,
+          "packageId": "PKG-001",
+          "arrival": "2026-11-10T09:00:00+02:00",
+          "departure": "2026-11-10T09:05:00+02:00",
+          "lateMinutes": 0,
+          "waitMinutes": 0,
+          "distanceFromPrevKm": 3.4
+        },
+        {
+          "seq": 2,
+          "packageId": "PKG-004",
+          "arrival": "2026-11-10T09:20:00+02:00",
+          "departure": "2026-11-10T09:25:00+02:00",
+          "lateMinutes": 0,
+          "waitMinutes": 0,
+          "distanceFromPrevKm": 3.8
+        },
+        {
+          "seq": 3,
+          "packageId": "PKG-002",
+          "arrival": "2026-11-10T09:40:00+02:00",
+          "departure": "2026-11-10T10:05:00+02:00",
+          "lateMinutes": 0,
+          "waitMinutes": 20,
+          "distanceFromPrevKm": 2.6
+        }
+      ],
+      "totalKm": 15.1,
+      "totalMinutes": 155,
+      "totalWeightKg": 36,
+      "path": [
+        [
+          54.672,
+          25.241
+        ],
+        [
+          54.6872,
+          25.2797
+        ],
+        [
+          54.699,
+          25.316
+        ],
+        [
+          54.7105,
+          25.299
+        ],
+        [
+          54.672,
+          25.241
+        ]
+      ]
+    },
+    {
+      "courierId": "C02",
+      "start": "2026-11-10T11:40:00+02:00",
+      "end": "2026-11-10T13:40:00+02:00",
+      "stops": [
+        {
+          "seq": 1,
+          "packageId": "PKG-003",
+          "arrival": "2026-11-10T12:00:00+02:00",
+          "departure": "2026-11-10T12:05:00+02:00",
+          "lateMinutes": 0,
+          "waitMinutes": 0,
+          "distanceFromPrevKm": 3.1
+        }
+      ],
+      "totalKm": 6.2,
+      "totalMinutes": 120,
+      "totalWeightKg": 8,
+      "path": [
+        [
+          54.672,
+          25.241
+        ],
+        [
+          54.6791,
+          25.2775
+        ],
+        [
+          54.672,
+          25.241
+        ]
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "packageId": "PKG-005",
+      "reason": "Neužtenka talpos / laiko (pavyzdys)"
+    }
+  ],
+  "metrics": {
+    "totalKm": 21.3,
+    "totalHours": 4.6,
+    "deliveredCount": 4,
+    "skippedCount": 1,
+    "lateCount": 0,
+    "totalCost": 70.5
+  }
+}

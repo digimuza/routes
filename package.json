@@ -1,0 +1,14 @@
+{
+  "name": "marsrutai",
+  "private": true,
+  "type": "module",
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "gen-data": "npm run gen-data -w @marsrutai/cli",
+    "demo": "npm run demo -w @marsrutai/cli --",
+    "dev": "npm run dev -w @marsrutai/dashboard",
+    "build": "npm run build -w @marsrutai/dashboard",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "engines": { "node": ">=20" }
+}
