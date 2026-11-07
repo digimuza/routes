@@ -1,6 +1,6 @@
 # Demo specifikacija: kurjerių maršrutų planavimas su Google Route Optimization API
 
-Versija: 0.3, 2026-11-07
+Versija: 0.4, 2026-11-07
 
 ## 1. Tikslas
 
@@ -213,6 +213,52 @@ Layout: kairėje šoninė juosta (~320 px), dešinėje žemėlapis per visą lik
 Neįeina (galima vėliau): optimizacijos paleidimas iš naršyklės, duomenų redagavimas,
 stotelių perstumdymas drag-and-drop, realaus laiko pozicijos.
 
+## 5b. Interaktyvus scenarijų redaktorius (v0.4)
+
+Vartotojas pats susikuria demo scenarijų dashboard'e ir iš jo sugeneruoja maršrutus bei PDF.
+
+**Miestas**: viršuje perjungiklis „Vilnius / Kaunas". Kiekvienas miestas turi savo sandėlį
+ir žemėlapio centrą. Scenarijus vienu metu yra vieno miesto: Kaune esantis kurjeris nevažiuoja į
+Vilnių. Perjungus miestą, dabartinis scenarijus išsaugomas ir užkraunamas to miesto scenarijus.
+
+**Paketai**:
+- Mygtukas „Generuoti atsitiktinius": kiekis (numatyta 30) ir prioritetų pasiskirstymas
+  (numatyta 20 / 45 / 35 %). Taškai imami iš kuruoto realių to miesto adresų sąrašo su
+  ~50 m paklaida, kad nepatektų į upę ar mišką. Galima „pridėti" arba „pakeisti visus".
+- Paspaudus ant žemėlapio, pridedamas paketas tame taške. Atsiranda forma: prioritetas 1/2/3,
+  laiko langas, svoris, gavėjas, adresas. Adresas numatytai būna „lat, lng"; atvirkštinis
+  geokodavimas neįeina.
+- Paspaudus ant paketo žymeklio: keisti prioritetą, langą, svorį arba ištrinti. Žymeklio
+  spalva rodo prioritetą.
+- Mygtukas „Išvalyti paketus".
+
+**Kurjeriai**:
+- Sąrašas su mygtuku „Pridėti kurjerį". Laukai: vardas (numatytai sugeneruojamas lietuviškas),
+  talpa kg, pamainos pradžia ir pabaiga, transporto tipas. Spalva parenkama automatiškai iš paletės.
+- Kurjerį galima redaguoti ir ištrinti. Numatytai naujame scenarijuje yra 10 kurjerių.
+
+**Optimizavimas**:
+- Mygtukas „Sudaryti maršrutus" su pasirinkimu „Google API / Mock". Serveris paleidžia optimizatorių,
+  įrašo `out/<miestas>/plan.json`, sugeneruoja PDF kiekvienam kurjeriui ir grąžina planą.
+- Po optimizacijos žemėlapis rodo maršrutus kaip 5a skyriuje. Paketų redagavimas paslepia
+  pasenusius maršrutus ir rodo žymą „planas pasenęs".
+- Prie kiekvieno kurjerio yra nuoroda „PDF" ir bendras mygtukas „Atsisiųsti visus PDF" (ZIP).
+
+**Lokalus serveris** `packages/server` (Node, `hono` arba `node:http`), paleidžiamas kartu su Vite
+per `npm run dev`. Vite proxy'ina `/api` ir `/out` į serverį.
+
+| Metodas | Kelias | Aprašas |
+|---|---|---|
+| GET | `/api/cities` | miestų sąrašas: id, pavadinimas, sandėlis, centras, ribos |
+| GET | `/api/scenario?city=vilnius` | dabartinis `Dataset` (jei nėra, sukuriamas tuščias su 10 kurjerių) |
+| PUT | `/api/scenario?city=vilnius` | išsaugo `Dataset` į `data/scenarios/<miestas>.json` |
+| POST | `/api/generate` | `{city, count, mix:{p1,p2,p3}, seed?}`, grąžina naujus `Package[]` (neįrašo) |
+| POST | `/api/optimize` | `{city, mode:"api"\|"mock"}`, grąžina `Plan` ir PDF failų sąrašą |
+| GET | `/api/pdfs.zip?city=vilnius` | visi to miesto PDF vienu ZIP |
+| GET | `/out/**` | statiniai rezultatai (plan.json, PDF) |
+
+Bendri užklausų / atsakymų tipai įrašomi į `packages/shared/src/api.ts`.
+
 ## 6. Suvestinė (`out/summary.md` ir konsolė)
 
 Lentelė per kurjerius: paketų sk., km, valandos, pakrauta kg / talpa, vėluojančių sk.
@@ -232,6 +278,10 @@ balansavimas, vėlavimų minimizavimas, kurie paketai netilpo.
 - [ ] Kurjerių įjungimas / išjungimas ir „tik šis" veikia; paspaudus stotelę rodomas popup.
 - [ ] Nuoroda „PDF" dashboard'e atidaro atitinkamą kurjerio PDF.
 - [ ] `npm run build -w dashboard` sukuria statinį build'ą be klaidų.
+- [ ] Dashboard'e galima pasirinkti Vilnių arba Kauną ir sugeneruoti atsitiktinius paketus to miesto ribose.
+- [ ] Paspaudus žemėlapį, pridedamas paketas su pasirinktu prioritetu. Paketą galima redaguoti ir ištrinti.
+- [ ] Kurjerius galima pridėti, redaguoti ir ištrinti.
+- [ ] „Sudaryti maršrutus" su Google API sukuria maršrutus ir PDF kiekvienam kurjeriui. PDF atsidaro iš dashboard'o, veikia ir ZIP atsisiuntimas.
 - [ ] README su paleidimo instrukcija ir GCP setup žingsniais.
 
 ## 8. Rizikos ir pastabos
