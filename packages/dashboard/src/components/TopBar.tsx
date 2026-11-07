@@ -3,6 +3,7 @@ import type { City, CityId } from "@marsrutai/shared";
 import type { OptimizeMode, OptimizeRun, SaveStatus } from "../state/useWorkspace";
 import { Segmented } from "./Segmented";
 import { Icon } from "./Icon";
+import type { DownloadProgress } from "../lib/downloads";
 
 interface Props {
   cities: City[];
@@ -17,8 +18,8 @@ interface Props {
   disabledReason: string | null;
   onOptimize: () => void;
   depotDate: string | null;
-  /** Visų kurjerių PDF archyvas; `null`, kol planas nesudarytas. */
-  zip: { url: string; fileName: string; stale: boolean } | null;
+  /** Visų kurjerių PDF (atskirais failais); `null`, kol planas nesudarytas. */
+  pdfs: { stale: boolean; progress: DownloadProgress | null; onDownload: () => void } | null;
 }
 
 function SaveIndicator({ save, onRetry }: { save: Props["save"]; onRetry: () => void }) {
@@ -114,16 +115,29 @@ export function TopBar(p: Props) {
             </>
           )}
         </button>
-        {p.zip ? (
-          <a
+        {p.pdfs ? (
+          <button
+            type="button"
             className="btn btn--secondary btn--lg btn--zip"
-            href={p.zip.url}
-            download={p.zip.fileName}
-            title={p.zip.stale ? "PDF atitinka paskutinį sudarytą planą (scenarijus po to keistas)" : "Visų kurjerių maršruto lapai vienu ZIP failu"}
+            onClick={p.pdfs.onDownload}
+            disabled={p.pdfs.progress != null && !p.pdfs.progress.finished}
+            aria-busy={p.pdfs.progress != null && !p.pdfs.progress.finished}
+            title={p.pdfs.stale ? "PDF atitinka paskutinį sudarytą planą (scenarijus po to keistas)" : "Kiekvieno kurjerio maršruto lapas atskiru PDF failu"}
           >
-            <Icon name="download" size={18} />
-            Atsisiųsti visus PDF
-          </a>
+            {p.pdfs.progress && !p.pdfs.progress.finished ? (
+              <>
+                <span className="spinner spinner--sm" aria-hidden="true" />
+                <span className="num">
+                  Atsisiunčiama {p.pdfs.progress.done + 1 > p.pdfs.progress.total ? p.pdfs.progress.total : p.pdfs.progress.done + 1} iš {p.pdfs.progress.total}
+                </span>
+              </>
+            ) : (
+              <>
+                <Icon name="download" size={18} />
+                Atsisiųsti visus PDF
+              </>
+            )}
+          </button>
         ) : (
           <span className="zipwrap" title="PDF atsiras, kai sudarysite maršrutus">
             <button type="button" className="btn btn--secondary btn--lg btn--zip" disabled aria-describedby="zip-why">

@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef } from "react";
-import type { OptimizeResponse } from "@marsrutai/shared";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { courierNavLinks, type OptimizeResponse } from "@marsrutai/shared";
 import { fmtEur, fmtHours, fmtKg, fmtKm, fmtNum, formatDateTime, makeMinuteOfDay, makeTimeFormatter, minToHours, toMinutes, type PlanIndex } from "../format";
 import { inkOn } from "../lib/palette";
 import { PriorityMark } from "./PriorityMark";
 import { Icon } from "./Icon";
 import { RecipientTag } from "./RecipientTag";
+import { NavActions, NavParts } from "./NavActions";
 
 interface Props {
   result: OptimizeResponse | null;
@@ -66,6 +67,8 @@ function PlanBody({ result, index, stale, hidden, hovered, busy, canOptimize, se
   const visibleCount = couriers.filter((c) => !hidden.has(c.id)).length;
   const fmtTime = useMemo(() => makeTimeFormatter(tz), [tz]);
   const listRef = useRef<HTMLUListElement>(null);
+  const navLinks = useMemo(() => new Map(couriers.map((c) => [c.id, courierNavLinks(plan, c.id)])), [plan, couriers]);
+  const [navOpen, setNavOpen] = useState<string | null>(null);
   useEffect(() => {
     if (!selected) return;
     listRef.current?.querySelector(`[data-id="${CSS.escape(selected)}"]`)?.scrollIntoView({ block: "nearest", behavior: "smooth" });
@@ -130,6 +133,9 @@ function PlanBody({ result, index, stale, hidden, hovered, busy, canOptimize, se
             <Icon name="focus" size={16} />
             Rodyti visą planą
           </button>
+          <a className="textlink" href={result.zipUrl} download={`marsrutai-${plan.dataset.depot.date}.zip`}>
+            Visi PDF vienu ZIP
+          </a>
         </div>
       </section>
 
@@ -233,7 +239,14 @@ function PlanBody({ result, index, stale, hidden, hovered, busy, canOptimize, se
                       PDF
                     </span>
                   )}
+                  <NavActions
+                    courier={c}
+                    links={navLinks.get(c.id) ?? []}
+                    open={navOpen === c.id}
+                    onToggle={() => setNavOpen((o) => (o === c.id ? null : c.id))}
+                  />
                 </span>
+                {navOpen === c.id && (navLinks.get(c.id)?.length ?? 0) > 1 && <NavParts links={navLinks.get(c.id)!} />}
                 {isSel && route && (
                   <table className="stops">
                     <caption className="sr-only">{c.name}: stotelės eilės tvarka</caption>

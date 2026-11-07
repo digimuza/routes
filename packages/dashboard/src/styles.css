@@ -1939,3 +1939,116 @@ button.row:hover,
 .leaflet-overlay-pane path.leaflet-interactive:focus {
   outline: none;
 }
+
+/* kurjerio navigacija (Google Maps) – antriniai veiksmai */
+.route__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+}
+.route__actions .btn--xs {
+  justify-content: flex-start;
+}
+.btn--xs.is-active {
+  background: var(--blue-wash);
+  color: var(--blue-press);
+}
+.navparts {
+  grid-column: 2 / -1;
+  display: grid;
+  gap: 2px;
+  margin: 2px 0 6px;
+  padding: 6px 8px;
+  list-style: none;
+  background: var(--field);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+}
+.navparts li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.navparts a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.navparts__end {
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  color: var(--ink-3);
+}
+.textlink {
+  margin-left: auto;
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.textlink:hover {
+  color: var(--ink);
+}
+
+/* PDF atsisiuntimo eiga */
+.dltoast {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  z-index: 1200;
+  width: 330px;
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px 12px 14px;
+  background: var(--field);
+  border: 1px solid var(--ink);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-pop);
+  animation: insp-in 0.2s var(--ease);
+}
+.dltoast__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dltoast__head strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.dltoast__bar {
+  height: 4px;
+  background: var(--rule-soft);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.dltoast__bar i {
+  display: block;
+  height: 100%;
+  background: var(--blue);
+  transition: width 0.2s var(--ease);
+}
+.dltoast__hint {
+  font-size: 0.87rem;
+  color: var(--ink-2);
+}
+.dltoast__fail {
+  font-size: 0.87rem;
+  color: var(--bad);
+  font-weight: 600;
+}
+.dltoast__zip {
+  justify-self: start;
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  text-underline-offset: 3px;
+}

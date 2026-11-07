@@ -12,6 +12,8 @@ import { PlanPanel } from "./components/PlanPanel";
 import { CourierInspector, PackageInspector } from "./components/Inspector";
 import { ServerDown } from "./components/ServerDown";
 import { Icon } from "./components/Icon";
+import { DownloadToast } from "./components/DownloadToast";
+import { downloadPdfsSeparately, type DownloadProgress } from "./lib/downloads";
 import { MapView, type FocusRequest } from "./map/MapView";
 
 type Tab = "packages" | "couriers" | "plan";
@@ -38,6 +40,12 @@ export function App() {
   const [focus, setFocus] = useState<FocusRequest | null>(null);
   const [generating, setGenerating] = useState(false);
   const [generateError, setGenerateError] = useState<string | null>(null);
+  const [dl, setDl] = useState<DownloadProgress | null>(null);
+  const closeDl = useCallback(() => setDl((d) => (d && !d.finished ? d : null)), []);
+  const downloadAll = async () => {
+    if (!result || (dl && !dl.finished)) return;
+    await downloadPdfsSeparately(result, setDl);
+  };
 
   useEffect(() => localStorage.setItem(MODE_KEY, mode), [mode]);
 
@@ -247,7 +255,7 @@ export function App() {
         disabledReason={disabledReason}
         onOptimize={() => void optimize()}
         depotDate={scenario?.depot.date ?? null}
-        zip={result ? { url: result.zipUrl, fileName: `marsrutai-${ws.cityId}-${result.plan.dataset.depot.date}.zip`, stale } : null}
+        pdfs={result ? { stale, progress: dl, onDownload: () => void downloadAll() } : null}
       />
 
       <div className="work">
@@ -386,6 +394,15 @@ export function App() {
             <div className="stagebanner" role="status">
               Planas pasenęs: rodomas paskutinis sudarytas planas
             </div>
+          )}
+
+          {dl && result && (
+            <DownloadToast
+              progress={dl}
+              zipUrl={result.zipUrl}
+              zipFileName={`marsrutai-${ws.cityId}-${result.plan.dataset.depot.date}.zip`}
+              onClose={closeDl}
+            />
           )}
 
           {draft && <PackageInspector pkg={draft} isNew onSave={(p) => savePackage(p, true)} onDelete={() => setSel(null)} onClose={() => setSel(null)} />}
