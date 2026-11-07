@@ -13,11 +13,6 @@ export const COURIER_PEOPLE: readonly (readonly [name: string, vehicle: string, 
   ["Mindaugas Šimkus", "Furgonas Renault Kangoo", 150],
 ];
 
-/** 10 visually distinct, map-friendly colours (tab10-like, no grey which is reserved for p3). */
-export const COURIER_COLORS = [
-  "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
-  "#8c564b", "#e377c2", "#17becf", "#808000", "#000075",
-] as const;
 
 /** Couriers (0-based index) whose shift starts at 09:00. */
 export const LATE_START = new Set([4, 8]);
@@ -48,10 +43,6 @@ export const SURNAMES: readonly (readonly [string, string, string])[] = [
 export const NOTES_PERSON = ["Skambinti prieš atvykstant", "Palikti prie durų", "Durų kodas 1234#", "Neveikia skambutis, skambinti telefonu", "Laiptinė iš kiemo pusės", "Trapus siuntinys"];
 
 /** Papildomos spalvos kurjeriams virš 10 (be pilkos ir prioritetų raudonos/geltonos). */
-export const EXTRA_COURIER_COLORS = [
-  "#3cb44b", "#4363d8", "#f58231", "#911eb4", "#42d4f4",
-  "#f032e6", "#469990", "#9a6324", "#800000", "#aaffc3",
-] as const;
 
 
 // ---- Autoservisai (išgalvoti pavadinimai) ----

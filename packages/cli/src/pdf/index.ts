@@ -7,6 +7,7 @@ import PDFDocument from "pdfkit";
 import QRCode from "qrcode";
 import {
   courierNavLinks,
+  displayColors,
   walkMinutesOf,
   type NavLink,
   PRIORITY_COLORS,
@@ -417,8 +418,10 @@ function drawPageChrome(ctx: Ctx): void {
 // ---------------------------------------------------------------- viešas API
 
 export async function renderCourierPdf(plan: Plan, courierId: string, outFile: string): Promise<void> {
-  const courier = plan.dataset.couriers.find((c) => c.id === courierId);
-  if (!courier) throw new Error(`Kurjeris ${courierId} nerastas plane`);
+  const found = plan.dataset.couriers.find((c) => c.id === courierId);
+  if (!found) throw new Error(`Kurjeris ${courierId} nerastas plane`);
+  // Ta pati rodymo spalva kaip dashboard'e (be prioritetų ir veiksmo spalvų).
+  const courier = { ...found, color: displayColors(plan.dataset.couriers).get(courierId) ?? found.color };
   const route = plan.routes.find((r) => r.courierId === courierId);
   const pkgById = new Map(plan.dataset.packages.map((p) => [p.id, p]));
   const stops = [...(route?.stops ?? [])]

@@ -1,12 +1,10 @@
 // Sintetinių duomenų generavimas: demo rinkiniai (scripts/gen-data.ts), atsitiktiniai paketai
 // serveriui (POST /api/generate), numatytieji kurjeriai ir tuščias scenarijus (SPEC 5b).
 import { randomInt } from "node:crypto";
-import type { CityId, Courier, Dataset, Depot, GenerateRequest, Package, Priority } from "@marsrutai/shared";
+import { COURIER_PALETTE, type CityId, type Courier, type Dataset, type Depot, type GenerateRequest, type Package, type Priority } from "@marsrutai/shared";
 import { CITY_DEFS, type CityDef } from "./cities.js";
 import {
-  COURIER_COLORS,
   COURIER_PEOPLE,
-  EXTRA_COURIER_COLORS,
   FEMALE_FIRST,
   LATE_START,
   MALE_FIRST,
@@ -222,9 +220,9 @@ function makeCouriers(rng: Rng, count: number): Courier[] {
 }
 
 /** Kurjerio spalva pagal indeksą: 10 pagrindinių, paskui papildoma paletė ratu. */
+/** Kurjerio spalva iš bendros paletės (be prioritetų ir veiksmo spalvų). */
 export function courierColor(index: number): string {
-  if (index < COURIER_COLORS.length) return COURIER_COLORS[index]!;
-  return EXTRA_COURIER_COLORS[(index - COURIER_COLORS.length) % EXTRA_COURIER_COLORS.length]!;
+  return COURIER_PALETTE[index % COURIER_PALETTE.length]!;
 }
 
 /** Numatytieji miesto kurjeriai (deterministiniai). */

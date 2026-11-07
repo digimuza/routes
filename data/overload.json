@@ -23,7 +23,7 @@
       "shiftEnd": "18:00",
       "costPerHour": 12.5,
       "costPerKm": 0.3,
-      "color": "#1f77b4"
+      "color": "#2e7d32"
     },
     {
       "id": "C02",
@@ -35,7 +35,7 @@
       "shiftEnd": "18:00",
       "costPerHour": 12.1,
       "costPerKm": 0.28,
-      "color": "#ff7f0e"
+      "color": "#7b3fa0"
     },
     {
       "id": "C03",
@@ -47,7 +47,7 @@
       "shiftEnd": "18:00",
       "costPerHour": 12.4,
       "costPerKm": 0.3,
-      "color": "#2ca02c"
+      "color": "#00838f"
     },
     {
       "id": "C04",
@@ -59,7 +59,7 @@
       "shiftEnd": "18:00",
       "costPerHour": 11.9,
       "costPerKm": 0.34,
-      "color": "#d62728"
+      "color": "#8d5524"
     },
     {
       "id": "C05",
@@ -71,7 +71,7 @@
       "shiftEnd": "18:00",
       "costPerHour": 11.6,
       "costPerKm": 0.26,
-      "color": "#9467bd"
+      "color": "#689f38"
     },
     {
       "id": "C06",
@@ -83,7 +83,7 @@
       "shiftEnd": "18:00",
       "costPerHour": 11.9,
       "costPerKm": 0.32,
-      "color": "#8c564b"
+      "color": "#ad5cc7"
     },
     {
       "id": "C07",
@@ -95,7 +95,7 @@
       "shiftEnd": "18:00",
       "costPerHour": 11.9,
       "costPerKm": 0.3,
-      "color": "#e377c2"
+      "color": "#37474f"
     },
     {
       "id": "C08",
@@ -107,7 +107,7 @@
       "shiftEnd": "18:00",
       "costPerHour": 12,
       "costPerKm": 0.27,
-      "color": "#17becf"
+      "color": "#5e35b1"
     },
     {
       "id": "C09",
@@ -119,7 +119,7 @@
       "shiftEnd": "18:00",
       "costPerHour": 11.6,
       "costPerKm": 0.32,
-      "color": "#808000"
+      "color": "#00695c"
     },
     {
       "id": "C10",
@@ -131,7 +131,7 @@
       "shiftEnd": "18:00",
       "costPerHour": 12,
       "costPerKm": 0.3,
-      "color": "#000075"
+      "color": "#7d6224"
     }
   ],
   "packages": [
