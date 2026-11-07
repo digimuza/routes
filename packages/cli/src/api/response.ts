@@ -107,17 +107,21 @@ export function buildPlan(dataset: Dataset, response: OptimizeToursResponse, gen
       const p = pkgOf(v.shipmentIndex, v.shipmentLabel);
       delivered.add(p.id);
       weight += p.weightKg;
+      // visit.startTime = aptarnavimo pradžia (po laukimo). Plan.arrival = atvykimas prie durų,
+      // todėl atimame prieš vizitą buvusios transition laukimą (kaip mock ir fixture).
       const startMs = ms(v.startTime);
+      const tr = transitions[i];
+      const waitSec = parseDurationSec(tr?.waitDuration);
+      const arrivalMs = startMs - waitSec * 1000;
       const endMs = startMs + (p.serviceMinutes ?? 5) * 60_000;
       const windowEndMs = localToUtcMs(depot.date, p.window.end, tz);
-      const tr = transitions[i];
       return {
         seq: i + 1,
         packageId: p.id,
-        arrival: toLocalIso(startMs, tz),
+        arrival: toLocalIso(arrivalMs, tz),
         departure: toLocalIso(endMs, tz),
         lateMinutes: round(Math.max(0, (startMs - windowEndMs) / 60_000), 1),
-        waitMinutes: round(parseDurationSec(tr?.waitDuration) / 60, 1),
+        waitMinutes: round(waitSec / 60, 1),
         distanceFromPrevKm: round((tr?.travelDistanceMeters ?? 0) / 1000, 2),
       };
     });
@@ -154,7 +158,7 @@ export function buildPlan(dataset: Dataset, response: OptimizeToursResponse, gen
   const totalKm = round(routes.reduce((s, r) => s + r.totalKm, 0), 2);
   const allStops = routes.flatMap((r) => r.stops);
   const plan: Plan = {
-    generatedAt: generatedAt.toISOString(),
+    generatedAt: toLocalIso(Math.floor(generatedAt.getTime() / 1000) * 1000, tz),
     mode: "api",
     dataset,
     routes,

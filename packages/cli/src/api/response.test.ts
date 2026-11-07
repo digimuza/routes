@@ -13,7 +13,7 @@ test("planas validus ir atitinka API visits tvarką", () => {
   const plan = buildPlan(dataset, response, NOW);
   PlanSchema.parse(plan);
   assert.equal(plan.mode, "api");
-  assert.equal(plan.generatedAt, "2026-11-07T10:00:00.000Z");
+  assert.equal(plan.generatedAt, "2026-11-07T12:00:00+02:00");
   assert.deepEqual(plan.routes.map((r) => r.courierId), ["C01", "C02", "C03"]);
   for (const [i, r] of plan.routes.entries()) {
     const api = response.routes!.find((x) => x.vehicleLabel === r.courierId)!;
@@ -94,4 +94,20 @@ test("praleistas be priežasties kodo → bendras paaiškinimas; index 0 be labe
   assert.equal(plan.skipped.length, dataset.packages.length);
   assert.equal(plan.routes.length, dataset.couriers.length);
   assert.equal(plan.metrics.totalCost, undefined);
+});
+
+test("arrival = atvykimas prie durų (vizito pradžia − laukimas), departure = pradžia + aptarnavimas", () => {
+  const resp = structuredClone(response);
+  const r = resp.routes!.find((x) => x.vehicleLabel === "C03")!;
+  // Dirbtinai: 7 min 30 s laukimo prieš pirmą vizitą.
+  r.transitions![0]!.waitDuration = "450s";
+  const plan = buildPlan(dataset, resp, NOW);
+  const s = plan.routes.find((x) => x.courierId === "C03")!.stops[0]!;
+  assert.equal(s.arrival, "2026-11-10T09:25:04+02:00");
+  assert.equal(s.departure, "2026-11-10T09:37:34+02:00");
+  assert.equal(s.waitMinutes, 7.5);
+  // be laukimo arrival sutampa su vizito pradžia
+  const s2 = plan.routes.find((x) => x.courierId === "C03")!.stops[1]!;
+  const visit2 = new Date(r.visits![1]!.startTime).getTime();
+  assert.equal(new Date(s2.arrival).getTime(), visit2);
 });
