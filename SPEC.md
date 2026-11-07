@@ -46,6 +46,14 @@ Kiekvienas paketas turi:
 Visi paketai paimami sandėlyje dienos pradžioje (kurjeris startuoja iš sandėlio jau su
 savo paketais, todėl modelyje pickup = sandėlis, laiko kaštų jam neskiriame).
 
+### 3.1a Gavėjai
+Klientas daugiausia veža **fiziniams asmenims** ir **autoservisams** (`recipientType`:
+`person` / `autoservice`, numatyta 65 / 35 %, keičiama `autoservicePct` generuojant).
+- Autoservisai: darbo laikas 08:00–17:00, skubūs (p1) siuntiniai rytą („automobilis ant keltuvo"),
+  sunkesnės autodalys 2–30 kg (diskai, padangos, akumuliatoriai), aptarnavimas 5–10 min.
+- Fiziniai asmenys: smulkūs siuntiniai 0.5–15 kg, aptarnavimas 3–6 min, butų numeriai adresuose.
+- PDF ir dashboard autoservisą pažymi atskirai.
+
 ### 3.2 Kurjeriai
 10 kurjerių, kiekvienas:
 - `id`, `name`, telefonas (rodymui).

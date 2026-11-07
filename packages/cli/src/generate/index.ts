@@ -10,7 +10,7 @@ import {
   FEMALE_FIRST,
   LATE_START,
   MALE_FIRST,
-  NOTES_COMPANY,
+  NOTES_AUTOSERVICE,
   NOTES_PERSON,
   SURNAMES,
 } from "./people.js";
@@ -48,6 +48,28 @@ function personName(rng: Rng): string {
   const sn = rng.pick(SURNAMES);
   if (rng.chance(0.5)) return `${rng.pick(MALE_FIRST)} ${sn[0]}`;
   return `${rng.pick(FEMALE_FIRST)} ${rng.chance(0.6) ? sn[1] : sn[2]}`;
+}
+
+/** Autoservisai dirba 08:00–17:00; skubūs (p1) – rytą, kol automobilis ant keltuvo. */
+function makeAutoserviceWindow(rng: Rng, priority: Priority): { start: string; end: string } {
+  const H = 60;
+  if (priority === 1) {
+    const [s, e] = rng.weighted<readonly [number, number]>([
+      [[8 * H, 10 * H], 4],
+      [[8 * H + 30, 10 * H + 30], 3],
+      [[9 * H, 11 * H], 3],
+    ]);
+    return { start: hhmm(s), end: hhmm(e) };
+  }
+  if (priority === 2) {
+    const [s, e] = rng.weighted<readonly [number, number]>([
+      [[8 * H, 12 * H], 3],
+      [[10 * H, 13 * H], 2],
+      [[12 * H, 16 * H], 2],
+    ]);
+    return { start: hhmm(s), end: hhmm(e) };
+  }
+  return { start: hhmm(8 * H), end: hhmm(17 * H) };
 }
 
 function makeWindow(rng: Rng, priority: Priority): { start: string; end: string } {
@@ -109,6 +131,8 @@ interface PackageOptions {
   /** Weight = 0.5 + 29.5 * u^skew; higher skew → lighter packages. */
   weightSkew: number;
   mix: PriorityMix;
+  /** Autoservisų dalis 0–100 %, likusieji – fiziniai asmenys. */
+  autoservicePct: number;
   ids: string[];
 }
 
@@ -126,29 +150,38 @@ function makePackages(rng: Rng, o: PackageOptions): Package[] {
   const { def, mix } = o;
   if (!(mix.p1 + mix.p2 + mix.p3 > 0)) throw new Error("Prioritetų pasiskirstymo suma turi būti didesnė už 0");
   const city = def.city.name;
+  const autoShare = Math.min(100, Math.max(0, o.autoservicePct)) / 100;
   return pickAddresses(rng, def, o.count).map(([street, lat, lng], i) => {
-    // RNG kvietimų tvarka nekeičiama: nuo jos priklauso data/*.json (deterministinis seed).
     const priority = rng.weighted<Priority>([[1, mix.p1], [2, mix.p2], [3, mix.p3]]);
-    const isCompany = rng.chance(0.35);
-    const recipient = isCompany ? rng.pick(def.companies) : personName(rng);
-    const address = !isCompany && rng.chance(0.45) ? `${street}-${rng.int(1, 80)}, ${city}` : `${street}, ${city}`;
-    const weightKg = Math.max(0.5, round(0.5 + 29.5 * rng.float() ** o.weightSkew, 1));
-    const serviceMinutes = rng.weighted<number>([[3, 3], [4, 4], [5, 5], [6, 3], [7, 2], [8, 1], [10, 1]]);
+    const isAuto = rng.chance(autoShare);
+    const recipient = isAuto ? rng.pick(def.autoservices) : personName(rng);
+    const address = !isAuto && rng.chance(0.45) ? `${street}-${rng.int(1, 80)}, ${city}` : `${street}, ${city}`;
+    // Autodalys sunkesnės (2–30 kg: diskai, padangos, akumuliatoriai); asmenims – daugiausia smulkūs siuntiniai.
+    const weightKg = isAuto
+      ? round(2 + 28 * rng.float() ** 1.4, 1)
+      : Math.max(0.5, round(0.5 + 14.5 * rng.float() ** o.weightSkew, 1));
+    const serviceMinutes = isAuto
+      ? rng.weighted<number>([[5, 3], [6, 3], [8, 2], [10, 2]])
+      : rng.weighted<number>([[3, 4], [4, 4], [5, 3], [6, 1]]);
     const pkg: Package = {
       id: o.ids[i]!,
       recipient,
-      ...(rng.chance(0.85) ? { phone: phone(rng) } : {}),
+      recipientType: isAuto ? "autoservice" : "person",
+      ...(rng.chance(isAuto ? 0.95 : 0.85) ? { phone: phone(rng) } : {}),
       address,
       location: jitter(rng, lat, lng, JITTER_METERS),
       priority,
-      window: makeWindow(rng, priority),
+      window: isAuto ? makeAutoserviceWindow(rng, priority) : makeWindow(rng, priority),
       weightKg,
       serviceMinutes,
     };
-    if (rng.chance(0.15)) pkg.note = rng.pick(isCompany ? NOTES_COMPANY : NOTES_PERSON);
+    if (rng.chance(isAuto ? 0.35 : 0.15)) pkg.note = rng.pick(isAuto ? NOTES_AUTOSERVICE : NOTES_PERSON);
     return pkg;
   });
 }
+
+/** Numatyta autoservisų dalis, %. */
+export const DEFAULT_AUTOSERVICE_PCT = 35;
 
 /** POST /api/generate: atsitiktiniai miesto paketai. Be `seed` – atsitiktinis seed. */
 export function generatePackages(req: GenerateRequest): Package[] {
@@ -159,6 +192,7 @@ export function generatePackages(req: GenerateRequest): Package[] {
     count: req.count,
     weightSkew: 3,
     mix: req.mix,
+    autoservicePct: req.autoservicePct ?? DEFAULT_AUTOSERVICE_PCT,
     ids: nextPackageIds(req.count, req.existingIds),
   });
 }
@@ -242,7 +276,7 @@ export const DEMO_DATE = "2026-11-10";
 
 export const DEMO_PROFILES: readonly (readonly [label: string, profile: DemoProfile])[] = [
   ["normal", { count: 70, weightSkew: 3 }],
-  ["overload", { count: 140, weightSkew: 1.6 }],
+  ["overload", { count: 140, weightSkew: 0.8 }],
 ];
 
 /** data/<label>.json rinkinys (Vilnius). Tas pats seed → baitas į baitą tas pats rezultatas. */
@@ -255,6 +289,7 @@ export function makeDemoDataset(seed: number, label: string, profile: DemoProfil
     count: profile.count,
     weightSkew: profile.weightSkew,
     mix: DEFAULT_MIX,
+    autoservicePct: DEFAULT_AUTOSERVICE_PCT,
     ids: nextPackageIds(profile.count),
   });
   return { depot: cityDepot("vilnius", DEMO_DATE), couriers, packages };

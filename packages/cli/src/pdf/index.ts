@@ -156,6 +156,7 @@ function priorityCell(p: Package | undefined): CellInput {
 function recipientCell(p: Package | undefined): CellInput {
   if (!p) return { lines: [{ text: "Nežinomas paketas", color: COLORS.late }] };
   const lines: Segment[] = [{ text: p.recipient }];
+  if (p.recipientType === "autoservice") lines.push({ text: "AUTOSERVISAS", color: COLORS.muted, size: 6.5, bold: true });
   if (p.phone) lines.push({ text: p.phone, color: COLORS.muted, size: 7.5 });
   return { lines };
 }

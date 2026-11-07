@@ -113,3 +113,22 @@ test("nextWeekday: Vilniaus laiku, visada po šiandienos", () => {
   // 23:30 UTC sekmadienį = pirmadienis 01:30 Vilniuje → antradienis
   assert.equal(nextWeekday(new Date("2026-11-08T23:30:00Z")), "2026-11-10");
 });
+
+test("gavėjai: fiziniai asmenys ir autoservisai; autoservisų langai 08–17, dalis valdoma", () => {
+  const pkgs = generatePackages({ city: "kaunas", count: 400, mix: DEFAULT_MIX, seed: 11 });
+  const auto = pkgs.filter((p) => p.recipientType === "autoservice");
+  const persons = pkgs.filter((p) => p.recipientType === "person");
+  assert.equal(auto.length + persons.length, pkgs.length);
+  const share = auto.length / pkgs.length;
+  assert.ok(share > 0.25 && share < 0.45, `autoservisų dalis ${share}`);
+  for (const p of auto) {
+    assert.ok(p.window.start >= "08:00" && p.window.end <= "17:00", `${p.id} ${p.window.start}-${p.window.end}`);
+    assert.ok(p.weightKg >= 2, `${p.id} ${p.weightKg}`);
+    assert.doesNotMatch(p.address, /-\d+, /, "autoservisas be buto numerio");
+  }
+  for (const p of persons) assert.ok(p.weightKg <= 15, `${p.id} ${p.weightKg}`);
+  const none = generatePackages({ city: "vilnius", count: 50, mix: DEFAULT_MIX, seed: 1, autoservicePct: 0 });
+  assert.ok(none.every((p) => p.recipientType === "person"));
+  const all = generatePackages({ city: "vilnius", count: 50, mix: DEFAULT_MIX, seed: 1, autoservicePct: 100 });
+  assert.ok(all.every((p) => p.recipientType === "autoservice"));
+});

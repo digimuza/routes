@@ -1,7 +1,7 @@
 // Miestai (SPEC 5b): sandėlis, žemėlapio centras, ribos ir kuruoti adresai.
 import type { City, CityId, LatLng } from "@marsrutai/shared";
 import { KAUNAS_ADDRESSES } from "./kaunas.js";
-import { COMPANIES, KAUNAS_COMPANIES } from "./people.js";
+import { AUTOSERVICES, KAUNAS_AUTOSERVICES } from "./people.js";
 import type { Addr } from "./types.js";
 import { VILNIUS_ADDRESSES } from "./vilnius.js";
 
@@ -10,7 +10,8 @@ export interface CityDef {
   /** Depot.id naujame scenarijuje. */
   depotId: string;
   addresses: readonly Addr[];
-  companies: readonly string[];
+  /** Autoservisų pavadinimai šiame mieste. */
+  autoservices: readonly string[];
 }
 
 export const CITY_DEFS: Record<CityId, CityDef> = {
@@ -28,7 +29,7 @@ export const CITY_DEFS: Record<CityId, CityDef> = {
     },
     depotId: "D1",
     addresses: VILNIUS_ADDRESSES,
-    companies: COMPANIES,
+    autoservices: AUTOSERVICES,
   },
   kaunas: {
     city: {
@@ -45,7 +46,7 @@ export const CITY_DEFS: Record<CityId, CityDef> = {
     },
     depotId: "D2",
     addresses: KAUNAS_ADDRESSES,
-    companies: KAUNAS_COMPANIES,
+    autoservices: KAUNAS_AUTOSERVICES,
   },
 };
 

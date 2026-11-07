@@ -45,16 +45,7 @@ export const SURNAMES: readonly (readonly [string, string, string])[] = [
   ["Grigas", "Grigienė", "Grigaitė"],
   ["Černiauskas", "Černiauskienė", "Černiauskaitė"],
 ];
-export const COMPANIES = [
-  "UAB „Baltijos sprendimai“", "UAB „Šiaurės vėjas“", "UAB „Gintarinė prekyba“", "UAB „Vilniaus logistika“",
-  "UAB „Žalias kodas“", "UAB „Neries technologijos“", "UAB „Medžio dirbtuvės“", "UAB „Kavos namai“",
-  "UAB „Ąžuolo baldai“", "UAB „Senamiesčio vaistinė“", "UAB „Saulės energija“", "UAB „Rūtos gėlės“",
-  "UAB „Tikslus apskaitos centras“", "UAB „Debesų sistemos“", "UAB „Švarūs langai“", "UAB „Knygų kampas“",
-  "UAB „Pilies spaustuvė“", "UAB „Žirmūnų odontologija“", "UAB „Dviračių centras“", "UAB „Lino namai“",
-  "MB „Užupio keramika“", "MB „Šviežia duona“", "VšĮ „Jaunimo erdvė“", "UAB „Elektros taškas“",
-];
 export const NOTES_PERSON = ["Skambinti prieš atvykstant", "Palikti prie durų", "Durų kodas 1234#", "Neveikia skambutis, skambinti telefonu", "Laiptinė iš kiemo pusės", "Trapus siuntinys"];
-export const NOTES_COMPANY = ["Palikti pas administratorių", "Pristatyti į registratūrą", "Įvažiavimas iš kiemo pusės", "Skambinti prieš atvykstant", "Trapus siuntinys", "Krovimo rampa nr. 2"];
 
 /** Papildomos spalvos kurjeriams virš 10 (be pilkos ir prioritetų raudonos/geltonos). */
 export const EXTRA_COURIER_COLORS = [
@@ -62,11 +53,22 @@ export const EXTRA_COURIER_COLORS = [
   "#f032e6", "#469990", "#9a6324", "#800000", "#aaffc3",
 ] as const;
 
-export const KAUNAS_COMPANIES = [
-  "UAB „Nemuno logistika“", "UAB „Laisvės alėjos knygynas“", "UAB „Žaliakalnio statyba“", "UAB „Kauno duona“",
-  "UAB „Santakos sprendimai“", "UAB „Šilainių vaistinė“", "UAB „Aleksoto technika“", "UAB „Dainavos baldai“",
-  "UAB „Baltų spauda“", "UAB „Ąžuolyno sportas“", "UAB „Gintarinė prekyba“", "UAB „Debesų sistemos“",
-  "UAB „Tikslus apskaitos centras“", "UAB „Švarūs langai“", "UAB „Elektros taškas“", "UAB „Kavos namai“",
-  "MB „Senamiesčio keramika“", "MB „Šviežia duona“", "VšĮ „Jaunimo erdvė“", "UAB „Pažaislio gėlės“",
-  "UAB „Petrašiūnų metalas“", "UAB „Vilijampolės odontologija“", "UAB „Dviračių centras“", "UAB „Lino namai“",
+
+// ---- Autoservisai (išgalvoti pavadinimai) ----
+export const AUTOSERVICES = [
+  "Autoservisas „Ratų centras“", "UAB „Stabdžių meistrai“", "MB „Variklio klinika“", "Padangų centras „Protektorius“",
+  "UAB „Kėbulų remontas“", "Autoservisas „Greitas ratas“", "UAB „Pavarų dėžės servisas“", "MB „Tepalų taškas“",
+  "UAB „Auto diagnostika“", "Autoservisas „Važiuoklė“", "UAB „Dyzelio ekspertai“", "MB „Garažas 24“",
+  "UAB „Elektros auto servisas“", "Autoservisas „Kampas“", "UAB „Amortizatorių centras“", "MB „Meistro dirbtuvės“",
+  "UAB „Kondicionierių servisas“", "Autoservisas „Šviesos ir stiklai“", "UAB „Sankabų servisas“", "MB „Ratlankių remontas“",
+] as const;
+export const KAUNAS_AUTOSERVICES = [
+  "Autoservisas „Nemuno ratai“", "UAB „Santakos autoservisas“", "MB „Šilainių garažas“", "Padangų centras „Dainava“",
+  "UAB „Aleksoto kėbulai“", "Autoservisas „Petrašiūnų meistrai“", "UAB „Kauno stabdžiai“", "MB „Variklių klinika“",
+  "UAB „Auto diagnostika Kaune“", "Autoservisas „Vilijampolės ratas“", "UAB „Pavarų centras“", "MB „Tepalų stotelė“",
+  "UAB „Važiuoklės ekspertai“", "Autoservisas „Žaliakalnio garažas“", "UAB „Eiguliai servisas“", "MB „Kalniečių dirbtuvės“",
+] as const;
+export const NOTES_AUTOSERVICE = [
+  "Automobilis ant keltuvo – skubu", "Pristatyti į dirbtuves, priima meistras", "Įvažiavimas pro vartus",
+  "Padangų komplektas (4 vnt.)", "Stabdžių diskai ir kaladėlės", "Skambinti prieš atvykstant", "Priima iki 16:30",
 ] as const;
