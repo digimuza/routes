@@ -766,7 +766,7 @@ button.row:hover,
   border: 1px solid currentColor;
 }
 .badge--api {
-  color: var(--blue);
+  color: var(--ink);
 }
 .badge--mock {
   color: var(--brown);
@@ -1620,8 +1620,8 @@ button.row:hover,
   color: var(--bad);
 }
 .tag--wait {
-  background: var(--blue-wash);
-  color: var(--blue-press);
+  background: rgba(28, 33, 30, 0.07);
+  color: var(--ink-2);
 }
 
 .pmark {
