@@ -51,7 +51,7 @@ export function resolveDatasetPath(nameOrPath: string): string {
   return isAbsolute(nameOrPath) ? nameOrPath : resolve(process.cwd(), nameOrPath);
 }
 
-function formatPath(path: (string | number)[]): string {
+export function formatIssuePath(path: (string | number)[]): string {
   if (path.length === 0) return "(šaknis)";
   return path
     .map((p, i) => (typeof p === "number" ? `[${p}]` : i === 0 ? p : `.${p}`))
@@ -59,27 +59,43 @@ function formatPath(path: (string | number)[]): string {
 }
 
 export function formatZodIssues(issues: ZodIssue[]): string {
-  return issues.map((i) => `  - ${formatPath(i.path)}: ${i.message}`).join("\n");
+  return issues.map((i) => `  - ${formatIssuePath(i.path)}: ${i.message}`).join("\n");
 }
 
-/** Semantic checks the schema can't express. Returns human-readable problems. */
-function semanticProblems(ds: Dataset): string[] {
-  const problems: string[] = [];
+export interface DatasetProblem {
+  /** JSON kelias, pvz. "packages[3].window". */
+  path: string;
+  message: string;
+}
+
+/** Semantic checks the schema can't express (unique ids, start < end). */
+export function datasetProblems(ds: Dataset): DatasetProblem[] {
+  const problems: DatasetProblem[] = [];
   const dup = (ids: string[]) => ids.filter((id, i) => ids.indexOf(id) !== i);
-  for (const id of new Set(dup(ds.packages.map((p) => p.id)))) problems.push(`  - packages: pasikartojantis id "${id}"`);
-  for (const id of new Set(dup(ds.couriers.map((c) => c.id)))) problems.push(`  - couriers: pasikartojantis id "${id}"`);
+  for (const id of new Set(dup(ds.packages.map((p) => p.id)))) {
+    problems.push({ path: "packages", message: `pasikartojantis id "${id}"` });
+  }
+  for (const id of new Set(dup(ds.couriers.map((c) => c.id)))) {
+    problems.push({ path: "couriers", message: `pasikartojantis id "${id}"` });
+  }
   ds.packages.forEach((p, i) => {
     if (p.window.start >= p.window.end) {
-      problems.push(`  - packages[${i}].window (${p.id}): pradžia ${p.window.start} nėra prieš pabaigą ${p.window.end}`);
+      problems.push({
+        path: `packages[${i}].window`,
+        message: `${p.id}: pradžia ${p.window.start} nėra prieš pabaigą ${p.window.end}`,
+      });
     }
   });
   ds.couriers.forEach((c, i) => {
     if (c.shiftStart >= c.shiftEnd) {
-      problems.push(`  - couriers[${i}] (${c.id}): pamainos pradžia ${c.shiftStart} nėra prieš pabaigą ${c.shiftEnd}`);
+      problems.push({
+        path: `couriers[${i}]`,
+        message: `${c.id}: pamainos pradžia ${c.shiftStart} nėra prieš pabaigą ${c.shiftEnd}`,
+      });
     }
   });
   if (ds.depot.open >= ds.depot.close) {
-    problems.push(`  - depot: atidarymas ${ds.depot.open} nėra prieš uždarymą ${ds.depot.close}`);
+    problems.push({ path: "depot", message: `atidarymas ${ds.depot.open} nėra prieš uždarymą ${ds.depot.close}` });
   }
   return problems;
 }
@@ -93,9 +109,9 @@ export function parseDataset(value: unknown, source = "duomenys"): Dataset {
   if (!result.success) {
     throw new Error(`Netinkamas duomenų rinkinys ${source}:\n${formatZodIssues(result.error.issues)}`);
   }
-  const problems = semanticProblems(result.data);
+  const problems = datasetProblems(result.data);
   if (problems.length > 0) {
-    throw new Error(`Netinkamas duomenų rinkinys ${source}:\n${problems.join("\n")}`);
+    throw new Error(`Netinkamas duomenų rinkinys ${source}:\n${problems.map((p) => `  - ${p.path}: ${p.message}`).join("\n")}`);
   }
   return result.data;
 }
