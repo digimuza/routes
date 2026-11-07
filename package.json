@@ -12,6 +12,7 @@
     "dev:server": "npm run dev -w @marsrutai/server",
     "dev:web": "npm run dev -w @marsrutai/dashboard",
     "build": "npm run build -w @marsrutai/dashboard",
+    "start": "npm run build && npm run start -w @marsrutai/server",
     "test": "npm test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present"
   },

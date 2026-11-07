@@ -13,7 +13,8 @@ npm run demo                    # data/normal.json per realų Google Route Optim
 npm run demo -- overload        # data/overload.json: per daug paketų, dalis 3 prioriteto lieka nepristatyti
 npm run demo -- --mock          # lokalus algoritmas, be GCP paskyros
 npm run demo -- kelias/iki/dataset.json --out kitas/katalogas
-npm run dev                     # serveris (:8787) + dashboard (Vite) kartu – interaktyvus redaktorius
+npm run start                   # demo: sukompiliuotas dashboard + API vienu adresu http://localhost:8787
+npm run dev                     # kūrimui: serveris (:8787) + dashboard (Vite) kartu
 npm run dev:server              # tik serveris (PORT=8787 numatytai)
 npm run dev:web                 # tik dashboard
 npm test                        # visi testai (cli + server)
