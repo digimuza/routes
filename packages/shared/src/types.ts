@@ -23,9 +23,16 @@ export type Depot = z.infer<typeof DepotSchema>;
 export const Priority = z.union([z.literal(1), z.literal(2), z.literal(3)]);
 export type Priority = z.infer<typeof Priority>;
 
+/** Gavėjo tipas: demo klientas daugiausia veža fiziniams asmenims ir autoservisams. */
+export const RecipientType = z.enum(["person", "autoservice"]);
+export type RecipientType = z.infer<typeof RecipientType>;
+export const RECIPIENT_TYPE_LABELS: Record<RecipientType, string> = { person: "Fizinis asmuo", autoservice: "Autoservisas" };
+
 export const PackageSchema = z.object({
   id: z.string(),
   recipient: z.string(),
+  /** Neprivalomas: seni duomenys be jo laikomi „person". */
+  recipientType: RecipientType.optional(),
   phone: z.string().optional(),
   address: z.string(),
   location: LatLngSchema,

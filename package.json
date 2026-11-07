@@ -2,13 +2,23 @@
   "name": "marsrutai",
   "private": true,
   "type": "module",
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "gen-data": "npm run gen-data -w @marsrutai/cli",
+    "gen-data": "npm run gen-data -w @marsrutai/cli --",
     "demo": "npm run demo -w @marsrutai/cli --",
-    "dev": "npm run dev -w @marsrutai/dashboard",
+    "dev": "concurrently -k -n server,web -c blue,magenta \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "npm run dev -w @marsrutai/server",
+    "dev:web": "npm run dev -w @marsrutai/dashboard",
     "build": "npm run build -w @marsrutai/dashboard",
+    "test": "npm test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  }
 }

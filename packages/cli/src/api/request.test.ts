@@ -7,8 +7,20 @@ import { buildRequest, COST_TUNING } from "./request.js";
 const fx = (f: string) => JSON.parse(readFileSync(new URL(`../../fixtures/api/${f}`, import.meta.url), "utf8"));
 const dataset = DatasetSchema.parse(fx("dataset.json"));
 
-test("buildRequest atitinka įrašytą realią užklausą", () => {
-  assert.deepEqual(buildRequest(dataset), fx("request.json"));
+test("buildRequest atitinka įrašytą realią užklausą (be vėliau pridėto balansavimo)", () => {
+  // Įrašas padarytas prieš routeDurationLimit balansavimą; jį tikriname atskirai žemiau.
+  const r = buildRequest(dataset);
+  for (const v of r.model.vehicles) delete v.routeDurationLimit;
+  assert.deepEqual(r, fx("request.json"));
+});
+
+test("balansavimas: kvadratinė maršruto trukmės kaina nuo 0 h, riba = pamainos trukmė", () => {
+  const v = buildRequest(dataset).model.vehicles[0]!;
+  assert.deepEqual(v.routeDurationLimit, {
+    maxDuration: "36000s",
+    quadraticSoftMaxDuration: "0s",
+    costPerSquareHourAfterQuadraticSoftMax: COST_TUNING.balanceCostPerSquareHour,
+  });
 });
 
 test("globalūs laikai = sandėlio darbo laikas UTC", () => {
@@ -59,6 +71,11 @@ test("transporto priemonė = kurjeris", () => {
     loadLimits: { weight_kg: { maxLoad: "80" } },
     costPerHour: 12,
     costPerKilometer: 0.25,
+    routeDurationLimit: {
+      maxDuration: "36000s",
+      quadraticSoftMaxDuration: "0s",
+      costPerSquareHourAfterQuadraticSoftMax: COST_TUNING.balanceCostPerSquareHour,
+    },
   });
 });
 

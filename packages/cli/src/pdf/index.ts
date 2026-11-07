@@ -156,6 +156,7 @@ function priorityCell(p: Package | undefined): CellInput {
 function recipientCell(p: Package | undefined): CellInput {
   if (!p) return { lines: [{ text: "Nežinomas paketas", color: COLORS.late }] };
   const lines: Segment[] = [{ text: p.recipient }];
+  if (p.recipientType === "autoservice") lines.push({ text: "AUTOSERVISAS", color: COLORS.muted, size: 6.5, bold: true });
   if (p.phone) lines.push({ text: p.phone, color: COLORS.muted, size: 7.5 });
   return { lines };
 }
@@ -205,10 +206,14 @@ function drawLoadingList(ctx: Ctx): void {
   doc.y += 14;
 }
 
-function remarkCell(stop: Stop, pkg: Package | undefined): CellInput {
+/** Pastabos langelis; eksportuojama testams. */
+export function remarkCell(stop: Stop, pkg: Package | undefined): CellInput {
   const lines: Segment[] = [];
-  if (stop.lateMinutes > 0) lines.push({ text: `Vėluoja ${Math.round(stop.lateMinutes)} min`, color: COLORS.late, bold: true });
-  if (stop.waitMinutes > 0) lines.push({ text: `Laukti ${Math.round(stop.waitMinutes)} min`, color: COLORS.wait, bold: true });
+  // Rodome tik tai, kas apvalinant sudaro bent 1 min ("Laukti 0 min" klaidina).
+  const late = Math.round(stop.lateMinutes);
+  const wait = Math.round(stop.waitMinutes);
+  if (late >= 1) lines.push({ text: `Vėluoja ${late} min`, color: COLORS.late, bold: true });
+  if (wait >= 1) lines.push({ text: `Laukti ${wait} min`, color: COLORS.wait, bold: true });
   if (pkg?.note) lines.push({ text: pkg.note, color: COLORS.muted, size: 7.5 });
   return lines.length ? { lines } : "";
 }
@@ -228,7 +233,7 @@ function drawRouteTable(ctx: Ctx): void {
   ];
   const rows: CellInput[][] = ctx.stops.map(({ stop, pkg }) => [
     { lines: [{ text: String(stop.seq), bold: true }] },
-    { lines: [{ text: formatTime(stop.arrival, tz), bold: true, color: stop.lateMinutes > 0 ? COLORS.late : COLORS.text }] },
+    { lines: [{ text: formatTime(stop.arrival, tz), bold: true, color: Math.round(stop.lateMinutes) >= 1 ? COLORS.late : COLORS.text }] },
     stop.packageId,
     recipientCell(pkg),
     {

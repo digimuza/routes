@@ -137,7 +137,8 @@
   "packages": [
     {
       "id": "PKG-001",
-      "recipient": "UAB „Gintarinė prekyba“",
+      "recipient": "UAB „Stabdžių meistrai“",
+      "recipientType": "autoservice",
       "phone": "+37066914324",
       "address": "Parko g. 9, Vilnius",
       "location": {
@@ -146,834 +147,889 @@
       },
       "priority": 2,
       "window": {
-        "start": "14:30",
-        "end": "17:30"
+        "start": "08:00",
+        "end": "12:00"
       },
-      "weightKg": 11.6,
-      "serviceMinutes": 5
+      "weightKg": 13.9,
+      "serviceMinutes": 6
     },
     {
       "id": "PKG-002",
-      "recipient": "MB „Šviežia duona“",
-      "phone": "+37063014330",
+      "recipient": "UAB „Stabdžių meistrai“",
+      "recipientType": "autoservice",
+      "phone": "+37064850820",
       "address": "Pašilaičių g. 10, Vilnius",
       "location": {
-        "lat": 54.726419,
-        "lng": 25.213658
+        "lat": 54.726648,
+        "lng": 25.213726
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "weightKg": 26.7,
+      "serviceMinutes": 6
+    },
+    {
+      "id": "PKG-003",
+      "recipient": "Vytautas Savickas",
+      "recipientType": "person",
+      "phone": "+37067369112",
+      "address": "Kovo 11-osios g. 28-45, Vilnius",
+      "location": {
+        "lat": 54.70668,
+        "lng": 25.320487
+      },
+      "priority": 1,
+      "window": {
+        "start": "08:30",
+        "end": "10:30"
+      },
+      "weightKg": 9.3,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-004",
+      "recipient": "Jūratė Mačiulytė",
+      "recipientType": "person",
+      "phone": "+37063543317",
+      "address": "Architektų g. 19-17, Vilnius",
+      "location": {
+        "lat": 54.672037,
+        "lng": 25.20694
       },
       "priority": 1,
       "window": {
         "start": "09:00",
         "end": "11:00"
       },
-      "weightKg": 4.8,
-      "serviceMinutes": 6
+      "weightKg": 12.8,
+      "serviceMinutes": 3
     },
     {
-      "id": "PKG-003",
-      "recipient": "Rimantas Žukauskas",
-      "phone": "+37068638767",
-      "address": "Kovo 11-osios g. 28, Vilnius",
+      "id": "PKG-005",
+      "recipient": "UAB „Sankabų servisas“",
+      "recipientType": "autoservice",
+      "phone": "+37062344782",
+      "address": "Tolminkiemio g. 10, Vilnius",
       "location": {
-        "lat": 54.706402,
-        "lng": 25.319819
+        "lat": 54.71398,
+        "lng": 25.183186
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "weightKg": 4.5,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-006",
+      "recipient": "Simona Savickaitė",
+      "recipientType": "person",
+      "phone": "+37061719159",
+      "address": "Fabijoniškių g. 96-16, Vilnius",
+      "location": {
+        "lat": 54.738274,
+        "lng": 25.240927
+      },
+      "priority": 1,
+      "window": {
+        "start": "09:30",
+        "end": "11:30"
+      },
+      "weightKg": 8.7,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-007",
+      "recipient": "Autoservisas „Greitas ratas“",
+      "recipientType": "autoservice",
+      "phone": "+37067597250",
+      "address": "Totorių g. 7, Vilnius",
+      "location": {
+        "lat": 54.685566,
+        "lng": 25.279233
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "weightKg": 16.2,
+      "serviceMinutes": 6,
+      "note": "Priima iki 16:30"
+    },
+    {
+      "id": "PKG-008",
+      "recipient": "UAB „Elektros auto servisas“",
+      "recipientType": "autoservice",
+      "phone": "+37061469694",
+      "address": "Lvovo g. 25, Vilnius",
+      "location": {
+        "lat": 54.698505,
+        "lng": 25.272042
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "weightKg": 6.4,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-009",
+      "recipient": "MB „Tepalų taškas“",
+      "recipientType": "autoservice",
+      "phone": "+37069507733",
+      "address": "Islandijos g. 4, Vilnius",
+      "location": {
+        "lat": 54.683595,
+        "lng": 25.281969
+      },
+      "priority": 1,
+      "window": {
+        "start": "09:00",
+        "end": "11:00"
+      },
+      "weightKg": 5,
+      "serviceMinutes": 10
+    },
+    {
+      "id": "PKG-010",
+      "recipient": "Rimantas Savickas",
+      "recipientType": "person",
+      "phone": "+37068701764",
+      "address": "Kęstučio g. 45, Vilnius",
+      "location": {
+        "lat": 54.691423,
+        "lng": 25.255775
+      },
+      "priority": 2,
+      "window": {
+        "start": "08:00",
+        "end": "12:00"
+      },
+      "weightKg": 13.7,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-011",
+      "recipient": "Rasa Navickienė",
+      "recipientType": "person",
+      "phone": "+37067849024",
+      "address": "Algirdo g. 31, Vilnius",
+      "location": {
+        "lat": 54.679106,
+        "lng": 25.269241
+      },
+      "priority": 1,
+      "window": {
+        "start": "09:00",
+        "end": "11:00"
+      },
+      "weightKg": 7,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-012",
+      "recipient": "Vaida Butkienė",
+      "recipientType": "person",
+      "phone": "+37065427928",
+      "address": "Ateities g. 10, Vilnius",
+      "location": {
+        "lat": 54.733914,
+        "lng": 25.265836
       },
       "priority": 3,
       "window": {
         "start": "10:00",
         "end": "18:00"
       },
-      "weightKg": 2.9,
-      "serviceMinutes": 6,
-      "note": "Neveikia skambutis, skambinti telefonu"
-    },
-    {
-      "id": "PKG-004",
-      "recipient": "Neringa Butkienė",
-      "phone": "+37060199736",
-      "address": "Architektų g. 19, Vilnius",
-      "location": {
-        "lat": 54.672075,
-        "lng": 25.207568
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 3.2,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-005",
-      "recipient": "Rimantas Stankevičius",
-      "phone": "+37064061009",
-      "address": "Tolminkiemio g. 10-8, Vilnius",
-      "location": {
-        "lat": 54.713713,
-        "lng": 25.182874
-      },
-      "priority": 2,
-      "window": {
-        "start": "13:00",
-        "end": "16:00"
-      },
-      "weightKg": 4.3,
-      "serviceMinutes": 7,
-      "note": "Palikti prie durų"
-    },
-    {
-      "id": "PKG-006",
-      "recipient": "UAB „Debesų sistemos“",
-      "address": "Fabijoniškių g. 96, Vilnius",
-      "location": {
-        "lat": 54.737716,
-        "lng": 25.240762
-      },
-      "priority": 2,
-      "window": {
-        "start": "09:30",
-        "end": "12:30"
-      },
-      "weightKg": 2.3,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-007",
-      "recipient": "UAB „Žalias kodas“",
-      "phone": "+37061021523",
-      "address": "Totorių g. 7, Vilnius",
-      "location": {
-        "lat": 54.685839,
-        "lng": 25.279334
-      },
-      "priority": 2,
-      "window": {
-        "start": "13:00",
-        "end": "15:00"
-      },
-      "weightKg": 19.5,
-      "serviceMinutes": 4
-    },
-    {
-      "id": "PKG-008",
-      "recipient": "UAB „Vilniaus logistika“",
-      "phone": "+37061452905",
-      "address": "Lvovo g. 25, Vilnius",
-      "location": {
-        "lat": 54.698413,
-        "lng": 25.272154
-      },
-      "priority": 1,
-      "window": {
-        "start": "09:00",
-        "end": "11:00"
-      },
-      "weightKg": 0.5,
-      "serviceMinutes": 4
-    },
-    {
-      "id": "PKG-009",
-      "recipient": "Algirdas Kavaliauskas",
-      "phone": "+37062104274",
-      "address": "Islandijos g. 4, Vilnius",
-      "location": {
-        "lat": 54.68353,
-        "lng": 25.281681
-      },
-      "priority": 1,
-      "window": {
-        "start": "09:30",
-        "end": "11:30"
-      },
-      "weightKg": 13.4,
-      "serviceMinutes": 6
-    },
-    {
-      "id": "PKG-010",
-      "recipient": "Goda Stankevičienė",
-      "address": "Kęstučio g. 45-1, Vilnius",
-      "location": {
-        "lat": 54.69138,
-        "lng": 25.25625
-      },
-      "priority": 1,
-      "window": {
-        "start": "08:30",
-        "end": "10:30"
-      },
-      "weightKg": 27.8,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-011",
-      "recipient": "Andrius Šimkus",
-      "phone": "+37066122233",
-      "address": "Algirdo g. 31-18, Vilnius",
-      "location": {
-        "lat": 54.679042,
-        "lng": 25.269576
-      },
-      "priority": 3,
-      "window": {
-        "start": "14:00",
-        "end": "18:00"
-      },
-      "weightKg": 21.1,
-      "serviceMinutes": 6,
-      "note": "Skambinti prieš atvykstant"
-    },
-    {
-      "id": "PKG-012",
-      "recipient": "Goda Jankauskaitė",
-      "address": "Ateities g. 10, Vilnius",
-      "location": {
-        "lat": 54.734016,
-        "lng": 25.266333
-      },
-      "priority": 2,
-      "window": {
-        "start": "14:00",
-        "end": "17:00"
-      },
-      "weightKg": 3.6,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-013",
-      "recipient": "Dalia Kazlauskienė",
-      "phone": "+37062244528",
-      "address": "Stiklių g. 7, Vilnius",
-      "location": {
-        "lat": 54.681141,
-        "lng": 25.285269
-      },
-      "priority": 1,
-      "window": {
-        "start": "08:30",
-        "end": "10:30"
-      },
-      "weightKg": 1,
-      "serviceMinutes": 4
-    },
-    {
-      "id": "PKG-014",
-      "recipient": "Austėja Navickienė",
-      "phone": "+37065972831",
-      "address": "L. Sapiegos g. 5, Vilnius",
-      "location": {
-        "lat": 54.692659,
-        "lng": 25.311015
-      },
-      "priority": 2,
-      "window": {
-        "start": "13:00",
-        "end": "16:00"
-      },
-      "weightKg": 0.5,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-015",
-      "recipient": "Ieva Ramanauskaitė",
-      "address": "Vydūno g. 9-14, Vilnius",
-      "location": {
-        "lat": 54.712651,
-        "lng": 25.190029
-      },
-      "priority": 2,
-      "window": {
-        "start": "14:00",
-        "end": "17:00"
-      },
-      "weightKg": 8,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-016",
-      "recipient": "Arūnas Kazlauskas",
-      "phone": "+37063727556",
-      "address": "Lazdynų g. 31-16, Vilnius",
-      "location": {
-        "lat": 54.676319,
-        "lng": 25.199884
-      },
-      "priority": 2,
-      "window": {
-        "start": "11:00",
-        "end": "13:00"
-      },
-      "weightKg": 12.7,
+      "weightKg": 1.5,
       "serviceMinutes": 3
     },
     {
-      "id": "PKG-017",
-      "recipient": "UAB „Elektros taškas“",
-      "phone": "+37064047544",
-      "address": "Didžioji g. 31, Vilnius",
+      "id": "PKG-013",
+      "recipient": "UAB „Dyzelio ekspertai“",
+      "recipientType": "autoservice",
+      "phone": "+37064371311",
+      "address": "Stiklių g. 7, Vilnius",
       "location": {
-        "lat": 54.679834,
-        "lng": 25.287811
+        "lat": 54.680771,
+        "lng": 25.28576
       },
       "priority": 3,
       "window": {
         "start": "08:00",
-        "end": "18:00"
+        "end": "17:00"
       },
-      "weightKg": 6.5,
-      "serviceMinutes": 3
+      "weightKg": 24.3,
+      "serviceMinutes": 5,
+      "note": "Priima iki 16:30"
     },
     {
-      "id": "PKG-018",
-      "recipient": "Vaida Urbonaitė",
-      "phone": "+37066877411",
-      "address": "Upės g. 9-60, Vilnius",
+      "id": "PKG-014",
+      "recipient": "Marius Navickas",
+      "recipientType": "person",
+      "phone": "+37067757501",
+      "address": "L. Sapiegos g. 5-28, Vilnius",
       "location": {
-        "lat": 54.694536,
-        "lng": 25.277237
-      },
-      "priority": 2,
-      "window": {
-        "start": "09:30",
-        "end": "11:30"
-      },
-      "weightKg": 3,
-      "serviceMinutes": 7
-    },
-    {
-      "id": "PKG-019",
-      "recipient": "MB „Šviežia duona“",
-      "phone": "+37064831808",
-      "address": "Pilies g. 22, Vilnius",
-      "location": {
-        "lat": 54.683553,
-        "lng": 25.289548
-      },
-      "priority": 2,
-      "window": {
-        "start": "15:00",
-        "end": "18:00"
-      },
-      "weightKg": 1.8,
-      "serviceMinutes": 10
-    },
-    {
-      "id": "PKG-020",
-      "recipient": "Ieva Ramanauskienė",
-      "address": "Sausio 13-osios g. 4-63, Vilnius",
-      "location": {
-        "lat": 54.685595,
-        "lng": 25.217458
-      },
-      "priority": 2,
-      "window": {
-        "start": "13:00",
-        "end": "16:00"
-      },
-      "weightKg": 10.3,
-      "serviceMinutes": 4,
-      "note": "Skambinti prieš atvykstant"
-    },
-    {
-      "id": "PKG-021",
-      "recipient": "UAB „Žirmūnų odontologija“",
-      "phone": "+37068181560",
-      "address": "Paupio g. 3, Vilnius",
-      "location": {
-        "lat": 54.67769,
-        "lng": 25.297555
-      },
-      "priority": 2,
-      "window": {
-        "start": "09:00",
-        "end": "11:00"
-      },
-      "weightKg": 1.1,
-      "serviceMinutes": 6
-    },
-    {
-      "id": "PKG-022",
-      "recipient": "MB „Užupio keramika“",
-      "phone": "+37068791447",
-      "address": "Didlaukio g. 47, Vilnius",
-      "location": {
-        "lat": 54.731339,
-        "lng": 25.265418
-      },
-      "priority": 1,
-      "window": {
-        "start": "13:00",
-        "end": "15:00"
-      },
-      "weightKg": 1.9,
-      "serviceMinutes": 3
-    },
-    {
-      "id": "PKG-023",
-      "recipient": "UAB „Neries technologijos“",
-      "phone": "+37062914971",
-      "address": "Odminių g. 3, Vilnius",
-      "location": {
-        "lat": 54.684901,
-        "lng": 25.286755
+        "lat": 54.693253,
+        "lng": 25.310729
       },
       "priority": 1,
       "window": {
         "start": "10:00",
         "end": "12:00"
       },
-      "weightKg": 16.2,
-      "serviceMinutes": 4,
-      "note": "Skambinti prieš atvykstant"
+      "weightKg": 3.8,
+      "serviceMinutes": 3
     },
     {
-      "id": "PKG-024",
-      "recipient": "Petras Kazlauskas",
-      "phone": "+37068613022",
-      "address": "Laisvės pr. 3, Vilnius",
+      "id": "PKG-015",
+      "recipient": "Šarūnas Šimkus",
+      "recipientType": "person",
+      "address": "Vydūno g. 9-38, Vilnius",
       "location": {
-        "lat": 54.690633,
-        "lng": 25.207988
+        "lat": 54.712386,
+        "lng": 25.190109
+      },
+      "priority": 2,
+      "window": {
+        "start": "14:30",
+        "end": "17:30"
+      },
+      "weightKg": 2.2,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-016",
+      "recipient": "Vilius Mačiulis",
+      "recipientType": "person",
+      "address": "Lazdynų g. 31-14, Vilnius",
+      "location": {
+        "lat": 54.676651,
+        "lng": 25.19953
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "18:00"
+      },
+      "weightKg": 7.8,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-017",
+      "recipient": "Petras Mačiulis",
+      "recipientType": "person",
+      "phone": "+37067629529",
+      "address": "Didžioji g. 31-6, Vilnius",
+      "location": {
+        "lat": 54.679947,
+        "lng": 25.287968
+      },
+      "priority": 2,
+      "window": {
+        "start": "08:30",
+        "end": "11:30"
+      },
+      "weightKg": 4.4,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-018",
+      "recipient": "Jūratė Jankauskienė",
+      "recipientType": "person",
+      "phone": "+37064292333",
+      "address": "Upės g. 9, Vilnius",
+      "location": {
+        "lat": 54.69448,
+        "lng": 25.277052
+      },
+      "priority": 2,
+      "window": {
+        "start": "11:00",
+        "end": "14:00"
+      },
+      "weightKg": 7.5,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-019",
+      "recipient": "Neringa Petrauskaitė",
+      "recipientType": "person",
+      "phone": "+37060040410",
+      "address": "Pilies g. 22, Vilnius",
+      "location": {
+        "lat": 54.683049,
+        "lng": 25.289542
+      },
+      "priority": 3,
+      "window": {
+        "start": "12:00",
+        "end": "18:00"
+      },
+      "weightKg": 11.2,
+      "serviceMinutes": 5,
+      "note": "Trapus siuntinys"
+    },
+    {
+      "id": "PKG-020",
+      "recipient": "Vilius Kavaliauskas",
+      "recipientType": "person",
+      "phone": "+37064938695",
+      "address": "Sausio 13-osios g. 4, Vilnius",
+      "location": {
+        "lat": 54.685352,
+        "lng": 25.216558
+      },
+      "priority": 1,
+      "window": {
+        "start": "10:00",
+        "end": "12:00"
+      },
+      "weightKg": 5.6,
+      "serviceMinutes": 6,
+      "note": "Palikti prie durų"
+    },
+    {
+      "id": "PKG-021",
+      "recipient": "Marius Kavaliauskas",
+      "recipientType": "person",
+      "phone": "+37060480159",
+      "address": "Paupio g. 3, Vilnius",
+      "location": {
+        "lat": 54.677471,
+        "lng": 25.297449
       },
       "priority": 2,
       "window": {
         "start": "14:00",
+        "end": "16:00"
+      },
+      "weightKg": 4.4,
+      "serviceMinutes": 3,
+      "note": "Laiptinė iš kiemo pusės"
+    },
+    {
+      "id": "PKG-022",
+      "recipient": "Andrius Žukauskas",
+      "recipientType": "person",
+      "address": "Didlaukio g. 47-64, Vilnius",
+      "location": {
+        "lat": 54.731296,
+        "lng": 25.265175
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
         "end": "18:00"
       },
-      "weightKg": 8.4,
-      "serviceMinutes": 4
+      "weightKg": 1.5,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-023",
+      "recipient": "UAB „Sankabų servisas“",
+      "recipientType": "autoservice",
+      "phone": "+37062441518",
+      "address": "Odminių g. 3, Vilnius",
+      "location": {
+        "lat": 54.684883,
+        "lng": 25.287469
+      },
+      "priority": 2,
+      "window": {
+        "start": "08:00",
+        "end": "12:00"
+      },
+      "weightKg": 28.3,
+      "serviceMinutes": 5,
+      "note": "Pristatyti į dirbtuves, priima meistras"
+    },
+    {
+      "id": "PKG-024",
+      "recipient": "MB „Variklio klinika“",
+      "recipientType": "autoservice",
+      "phone": "+37060265725",
+      "address": "Laisvės pr. 3, Vilnius",
+      "location": {
+        "lat": 54.690595,
+        "lng": 25.208096
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "weightKg": 14.5,
+      "serviceMinutes": 6
     },
     {
       "id": "PKG-025",
-      "recipient": "MB „Šviežia duona“",
-      "phone": "+37067100657",
+      "recipient": "Gabija Paulauskaitė",
+      "recipientType": "person",
+      "phone": "+37061768417",
       "address": "Mindaugo g. 25, Vilnius",
       "location": {
-        "lat": 54.675822,
-        "lng": 25.271025
+        "lat": 54.676138,
+        "lng": 25.271541
+      },
+      "priority": 2,
+      "window": {
+        "start": "13:30",
+        "end": "15:30"
+      },
+      "weightKg": 14.8,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-026",
+      "recipient": "Arūnas Butkus",
+      "recipientType": "person",
+      "phone": "+37064847437",
+      "address": "Traidenio g. 18, Vilnius",
+      "location": {
+        "lat": 54.694472,
+        "lng": 25.255897
       },
       "priority": 2,
       "window": {
         "start": "10:30",
         "end": "13:30"
       },
-      "weightKg": 2.5,
-      "serviceMinutes": 3
-    },
-    {
-      "id": "PKG-026",
-      "recipient": "Simona Petrauskienė",
-      "phone": "+37069767465",
-      "address": "Traidenio g. 18-36, Vilnius",
-      "location": {
-        "lat": 54.694495,
-        "lng": 25.255035
-      },
-      "priority": 3,
-      "window": {
-        "start": "08:00",
-        "end": "18:00"
-      },
-      "weightKg": 6.8,
-      "serviceMinutes": 3
+      "weightKg": 7.9,
+      "serviceMinutes": 3,
+      "note": "Neveikia skambutis, skambinti telefonu"
     },
     {
       "id": "PKG-027",
-      "recipient": "Dalia Kavaliauskienė",
-      "phone": "+37062642294",
-      "address": "Bajorų kel. 2-78, Vilnius",
+      "recipient": "Živilė Žemaitienė",
+      "recipientType": "person",
+      "phone": "+37062236704",
+      "address": "Bajorų kel. 2, Vilnius",
       "location": {
-        "lat": 54.740774,
-        "lng": 25.258644
+        "lat": 54.740611,
+        "lng": 25.258462
       },
-      "priority": 2,
+      "priority": 3,
       "window": {
-        "start": "14:00",
+        "start": "12:00",
         "end": "18:00"
       },
-      "weightKg": 2.3,
-      "serviceMinutes": 4
+      "weightKg": 9.1,
+      "serviceMinutes": 6
     },
     {
       "id": "PKG-028",
-      "recipient": "Gintaras Ramanauskas",
-      "phone": "+37062277350",
+      "recipient": "UAB „Elektros auto servisas“",
+      "recipientType": "autoservice",
+      "phone": "+37069283760",
       "address": "Konstitucijos pr. 7, Vilnius",
       "location": {
-        "lat": 54.696373,
-        "lng": 25.275999
+        "lat": 54.696213,
+        "lng": 25.276047
       },
-      "priority": 2,
+      "priority": 1,
       "window": {
-        "start": "11:30",
-        "end": "13:30"
+        "start": "08:30",
+        "end": "10:30"
       },
-      "weightKg": 18.7,
-      "serviceMinutes": 5
+      "weightKg": 2.4,
+      "serviceMinutes": 10,
+      "note": "Priima iki 16:30"
     },
     {
       "id": "PKG-029",
-      "recipient": "Rasa Žemaitytė",
-      "phone": "+37069352683",
+      "recipient": "Neringa Urbonienė",
+      "recipientType": "person",
+      "phone": "+37060499827",
       "address": "Dariaus ir Girėno g. 8, Vilnius",
       "location": {
-        "lat": 54.69031,
-        "lng": 25.412191
+        "lat": 54.690508,
+        "lng": 25.411448
+      },
+      "priority": 3,
+      "window": {
+        "start": "10:00",
+        "end": "18:00"
+      },
+      "weightKg": 4.1,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-030",
+      "recipient": "Jūratė Petrauskaitė",
+      "recipientType": "person",
+      "phone": "+37065662846",
+      "address": "Ąžuolyno g. 7-34, Vilnius",
+      "location": {
+        "lat": 54.730298,
+        "lng": 25.219705
+      },
+      "priority": 3,
+      "window": {
+        "start": "12:00",
+        "end": "18:00"
+      },
+      "weightKg": 8.7,
+      "serviceMinutes": 3,
+      "note": "Neveikia skambutis, skambinti telefonu"
+    },
+    {
+      "id": "PKG-031",
+      "recipient": "Donatas Stankevičius",
+      "recipientType": "person",
+      "phone": "+37067939620",
+      "address": "Gedimino pr. 34-73, Vilnius",
+      "location": {
+        "lat": 54.688222,
+        "lng": 25.274677
       },
       "priority": 1,
       "window": {
         "start": "10:00",
         "end": "12:00"
       },
-      "weightKg": 1.3,
+      "weightKg": 14.4,
       "serviceMinutes": 5
     },
     {
-      "id": "PKG-030",
-      "recipient": "Neringa Grigienė",
-      "phone": "+37064110596",
-      "address": "Ąžuolyno g. 7, Vilnius",
+      "id": "PKG-032",
+      "recipient": "MB „Variklio klinika“",
+      "recipientType": "autoservice",
+      "phone": "+37065270703",
+      "address": "Vingrių g. 5, Vilnius",
       "location": {
-        "lat": 54.729788,
-        "lng": 25.220354
+        "lat": 54.681293,
+        "lng": 25.278496
       },
-      "priority": 3,
-      "window": {
-        "start": "14:00",
-        "end": "18:00"
-      },
-      "weightKg": 0.9,
-      "serviceMinutes": 6
-    },
-    {
-      "id": "PKG-031",
-      "recipient": "Gabija Šimkienė",
-      "phone": "+37068268957",
-      "address": "Gedimino pr. 34, Vilnius",
-      "location": {
-        "lat": 54.687999,
-        "lng": 25.273953
-      },
-      "priority": 3,
+      "priority": 2,
       "window": {
         "start": "08:00",
-        "end": "18:00"
+        "end": "12:00"
       },
-      "weightKg": 4,
-      "serviceMinutes": 3
-    },
-    {
-      "id": "PKG-032",
-      "recipient": "Dalia Butkutė",
-      "phone": "+37066450788",
-      "address": "Vingrių g. 5-16, Vilnius",
-      "location": {
-        "lat": 54.681505,
-        "lng": 25.27885
-      },
-      "priority": 3,
-      "window": {
-        "start": "10:00",
-        "end": "18:00"
-      },
-      "weightKg": 1.7,
-      "serviceMinutes": 3
+      "weightKg": 23.5,
+      "serviceMinutes": 5
     },
     {
       "id": "PKG-033",
-      "recipient": "Austėja Vasiliauskaitė",
-      "phone": "+37064611826",
-      "address": "Mėsinių g. 5-10, Vilnius",
+      "recipient": "Andrius Savickas",
+      "recipientType": "person",
+      "phone": "+37067593413",
+      "address": "Mėsinių g. 5-6, Vilnius",
       "location": {
-        "lat": 54.679998,
-        "lng": 25.285452
+        "lat": 54.679732,
+        "lng": 25.286341
       },
       "priority": 3,
       "window": {
         "start": "08:00",
         "end": "18:00"
       },
-      "weightKg": 11.8,
-      "serviceMinutes": 3
+      "weightKg": 5.7,
+      "serviceMinutes": 4
     },
     {
       "id": "PKG-034",
-      "recipient": "UAB „Žalias kodas“",
-      "phone": "+37064627377",
+      "recipient": "Gabija Mačiulienė",
+      "recipientType": "person",
+      "phone": "+37067775378",
       "address": "Panerių g. 28, Vilnius",
       "location": {
-        "lat": 54.670513,
-        "lng": 25.269556
+        "lat": 54.670192,
+        "lng": 25.27008
+      },
+      "priority": 2,
+      "window": {
+        "start": "08:00",
+        "end": "11:00"
+      },
+      "weightKg": 3.5,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-035",
+      "recipient": "MB „Garažas 24“",
+      "recipientType": "autoservice",
+      "phone": "+37067577602",
+      "address": "Paupio g. 28, Vilnius",
+      "location": {
+        "lat": 54.678352,
+        "lng": 25.298915
+      },
+      "priority": 1,
+      "window": {
+        "start": "08:30",
+        "end": "10:30"
+      },
+      "weightKg": 16.6,
+      "serviceMinutes": 6
+    },
+    {
+      "id": "PKG-036",
+      "recipient": "Jūratė Petrauskaitė",
+      "recipientType": "person",
+      "phone": "+37060808090",
+      "address": "Savanorių pr. 28, Vilnius",
+      "location": {
+        "lat": 54.674401,
+        "lng": 25.255804
       },
       "priority": 1,
       "window": {
         "start": "09:00",
         "end": "11:00"
       },
-      "weightKg": 3.4,
+      "weightKg": 6.4,
       "serviceMinutes": 5
     },
     {
-      "id": "PKG-035",
-      "recipient": "Aistė Stankevičienė",
-      "phone": "+37065277001",
-      "address": "Paupio g. 28-56, Vilnius",
-      "location": {
-        "lat": 54.678547,
-        "lng": 25.299157
-      },
-      "priority": 3,
-      "window": {
-        "start": "08:00",
-        "end": "18:00"
-      },
-      "weightKg": 15.9,
-      "serviceMinutes": 4,
-      "note": "Durų kodas 1234#"
-    },
-    {
-      "id": "PKG-036",
+      "id": "PKG-037",
       "recipient": "Jūratė Stankevičienė",
+      "recipientType": "person",
       "phone": "+37068374973",
-      "address": "Savanorių pr. 28, Vilnius",
+      "address": "Kalvarijų g. 98, Vilnius",
       "location": {
-        "lat": 54.674258,
-        "lng": 25.255552
+        "lat": 54.708758,
+        "lng": 25.282551
       },
       "priority": 1,
       "window": {
         "start": "10:00",
         "end": "12:00"
       },
-      "weightKg": 18.6,
-      "serviceMinutes": 6
+      "weightKg": 11.9,
+      "serviceMinutes": 5
     },
     {
-      "id": "PKG-037",
+      "id": "PKG-038",
       "recipient": "Ieva Petrauskaitė",
-      "address": "Kalvarijų g. 98, Vilnius",
+      "recipientType": "person",
+      "address": "Ozo g. 25, Vilnius",
       "location": {
-        "lat": 54.709241,
-        "lng": 25.282832
+        "lat": 54.714241,
+        "lng": 25.268832
       },
       "priority": 2,
       "window": {
         "start": "14:30",
         "end": "17:30"
       },
-      "weightKg": 2.9,
-      "serviceMinutes": 8
+      "weightKg": 4.7,
+      "serviceMinutes": 6
     },
     {
-      "id": "PKG-038",
+      "id": "PKG-039",
       "recipient": "Petras Paulauskas",
+      "recipientType": "person",
       "phone": "+37064650760",
-      "address": "Ozo g. 25, Vilnius",
+      "address": "Šeškinės g. 40, Vilnius",
       "location": {
-        "lat": 54.713947,
-        "lng": 25.269135
+        "lat": 54.716447,
+        "lng": 25.247135
       },
       "priority": 2,
       "window": {
         "start": "12:00",
         "end": "15:00"
       },
-      "weightKg": 24.1,
-      "serviceMinutes": 7
+      "weightKg": 13.5,
+      "serviceMinutes": 5
     },
     {
-      "id": "PKG-039",
+      "id": "PKG-040",
       "recipient": "Laura Petrauskienė",
+      "recipientType": "person",
       "phone": "+37060067273",
-      "address": "Šeškinės g. 40-29, Vilnius",
+      "address": "Mykolo Paco g. 5-29, Vilnius",
       "location": {
-        "lat": 54.716764,
-        "lng": 25.247113
+        "lat": 54.692764,
+        "lng": 25.213613
       },
       "priority": 3,
       "window": {
         "start": "08:00",
         "end": "18:00"
       },
-      "weightKg": 18.6,
-      "serviceMinutes": 5,
+      "weightKg": 11.9,
+      "serviceMinutes": 4,
       "note": "Skambinti prieš atvykstant"
     },
     {
-      "id": "PKG-040",
-      "recipient": "UAB „Ąžuolo baldai“",
-      "phone": "+37060759782",
-      "address": "Mykolo Paco g. 5, Vilnius",
-      "location": {
-        "lat": 54.692739,
-        "lng": 25.213194
-      },
-      "priority": 1,
-      "window": {
-        "start": "10:00",
-        "end": "12:00"
-      },
-      "weightKg": 18.4,
-      "serviceMinutes": 5
-    },
-    {
       "id": "PKG-041",
-      "recipient": "MB „Užupio keramika“",
-      "phone": "+37065941521",
+      "recipient": "UAB „Pavarų dėžės servisas“",
+      "recipientType": "autoservice",
+      "phone": "+37060759782",
       "address": "Jeruzalės g. 15, Vilnius",
       "location": {
-        "lat": 54.740774,
-        "lng": 25.290251
+        "lat": 54.741239,
+        "lng": 25.289694
       },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 28.5,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-042",
-      "recipient": "Žygimantas Mačiulis",
-      "phone": "+37062459745",
-      "address": "A. Vienuolio g. 4-80, Vilnius",
-      "location": {
-        "lat": 54.687691,
-        "lng": 25.273271
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 3.1,
-      "serviceMinutes": 4,
-      "note": "Laiptinė iš kiemo pusės"
-    },
-    {
-      "id": "PKG-043",
-      "recipient": "UAB „Elektros taškas“",
-      "phone": "+37066261251",
-      "address": "Pilaitės pr. 16, Vilnius",
-      "location": {
-        "lat": 54.71128,
-        "lng": 25.183827
-      },
-      "priority": 2,
-      "window": {
-        "start": "09:30",
-        "end": "12:30"
-      },
-      "weightKg": 1.5,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-044",
-      "recipient": "UAB „Vilniaus logistika“",
-      "phone": "+37067828251",
-      "address": "Užupio g. 15, Vilnius",
-      "location": {
-        "lat": 54.681095,
-        "lng": 25.297292
-      },
-      "priority": 2,
+      "priority": 1,
       "window": {
         "start": "08:30",
         "end": "10:30"
       },
-      "weightKg": 1.7,
-      "serviceMinutes": 5
+      "weightKg": 20.1,
+      "serviceMinutes": 6,
+      "note": "Skambinti prieš atvykstant"
     },
     {
-      "id": "PKG-045",
-      "recipient": "Kęstutis Savickas",
-      "phone": "+37062703241",
-      "address": "Linksmoji g. 5-57, Vilnius",
+      "id": "PKG-042",
+      "recipient": "Gabija Černiauskienė",
+      "recipientType": "person",
+      "phone": "+37068450653",
+      "address": "A. Vienuolio g. 4, Vilnius",
       "location": {
-        "lat": 54.689067,
-        "lng": 25.401408
+        "lat": 54.687678,
+        "lng": 25.272623
       },
-      "priority": 2,
+      "priority": 1,
       "window": {
-        "start": "16:00",
-        "end": "18:00"
+        "start": "09:00",
+        "end": "11:00"
       },
-      "weightKg": 19.6,
-      "serviceMinutes": 5
+      "weightKg": 7.6,
+      "serviceMinutes": 3
     },
     {
-      "id": "PKG-046",
-      "recipient": "Neringa Žemaitytė",
-      "phone": "+37061400149",
-      "address": "Geležinkelio g. 6, Vilnius",
+      "id": "PKG-043",
+      "recipient": "Donatas Stankevičius",
+      "recipientType": "person",
+      "phone": "+37068124253",
+      "address": "Pilaitės pr. 16-38, Vilnius",
       "location": {
-        "lat": 54.671623,
-        "lng": 25.279959
+        "lat": 54.711001,
+        "lng": 25.184384
       },
       "priority": 1,
       "window": {
         "start": "13:00",
         "end": "15:00"
       },
-      "weightKg": 6.2,
-      "serviceMinutes": 4,
-      "note": "Palikti prie durų"
+      "weightKg": 3,
+      "serviceMinutes": 3,
+      "note": "Durų kodas 1234#"
     },
     {
-      "id": "PKG-047",
-      "recipient": "Gintaras Grigas",
-      "phone": "+37060973783",
-      "address": "S. Žukausko g. 22-71, Vilnius",
+      "id": "PKG-044",
+      "recipient": "Rasa Savickienė",
+      "recipientType": "person",
+      "phone": "+37061355870",
+      "address": "Užupio g. 15, Vilnius",
       "location": {
-        "lat": 54.713111,
-        "lng": 25.296433
+        "lat": 54.680971,
+        "lng": 25.297049
       },
       "priority": 2,
       "window": {
-        "start": "10:00",
-        "end": "14:00"
+        "start": "09:00",
+        "end": "13:00"
       },
-      "weightKg": 0.5,
-      "serviceMinutes": 7
+      "weightKg": 6.3,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-045",
+      "recipient": "UAB „Sankabų servisas“",
+      "recipientType": "autoservice",
+      "phone": "+37063429829",
+      "address": "Linksmoji g. 5, Vilnius",
+      "location": {
+        "lat": 54.688834,
+        "lng": 25.402331
+      },
+      "priority": 1,
+      "window": {
+        "start": "09:00",
+        "end": "11:00"
+      },
+      "weightKg": 7.3,
+      "serviceMinutes": 6
+    },
+    {
+      "id": "PKG-046",
+      "recipient": "Goda Vasiliauskienė",
+      "recipientType": "person",
+      "phone": "+37067668868",
+      "address": "Geležinkelio g. 6, Vilnius",
+      "location": {
+        "lat": 54.671767,
+        "lng": 25.28055
+      },
+      "priority": 2,
+      "window": {
+        "start": "15:00",
+        "end": "18:00"
+      },
+      "weightKg": 13.7,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-047",
+      "recipient": "Kęstutis Jankauskas",
+      "recipientType": "person",
+      "phone": "+37068671116",
+      "address": "S. Žukausko g. 22, Vilnius",
+      "location": {
+        "lat": 54.713341,
+        "lng": 25.296032
+      },
+      "priority": 2,
+      "window": {
+        "start": "10:30",
+        "end": "14:30"
+      },
+      "weightKg": 1.1,
+      "serviceMinutes": 3
     },
     {
       "id": "PKG-048",
-      "recipient": "UAB „Senamiesčio vaistinė“",
-      "phone": "+37069332975",
-      "address": "Justiniškių g. 14, Vilnius",
+      "recipient": "Rimantas Petrauskas",
+      "recipientType": "person",
+      "phone": "+37061112708",
+      "address": "Justiniškių g. 14-64, Vilnius",
       "location": {
-        "lat": 54.715081,
-        "lng": 25.217531
+        "lat": 54.714813,
+        "lng": 25.218205
       },
-      "priority": 3,
+      "priority": 1,
       "window": {
-        "start": "10:00",
-        "end": "18:00"
+        "start": "09:00",
+        "end": "11:00"
       },
-      "weightKg": 7.6,
+      "weightKg": 6.5,
       "serviceMinutes": 4
     },
     {
       "id": "PKG-049",
-      "recipient": "UAB „Tikslus apskaitos centras“",
+      "recipient": "Goda Šimkienė",
+      "recipientType": "person",
       "phone": "+37062380374",
-      "address": "Malūnų g. 3, Vilnius",
+      "address": "Malūnų g. 3-42, Vilnius",
       "location": {
         "lat": 54.681238,
         "lng": 25.295315
       },
-      "priority": 2,
+      "priority": 3,
       "window": {
-        "start": "08:30",
-        "end": "11:30"
+        "start": "12:00",
+        "end": "18:00"
       },
-      "weightKg": 20.7,
-      "serviceMinutes": 4
+      "weightKg": 12.5,
+      "serviceMinutes": 3,
+      "note": "Durų kodas 1234#"
     },
     {
       "id": "PKG-050",
       "recipient": "Paulius Navickas",
+      "recipientType": "person",
       "phone": "+37068789866",
       "address": "Vytenio g. 50-23, Vilnius",
       "location": {
@@ -985,12 +1041,13 @@
         "start": "09:00",
         "end": "12:00"
       },
-      "weightKg": 17.7,
-      "serviceMinutes": 5
+      "weightKg": 11.6,
+      "serviceMinutes": 4
     },
     {
       "id": "PKG-051",
       "recipient": "Dalia Černiauskaitė",
+      "recipientType": "person",
       "phone": "+37067861276",
       "address": "Ukmergės g. 282-52, Vilnius",
       "location": {
@@ -1002,12 +1059,13 @@
         "start": "10:00",
         "end": "12:00"
       },
-      "weightKg": 16.9,
-      "serviceMinutes": 7
+      "weightKg": 11.3,
+      "serviceMinutes": 5
     },
     {
       "id": "PKG-052",
       "recipient": "Petras Jankauskas",
+      "recipientType": "person",
       "phone": "+37062232671",
       "address": "Literatų g. 3-42, Vilnius",
       "location": {
@@ -1019,12 +1077,13 @@
         "start": "10:00",
         "end": "12:00"
       },
-      "weightKg": 21.2,
-      "serviceMinutes": 6
+      "weightKg": 12.6,
+      "serviceMinutes": 4
     },
     {
       "id": "PKG-053",
       "recipient": "Lina Žukauskaitė",
+      "recipientType": "person",
       "phone": "+37064449617",
       "address": "Liubarto g. 6, Vilnius",
       "location": {
@@ -1036,12 +1095,13 @@
         "start": "11:00",
         "end": "14:00"
       },
-      "weightKg": 29.8,
-      "serviceMinutes": 6
+      "weightKg": 15,
+      "serviceMinutes": 4
     },
     {
       "id": "PKG-054",
       "recipient": "Žygimantas Žemaitis",
+      "recipientType": "person",
       "phone": "+37069513806",
       "address": "Gabijos g. 90-77, Vilnius",
       "location": {
@@ -1053,12 +1113,13 @@
         "start": "12:00",
         "end": "18:00"
       },
-      "weightKg": 0.7,
-      "serviceMinutes": 7
+      "weightKg": 1.8,
+      "serviceMinutes": 5
     },
     {
       "id": "PKG-055",
       "recipient": "Arūnas Ramanauskas",
+      "recipientType": "person",
       "phone": "+37062412437",
       "address": "Verkių g. 29, Vilnius",
       "location": {
@@ -1070,12 +1131,13 @@
         "start": "09:30",
         "end": "11:30"
       },
-      "weightKg": 1.3,
-      "serviceMinutes": 10
+      "weightKg": 2.9,
+      "serviceMinutes": 6
     },
     {
       "id": "PKG-056",
       "recipient": "Vilius Paulauskas",
+      "recipientType": "person",
       "phone": "+37066801060",
       "address": "Trakų g. 12, Vilnius",
       "location": {
@@ -1087,12 +1149,13 @@
         "start": "15:30",
         "end": "17:30"
       },
-      "weightKg": 12,
+      "weightKg": 9.6,
       "serviceMinutes": 3
     },
     {
       "id": "PKG-057",
       "recipient": "Goda Petrauskienė",
+      "recipientType": "person",
       "phone": "+37066831817",
       "address": "Smolensko g. 10, Vilnius",
       "location": {
@@ -1104,28 +1167,31 @@
         "start": "12:00",
         "end": "18:00"
       },
-      "weightKg": 1.3,
-      "serviceMinutes": 5
+      "weightKg": 2.8,
+      "serviceMinutes": 4
     },
     {
       "id": "PKG-058",
-      "recipient": "UAB „Saulės energija“",
+      "recipient": "Autoservisas „Važiuoklė“",
+      "recipientType": "autoservice",
+      "phone": "+37061151128",
       "address": "Pamiškės g. 9, Vilnius",
       "location": {
-        "lat": 54.697422,
-        "lng": 25.322662
+        "lat": 54.697698,
+        "lng": 25.322647
       },
       "priority": 3,
       "window": {
-        "start": "12:00",
-        "end": "18:00"
+        "start": "08:00",
+        "end": "17:00"
       },
-      "weightKg": 14,
-      "serviceMinutes": 3
+      "weightKg": 16.1,
+      "serviceMinutes": 5
     },
     {
       "id": "PKG-059",
       "recipient": "Algirdas Savickas",
+      "recipientType": "person",
       "phone": "+37060994801",
       "address": "Viršuliškių g. 22, Vilnius",
       "location": {
@@ -1137,12 +1203,13 @@
         "start": "10:00",
         "end": "18:00"
       },
-      "weightKg": 21.6,
-      "serviceMinutes": 10
+      "weightKg": 12.8,
+      "serviceMinutes": 6
     },
     {
       "id": "PKG-060",
-      "recipient": "UAB „Medžio dirbtuvės“",
+      "recipient": "Autoservisas „Greitas ratas“",
+      "recipientType": "autoservice",
       "phone": "+37062025646",
       "address": "Fabijoniškių g. 59, Vilnius",
       "location": {
@@ -1151,131 +1218,144 @@
       },
       "priority": 3,
       "window": {
-        "start": "14:00",
-        "end": "18:00"
+        "start": "08:00",
+        "end": "17:00"
       },
-      "weightKg": 2.7,
-      "serviceMinutes": 3
+      "weightKg": 4.9,
+      "serviceMinutes": 5
     },
     {
       "id": "PKG-061",
-      "recipient": "MB „Užupio keramika“",
-      "phone": "+37062343936",
-      "address": "Akademijos g. 2, Vilnius",
+      "recipient": "Aistė Žukauskaitė",
+      "recipientType": "person",
+      "phone": "+37061855274",
+      "address": "Akademijos g. 2-19, Vilnius",
       "location": {
-        "lat": 54.732994,
-        "lng": 25.267686
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 0.9,
-      "serviceMinutes": 6
-    },
-    {
-      "id": "PKG-062",
-      "recipient": "Marius Ramanauskas",
-      "address": "A. Mickevičiaus g. 32-9, Vilnius",
-      "location": {
-        "lat": 54.693616,
-        "lng": 25.262398
+        "lat": 54.733169,
+        "lng": 25.267532
       },
       "priority": 3,
       "window": {
         "start": "08:00",
         "end": "18:00"
       },
-      "weightKg": 3.8,
-      "serviceMinutes": 4
+      "weightKg": 5.4,
+      "serviceMinutes": 5,
+      "note": "Trapus siuntinys"
+    },
+    {
+      "id": "PKG-062",
+      "recipient": "Autoservisas „Greitas ratas“",
+      "recipientType": "autoservice",
+      "phone": "+37061759551",
+      "address": "A. Mickevičiaus g. 32, Vilnius",
+      "location": {
+        "lat": 54.693446,
+        "lng": 25.262438
+      },
+      "priority": 1,
+      "window": {
+        "start": "08:30",
+        "end": "10:30"
+      },
+      "weightKg": 4.3,
+      "serviceMinutes": 10
     },
     {
       "id": "PKG-063",
-      "recipient": "Aistė Stankevičiūtė",
-      "phone": "+37060120944",
+      "recipient": "Živilė Kazlauskienė",
+      "recipientType": "person",
+      "phone": "+37063249292",
       "address": "Šeškinės g. 12, Vilnius",
       "location": {
-        "lat": 54.708868,
-        "lng": 25.24245
+        "lat": 54.708997,
+        "lng": 25.24204
       },
       "priority": 2,
       "window": {
-        "start": "10:00",
-        "end": "12:00"
+        "start": "11:00",
+        "end": "15:00"
       },
-      "weightKg": 5.8,
-      "serviceMinutes": 6
-    },
-    {
-      "id": "PKG-064",
-      "recipient": "Rasa Kavaliauskienė",
-      "address": "Naugarduko g. 42, Vilnius",
-      "location": {
-        "lat": 54.677281,
-        "lng": 25.268998
-      },
-      "priority": 2,
-      "window": {
-        "start": "09:00",
-        "end": "13:00"
-      },
-      "weightKg": 5.3,
+      "weightKg": 12.9,
       "serviceMinutes": 3
     },
     {
+      "id": "PKG-064",
+      "recipient": "Marius Žukauskas",
+      "recipientType": "person",
+      "phone": "+37068680534",
+      "address": "Naugarduko g. 42-1, Vilnius",
+      "location": {
+        "lat": 54.677527,
+        "lng": 25.268752
+      },
+      "priority": 2,
+      "window": {
+        "start": "13:00",
+        "end": "15:00"
+      },
+      "weightKg": 14.7,
+      "serviceMinutes": 4,
+      "note": "Laiptinė iš kiemo pusės"
+    },
+    {
       "id": "PKG-065",
-      "recipient": "Neringa Petrauskienė",
-      "address": "Rinktinės g. 5-3, Vilnius",
+      "recipient": "Vilius Jankauskas",
+      "recipientType": "person",
+      "phone": "+37063213783",
+      "address": "Rinktinės g. 5, Vilnius",
       "location": {
-        "lat": 54.696505,
-        "lng": 25.289747
-      },
-      "priority": 1,
-      "window": {
-        "start": "10:00",
-        "end": "12:00"
-      },
-      "weightKg": 29.1,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-066",
-      "recipient": "Rimantas Jankauskas",
-      "phone": "+37061527230",
-      "address": "Antakalnio g. 17, Vilnius",
-      "location": {
-        "lat": 54.693063,
-        "lng": 25.307347
-      },
-      "priority": 1,
-      "window": {
-        "start": "10:00",
-        "end": "12:00"
-      },
-      "weightKg": 21,
-      "serviceMinutes": 8
-    },
-    {
-      "id": "PKG-067",
-      "recipient": "Gintaras Kazlauskas",
-      "phone": "+37068050897",
-      "address": "Žirmūnų g. 2-68, Vilnius",
-      "location": {
-        "lat": 54.699767,
-        "lng": 25.296928
+        "lat": 54.696683,
+        "lng": 25.289769
       },
       "priority": 2,
       "window": {
         "start": "08:30",
-        "end": "12:30"
+        "end": "11:30"
       },
-      "weightKg": 28,
+      "weightKg": 14.2,
+      "serviceMinutes": 3,
+      "note": "Neveikia skambutis, skambinti telefonu"
+    },
+    {
+      "id": "PKG-066",
+      "recipient": "Gabija Grigienė",
+      "recipientType": "person",
+      "phone": "+37060364751",
+      "address": "Antakalnio g. 17-40, Vilnius",
+      "location": {
+        "lat": 54.693017,
+        "lng": 25.306953
+      },
+      "priority": 3,
+      "window": {
+        "start": "12:00",
+        "end": "18:00"
+      },
+      "weightKg": 4.7,
       "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-067",
+      "recipient": "UAB „Amortizatorių centras“",
+      "recipientType": "autoservice",
+      "address": "Žirmūnų g. 2, Vilnius",
+      "location": {
+        "lat": 54.699697,
+        "lng": 25.297481
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "weightKg": 22.7,
+      "serviceMinutes": 6
     },
     {
       "id": "PKG-068",
       "recipient": "Aistė Savickienė",
+      "recipientType": "person",
       "phone": "+37067796715",
       "address": "Latvių g. 25-57, Vilnius",
       "location": {
@@ -1287,12 +1367,13 @@
         "start": "09:30",
         "end": "11:30"
       },
-      "weightKg": 24.7,
-      "serviceMinutes": 6
+      "weightKg": 13.6,
+      "serviceMinutes": 5
     },
     {
       "id": "PKG-069",
       "recipient": "Jūratė Kavaliauskienė",
+      "recipientType": "person",
       "phone": "+37061514585",
       "address": "Viršuliškių g. 85, Vilnius",
       "location": {
@@ -1304,12 +1385,13 @@
         "start": "12:00",
         "end": "18:00"
       },
-      "weightKg": 5.4,
-      "serviceMinutes": 6
+      "weightKg": 6.4,
+      "serviceMinutes": 5
     },
     {
       "id": "PKG-070",
       "recipient": "Austėja Savickaitė",
+      "recipientType": "person",
       "phone": "+37065288068",
       "address": "Pilaitės pr. 31, Vilnius",
       "location": {
@@ -1321,13 +1403,14 @@
         "start": "08:00",
         "end": "10:00"
       },
-      "weightKg": 4.7,
-      "serviceMinutes": 7,
+      "weightKg": 6,
+      "serviceMinutes": 5,
       "note": "Palikti prie durų"
     },
     {
       "id": "PKG-071",
-      "recipient": "UAB „Debesų sistemos“",
+      "recipient": "MB „Garažas 24“",
+      "recipientType": "autoservice",
       "phone": "+37067670684",
       "address": "Pergalės g. 12, Vilnius",
       "location": {
@@ -1336,15 +1419,17 @@
       },
       "priority": 2,
       "window": {
-        "start": "09:00",
-        "end": "12:00"
+        "start": "10:00",
+        "end": "13:00"
       },
-      "weightKg": 3,
-      "serviceMinutes": 8
+      "weightKg": 5.2,
+      "serviceMinutes": 10,
+      "note": "Skambinti prieš atvykstant"
     },
     {
       "id": "PKG-072",
       "recipient": "Austėja Paulauskienė",
+      "recipientType": "person",
       "phone": "+37067965420",
       "address": "Rygiškių Jono g. 7-60, Vilnius",
       "location": {
@@ -1356,12 +1441,13 @@
         "start": "08:30",
         "end": "10:30"
       },
-      "weightKg": 19.7,
-      "serviceMinutes": 5
+      "weightKg": 12.2,
+      "serviceMinutes": 4
     },
     {
       "id": "PKG-073",
       "recipient": "Paulius Navickas",
+      "recipientType": "person",
       "phone": "+37069420005",
       "address": "Polocko g. 23, Vilnius",
       "location": {
@@ -1373,12 +1459,13 @@
         "start": "12:00",
         "end": "18:00"
       },
-      "weightKg": 11.2,
+      "weightKg": 9.2,
       "serviceMinutes": 4
     },
     {
       "id": "PKG-074",
-      "recipient": "UAB „Debesų sistemos“",
+      "recipient": "UAB „Dyzelio ekspertai“",
+      "recipientType": "autoservice",
       "phone": "+37060113389",
       "address": "Krivių g. 15, Vilnius",
       "location": {
@@ -1387,477 +1474,505 @@
       },
       "priority": 3,
       "window": {
-        "start": "12:00",
-        "end": "18:00"
+        "start": "08:00",
+        "end": "17:00"
       },
-      "weightKg": 28,
-      "serviceMinutes": 4,
-      "note": "Įvažiavimas iš kiemo pusės"
+      "weightKg": 28.4,
+      "serviceMinutes": 6,
+      "note": "Automobilis ant keltuvo – skubu"
     },
     {
       "id": "PKG-075",
-      "recipient": "UAB „Lino namai“",
+      "recipient": "Lina Kazlauskienė",
+      "recipientType": "person",
       "address": "Kalvelių g. 41, Vilnius",
       "location": {
-        "lat": 54.688034,
-        "lng": 25.406666
+        "lat": 54.687967,
+        "lng": 25.40653
+      },
+      "priority": 2,
+      "window": {
+        "start": "12:00",
+        "end": "16:00"
+      },
+      "weightKg": 6,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-076",
+      "recipient": "Vilius Žemaitis",
+      "recipientType": "person",
+      "phone": "+37060765408",
+      "address": "Ukmergės g. 126-79, Vilnius",
+      "location": {
+        "lat": 54.705698,
+        "lng": 25.258353
+      },
+      "priority": 2,
+      "window": {
+        "start": "13:00",
+        "end": "16:00"
+      },
+      "weightKg": 7,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-077",
+      "recipient": "Žygimantas Šimkus",
+      "recipientType": "person",
+      "phone": "+37067364318",
+      "address": "A. Goštauto g. 8, Vilnius",
+      "location": {
+        "lat": 54.68904,
+        "lng": 25.271268
       },
       "priority": 2,
       "window": {
         "start": "11:30",
         "end": "15:30"
       },
-      "weightKg": 28,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-076",
-      "recipient": "Rimantas Paulauskas",
-      "phone": "+37069765174",
-      "address": "Ukmergės g. 126, Vilnius",
-      "location": {
-        "lat": 54.705684,
-        "lng": 25.257803
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 8.4,
-      "serviceMinutes": 10,
-      "note": "Neveikia skambutis, skambinti telefonu"
-    },
-    {
-      "id": "PKG-077",
-      "recipient": "Vytautas Savickas",
-      "phone": "+37067825922",
-      "address": "A. Goštauto g. 8, Vilnius",
-      "location": {
-        "lat": 54.689352,
-        "lng": 25.27042
-      },
-      "priority": 1,
-      "window": {
-        "start": "09:30",
-        "end": "11:30"
-      },
-      "weightKg": 22.3,
+      "weightKg": 13.7,
       "serviceMinutes": 5
     },
     {
       "id": "PKG-078",
-      "recipient": "Laura Šimkutė",
-      "phone": "+37060794717",
-      "address": "Gedimino pr. 9, Vilnius",
+      "recipient": "Andrius Savickas",
+      "recipientType": "person",
+      "phone": "+37060885772",
+      "address": "Gedimino pr. 9-49, Vilnius",
       "location": {
-        "lat": 54.687444,
-        "lng": 25.279461
-      },
-      "priority": 3,
-      "window": {
-        "start": "10:00",
-        "end": "18:00"
-      },
-      "weightKg": 17.8,
-      "serviceMinutes": 4
-    },
-    {
-      "id": "PKG-079",
-      "recipient": "UAB „Knygų kampas“",
-      "phone": "+37061182124",
-      "address": "Aušros Vartų g. 12, Vilnius",
-      "location": {
-        "lat": 54.675327,
-        "lng": 25.2896
-      },
-      "priority": 1,
-      "window": {
-        "start": "13:00",
-        "end": "15:00"
-      },
-      "weightKg": 2.8,
-      "serviceMinutes": 6
-    },
-    {
-      "id": "PKG-080",
-      "recipient": "Donatas Urbonas",
-      "phone": "+37060734722",
-      "address": "Bokšto g. 6, Vilnius",
-      "location": {
-        "lat": 54.679654,
-        "lng": 25.292237
-      },
-      "priority": 2,
-      "window": {
-        "start": "14:30",
-        "end": "17:30"
-      },
-      "weightKg": 14.6,
-      "serviceMinutes": 3
-    },
-    {
-      "id": "PKG-081",
-      "recipient": "Neringa Žukauskienė",
-      "phone": "+37064657888",
-      "address": "Įsruties g. 4-65, Vilnius",
-      "location": {
-        "lat": 54.705931,
-        "lng": 25.180761
-      },
-      "priority": 1,
-      "window": {
-        "start": "09:30",
-        "end": "11:30"
-      },
-      "weightKg": 6,
-      "serviceMinutes": 3,
-      "note": "Skambinti prieš atvykstant"
-    },
-    {
-      "id": "PKG-082",
-      "recipient": "Šarūnas Kazlauskas",
-      "phone": "+37064161518",
-      "address": "Krokuvos g. 6, Vilnius",
-      "location": {
-        "lat": 54.70078,
-        "lng": 25.276543
-      },
-      "priority": 3,
-      "window": {
-        "start": "10:00",
-        "end": "18:00"
-      },
-      "weightKg": 2.3,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-083",
-      "recipient": "Paulius Savickas",
-      "phone": "+37066508479",
-      "address": "Gelvonų g. 25, Vilnius",
-      "location": {
-        "lat": 54.72396,
-        "lng": 25.241762
-      },
-      "priority": 2,
-      "window": {
-        "start": "09:00",
-        "end": "13:00"
-      },
-      "weightKg": 22.7,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-084",
-      "recipient": "UAB „Debesų sistemos“",
-      "phone": "+37069741156",
-      "address": "Kareivių g. 6, Vilnius",
-      "location": {
-        "lat": 54.717682,
-        "lng": 25.292811
-      },
-      "priority": 2,
-      "window": {
-        "start": "15:00",
-        "end": "18:00"
-      },
-      "weightKg": 0.5,
-      "serviceMinutes": 5,
-      "note": "Trapus siuntinys"
-    },
-    {
-      "id": "PKG-085",
-      "recipient": "Šarūnas Mačiulis",
-      "phone": "+37062153212",
-      "address": "Trinapolio g. 9-80, Vilnius",
-      "location": {
-        "lat": 54.735973,
-        "lng": 25.28723
-      },
-      "priority": 3,
-      "window": {
-        "start": "08:00",
-        "end": "18:00"
-      },
-      "weightKg": 28.5,
-      "serviceMinutes": 3
-    },
-    {
-      "id": "PKG-086",
-      "recipient": "VšĮ „Jaunimo erdvė“",
-      "phone": "+37068663109",
-      "address": "Gerosios Vilties g. 1, Vilnius",
-      "location": {
-        "lat": 54.674125,
-        "lng": 25.254355
+        "lat": 54.687099,
+        "lng": 25.279523
       },
       "priority": 2,
       "window": {
         "start": "14:00",
         "end": "16:00"
       },
-      "weightKg": 20.8,
-      "serviceMinutes": 7
+      "weightKg": 14,
+      "serviceMinutes": 5
     },
     {
-      "id": "PKG-087",
-      "recipient": "UAB „Švarūs langai“",
-      "phone": "+37061904877",
-      "address": "Žolyno g. 13, Vilnius",
+      "id": "PKG-079",
+      "recipient": "Vaida Jankauskienė",
+      "recipientType": "person",
+      "phone": "+37068059954",
+      "address": "Aušros Vartų g. 12, Vilnius",
       "location": {
-        "lat": 54.708562,
-        "lng": 25.333897
+        "lat": 54.675395,
+        "lng": 25.289659
       },
       "priority": 1,
-      "window": {
-        "start": "09:30",
-        "end": "11:30"
-      },
-      "weightKg": 18.6,
-      "serviceMinutes": 4
-    },
-    {
-      "id": "PKG-088",
-      "recipient": "Simona Savickaitė",
-      "phone": "+37067354106",
-      "address": "Parko g. 31, Vilnius",
-      "location": {
-        "lat": 54.695972,
-        "lng": 25.423509
-      },
-      "priority": 1,
-      "window": {
-        "start": "08:30",
-        "end": "10:30"
-      },
-      "weightKg": 21.6,
-      "serviceMinutes": 3
-    },
-    {
-      "id": "PKG-089",
-      "recipient": "Paulius Žemaitis",
-      "phone": "+37062086420",
-      "address": "S. Nėries g. 39, Vilnius",
-      "location": {
-        "lat": 54.735019,
-        "lng": 25.251477
-      },
-      "priority": 2,
       "window": {
         "start": "09:00",
         "end": "11:00"
       },
-      "weightKg": 27.7,
-      "serviceMinutes": 3
+      "weightKg": 8.1,
+      "serviceMinutes": 3,
+      "note": "Durų kodas 1234#"
     },
     {
-      "id": "PKG-090",
-      "recipient": "Gabija Petrauskaitė",
-      "phone": "+37068184106",
-      "address": "Birutės g. 28, Vilnius",
+      "id": "PKG-080",
+      "recipient": "Gabija Grigienė",
+      "recipientType": "person",
+      "phone": "+37068081744",
+      "address": "Bokšto g. 6-70, Vilnius",
       "location": {
-        "lat": 54.692408,
-        "lng": 25.250447
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 3.9,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-091",
-      "recipient": "UAB „Ąžuolo baldai“",
-      "phone": "+37069117572",
-      "address": "Kernavės g. 10, Vilnius",
-      "location": {
-        "lat": 54.702727,
-        "lng": 25.283839
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 23.1,
-      "serviceMinutes": 10,
-      "note": "Trapus siuntinys"
-    },
-    {
-      "id": "PKG-092",
-      "recipient": "Paulius Žukauskas",
-      "phone": "+37066388228",
-      "address": "Švitrigailos g. 11, Vilnius",
-      "location": {
-        "lat": 54.677013,
-        "lng": 25.263846
+        "lat": 54.679677,
+        "lng": 25.292705
       },
       "priority": 3,
       "window": {
         "start": "08:00",
         "end": "18:00"
       },
-      "weightKg": 20.9,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-093",
-      "recipient": "Aistė Vasiliauskaitė",
-      "phone": "+37063550824",
-      "address": "Žirmūnų g. 68, Vilnius",
-      "location": {
-        "lat": 54.707654,
-        "lng": 25.301082
-      },
-      "priority": 3,
-      "window": {
-        "start": "10:00",
-        "end": "18:00"
-      },
-      "weightKg": 4.9,
+      "weightKg": 4.6,
       "serviceMinutes": 3
     },
     {
-      "id": "PKG-094",
-      "recipient": "MB „Šviežia duona“",
-      "phone": "+37060397080",
-      "address": "Šeimyniškių g. 21, Vilnius",
+      "id": "PKG-081",
+      "recipient": "Andrius Grigas",
+      "recipientType": "person",
+      "phone": "+37066511968",
+      "address": "Įsruties g. 4, Vilnius",
       "location": {
-        "lat": 54.699067,
-        "lng": 25.282888
-      },
-      "priority": 2,
-      "window": {
-        "start": "14:30",
-        "end": "16:30"
-      },
-      "weightKg": 17.3,
-      "serviceMinutes": 7,
-      "note": "Skambinti prieš atvykstant"
-    },
-    {
-      "id": "PKG-095",
-      "recipient": "Rasa Paulauskienė",
-      "phone": "+37064391776",
-      "address": "Žalgirio g. 90, Vilnius",
-      "location": {
-        "lat": 54.704257,
-        "lng": 25.278105
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 12.6,
-      "serviceMinutes": 8
-    },
-    {
-      "id": "PKG-096",
-      "recipient": "Rasa Žukauskienė",
-      "address": "Gabijos g. 61-58, Vilnius",
-      "location": {
-        "lat": 54.723779,
-        "lng": 25.227916
-      },
-      "priority": 2,
-      "window": {
-        "start": "12:30",
-        "end": "16:30"
-      },
-      "weightKg": 2.3,
-      "serviceMinutes": 3
-    },
-    {
-      "id": "PKG-097",
-      "recipient": "UAB „Saulės energija“",
-      "phone": "+37066156812",
-      "address": "Perkūnkiemio g. 6, Vilnius",
-      "location": {
-        "lat": 54.730232,
-        "lng": 25.204948
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 7.3,
-      "serviceMinutes": 4
-    },
-    {
-      "id": "PKG-098",
-      "recipient": "Dalia Jankauskienė",
-      "phone": "+37065685415",
-      "address": "Subačiaus g. 5-50, Vilnius",
-      "location": {
-        "lat": 54.677031,
-        "lng": 25.291847
-      },
-      "priority": 2,
-      "window": {
-        "start": "11:00",
-        "end": "15:00"
-      },
-      "weightKg": 10.7,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-099",
-      "recipient": "Ieva Petrauskienė",
-      "phone": "+37066784506",
-      "address": "Medeinos g. 8, Vilnius",
-      "location": {
-        "lat": 54.732836,
-        "lng": 25.220924
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 17.6,
-      "serviceMinutes": 8
-    },
-    {
-      "id": "PKG-100",
-      "recipient": "UAB „Ąžuolo baldai“",
-      "phone": "+37066421448",
-      "address": "Architektų g. 76, Vilnius",
-      "location": {
-        "lat": 54.666774,
-        "lng": 25.198909
+        "lat": 54.706138,
+        "lng": 25.181482
       },
       "priority": 1,
       "window": {
         "start": "10:00",
         "end": "12:00"
       },
-      "weightKg": 2.2,
+      "weightKg": 14.3,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-082",
+      "recipient": "Inga Ramanauskienė",
+      "recipientType": "person",
+      "phone": "+37068940054",
+      "address": "Krokuvos g. 6, Vilnius",
+      "location": {
+        "lat": 54.700709,
+        "lng": 25.276734
+      },
+      "priority": 2,
+      "window": {
+        "start": "12:30",
+        "end": "15:30"
+      },
+      "weightKg": 11.3,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-083",
+      "recipient": "Živilė Stankevičienė",
+      "recipientType": "person",
+      "phone": "+37069741156",
+      "address": "Gelvonų g. 25, Vilnius",
+      "location": {
+        "lat": 54.723682,
+        "lng": 25.241811
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "18:00"
+      },
+      "weightKg": 0.6,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-084",
+      "recipient": "Austėja Mačiulienė",
+      "recipientType": "person",
+      "address": "Kareivių g. 6, Vilnius",
+      "location": {
+        "lat": 54.717892,
+        "lng": 25.293006
+      },
+      "priority": 1,
+      "window": {
+        "start": "09:00",
+        "end": "11:00"
+      },
+      "weightKg": 3.4,
+      "serviceMinutes": 6,
+      "note": "Palikti prie durų"
+    },
+    {
+      "id": "PKG-085",
+      "recipient": "Vilius Urbonas",
+      "recipientType": "person",
+      "address": "Trinapolio g. 9, Vilnius",
+      "location": {
+        "lat": 54.736125,
+        "lng": 25.287355
+      },
+      "priority": 2,
+      "window": {
+        "start": "14:00",
+        "end": "16:00"
+      },
+      "weightKg": 13.7,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-086",
+      "recipient": "UAB „Elektros auto servisas“",
+      "recipientType": "autoservice",
+      "phone": "+37061904877",
+      "address": "Gerosios Vilties g. 1, Vilnius",
+      "location": {
+        "lat": 54.674062,
+        "lng": 25.253897
+      },
+      "priority": 1,
+      "window": {
+        "start": "09:00",
+        "end": "11:00"
+      },
+      "weightKg": 20.2,
       "serviceMinutes": 6
     },
     {
-      "id": "PKG-101",
-      "recipient": "Gintaras Černiauskas",
-      "address": "Kurklių g. 5-14, Vilnius",
+      "id": "PKG-087",
+      "recipient": "Simona Savickaitė",
+      "recipientType": "person",
+      "phone": "+37067354106",
+      "address": "Žolyno g. 13, Vilnius",
       "location": {
-        "lat": 54.720428,
-        "lng": 25.244177
+        "lat": 54.708472,
+        "lng": 25.333509
+      },
+      "priority": 1,
+      "window": {
+        "start": "08:30",
+        "end": "10:30"
+      },
+      "weightKg": 12.8,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-088",
+      "recipient": "Paulius Žemaitis",
+      "recipientType": "person",
+      "phone": "+37062086420",
+      "address": "Parko g. 31, Vilnius",
+      "location": {
+        "lat": 54.696019,
+        "lng": 25.423477
+      },
+      "priority": 2,
+      "window": {
+        "start": "09:00",
+        "end": "11:00"
+      },
+      "weightKg": 14.4,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-089",
+      "recipient": "Gabija Petrauskaitė",
+      "recipientType": "person",
+      "phone": "+37068184106",
+      "address": "S. Nėries g. 39, Vilnius",
+      "location": {
+        "lat": 54.734908,
+        "lng": 25.251447
+      },
+      "priority": 3,
+      "window": {
+        "start": "12:00",
+        "end": "18:00"
+      },
+      "weightKg": 5.4,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-090",
+      "recipient": "MB „Tepalų taškas“",
+      "recipientType": "autoservice",
+      "phone": "+37069117572",
+      "address": "Birutės g. 28, Vilnius",
+      "location": {
+        "lat": 54.692727,
+        "lng": 25.250839
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "weightKg": 24.2,
+      "serviceMinutes": 10,
+      "note": "Automobilis ant keltuvo – skubu"
+    },
+    {
+      "id": "PKG-091",
+      "recipient": "Petras Navickas",
+      "recipientType": "person",
+      "phone": "+37066388228",
+      "address": "Kernavės g. 10-43, Vilnius",
+      "location": {
+        "lat": 54.702713,
+        "lng": 25.283845
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "18:00"
+      },
+      "weightKg": 12.5,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-092",
+      "recipient": "Aistė Vasiliauskaitė",
+      "recipientType": "person",
+      "phone": "+37063550824",
+      "address": "Švitrigailos g. 11, Vilnius",
+      "location": {
+        "lat": 54.676454,
+        "lng": 25.264082
+      },
+      "priority": 3,
+      "window": {
+        "start": "10:00",
+        "end": "18:00"
+      },
+      "weightKg": 6.1,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-093",
+      "recipient": "UAB „Sankabų servisas“",
+      "recipientType": "autoservice",
+      "phone": "+37060397080",
+      "address": "Žirmūnų g. 68, Vilnius",
+      "location": {
+        "lat": 54.708067,
+        "lng": 25.300888
+      },
+      "priority": 2,
+      "window": {
+        "start": "08:00",
+        "end": "12:00"
+      },
+      "weightKg": 19.1,
+      "serviceMinutes": 10
+    },
+    {
+      "id": "PKG-094",
+      "recipient": "Laura Savickaitė",
+      "recipientType": "person",
+      "address": "Šeimyniškių g. 21-17, Vilnius",
+      "location": {
+        "lat": 54.698746,
+        "lng": 25.283177
+      },
+      "priority": 1,
+      "window": {
+        "start": "10:00",
+        "end": "12:00"
+      },
+      "weightKg": 8.2,
+      "serviceMinutes": 4,
+      "note": "Skambinti prieš atvykstant"
+    },
+    {
+      "id": "PKG-095",
+      "recipient": "UAB „Auto diagnostika“",
+      "recipientType": "autoservice",
+      "phone": "+37063886332",
+      "address": "Žalgirio g. 90, Vilnius",
+      "location": {
+        "lat": 54.703968,
+        "lng": 25.277659
+      },
+      "priority": 1,
+      "window": {
+        "start": "08:00",
+        "end": "10:00"
+      },
+      "weightKg": 6.8,
+      "serviceMinutes": 8,
+      "note": "Priima iki 16:30"
+    },
+    {
+      "id": "PKG-096",
+      "recipient": "Rasa Černiauskaitė",
+      "recipientType": "person",
+      "phone": "+37066156812",
+      "address": "Gabijos g. 61-36, Vilnius",
+      "location": {
+        "lat": 54.724232,
+        "lng": 25.227948
       },
       "priority": 2,
       "window": {
         "start": "12:00",
-        "end": "15:00"
+        "end": "14:00"
       },
-      "weightKg": 2.5,
+      "weightKg": 7.5,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-097",
+      "recipient": "UAB „Dyzelio ekspertai“",
+      "recipientType": "autoservice",
+      "phone": "+37066223889",
+      "address": "Perkūnkiemio g. 6, Vilnius",
+      "location": {
+        "lat": 54.729777,
+        "lng": 25.205224
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "weightKg": 14.2,
+      "serviceMinutes": 5,
+      "note": "Padangų komplektas (4 vnt.)"
+    },
+    {
+      "id": "PKG-098",
+      "recipient": "Živilė Šimkutė",
+      "recipientType": "person",
+      "phone": "+37064097024",
+      "address": "Subačiaus g. 5, Vilnius",
+      "location": {
+        "lat": 54.676922,
+        "lng": 25.291473
+      },
+      "priority": 1,
+      "window": {
+        "start": "09:30",
+        "end": "11:30"
+      },
+      "weightKg": 2.6,
       "serviceMinutes": 4
     },
     {
+      "id": "PKG-099",
+      "recipient": "UAB „Dyzelio ekspertai“",
+      "recipientType": "autoservice",
+      "phone": "+37061362078",
+      "address": "Medeinos g. 8, Vilnius",
+      "location": {
+        "lat": 54.733102,
+        "lng": 25.221314
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "weightKg": 9.5,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-100",
+      "recipient": "Živilė Paulauskienė",
+      "recipientType": "person",
+      "phone": "+37068146567",
+      "address": "Architektų g. 76, Vilnius",
+      "location": {
+        "lat": 54.667088,
+        "lng": 25.199251
+      },
+      "priority": 1,
+      "window": {
+        "start": "09:00",
+        "end": "11:00"
+      },
+      "weightKg": 7.2,
+      "serviceMinutes": 6
+    },
+    {
+      "id": "PKG-101",
+      "recipient": "Autoservisas „Kampas“",
+      "recipientType": "autoservice",
+      "phone": "+37068456395",
+      "address": "Kurklių g. 5, Vilnius",
+      "location": {
+        "lat": 54.720389,
+        "lng": 25.244934
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "weightKg": 20.7,
+      "serviceMinutes": 6
+    },
+    {
       "id": "PKG-102",
-      "recipient": "Inga Žukauskienė",
+      "recipient": "UAB „Sankabų servisas“",
+      "recipientType": "autoservice",
       "phone": "+37069037191",
       "address": "Pranciškonų g. 3, Vilnius",
       "location": {
@@ -1867,99 +1982,103 @@
       "priority": 3,
       "window": {
         "start": "08:00",
-        "end": "18:00"
+        "end": "17:00"
       },
-      "weightKg": 14.9,
-      "serviceMinutes": 5
+      "weightKg": 16.9,
+      "serviceMinutes": 6
     },
     {
       "id": "PKG-103",
-      "recipient": "Jūratė Žemaitytė",
-      "phone": "+37069187010",
-      "address": "Ligoninės g. 3-28, Vilnius",
+      "recipient": "Dalia Černiauskienė",
+      "recipientType": "person",
+      "phone": "+37061023269",
+      "address": "Ligoninės g. 3, Vilnius",
       "location": {
-        "lat": 54.678169,
-        "lng": 25.280605
+        "lat": 54.678689,
+        "lng": 25.280317
       },
-      "priority": 3,
+      "priority": 2,
       "window": {
-        "start": "10:00",
-        "end": "18:00"
+        "start": "11:00",
+        "end": "15:00"
       },
-      "weightKg": 3.7,
-      "serviceMinutes": 3
+      "weightKg": 6.7,
+      "serviceMinutes": 4
     },
     {
       "id": "PKG-104",
-      "recipient": "Marius Žukauskas",
-      "phone": "+37064724718",
-      "address": "Pranciškaus Skorinos g. 3-9, Vilnius",
+      "recipient": "Petras Savickas",
+      "recipientType": "person",
+      "address": "Pranciškaus Skorinos g. 3, Vilnius",
       "location": {
-        "lat": 54.70081,
-        "lng": 25.319583
+        "lat": 54.700809,
+        "lng": 25.320365
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "18:00"
+      },
+      "weightKg": 5.2,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-105",
+      "recipient": "Žygimantas Mačiulis",
+      "recipientType": "person",
+      "address": "Šv. Mykolo g. 9, Vilnius",
+      "location": {
+        "lat": 54.682032,
+        "lng": 25.291026
+      },
+      "priority": 2,
+      "window": {
+        "start": "14:30",
+        "end": "16:30"
+      },
+      "weightKg": 11.7,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-106",
+      "recipient": "Rimantas Grigas",
+      "recipientType": "person",
+      "phone": "+37064539054",
+      "address": "Vokiečių g. 18, Vilnius",
+      "location": {
+        "lat": 54.679766,
+        "lng": 25.283081
+      },
+      "priority": 1,
+      "window": {
+        "start": "10:00",
+        "end": "12:00"
+      },
+      "weightKg": 10,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-107",
+      "recipient": "Petras Šimkus",
+      "recipientType": "person",
+      "phone": "+37060455744",
+      "address": "L. Asanavičiūtės g. 23-8, Vilnius",
+      "location": {
+        "lat": 54.688103,
+        "lng": 25.21056
       },
       "priority": 3,
       "window": {
         "start": "12:00",
         "end": "18:00"
       },
-      "weightKg": 28.4,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-105",
-      "recipient": "UAB „Saulės energija“",
-      "address": "Šv. Mykolo g. 9, Vilnius",
-      "location": {
-        "lat": 54.682032,
-        "lng": 25.291026
-      },
-      "priority": 1,
-      "window": {
-        "start": "09:00",
-        "end": "11:00"
-      },
-      "weightKg": 18,
-      "serviceMinutes": 6
-    },
-    {
-      "id": "PKG-106",
-      "recipient": "UAB „Švarūs langai“",
-      "phone": "+37064547288",
-      "address": "Vokiečių g. 18, Vilnius",
-      "location": {
-        "lat": 54.68027,
-        "lng": 25.283507
-      },
-      "priority": 2,
-      "window": {
-        "start": "11:00",
-        "end": "14:00"
-      },
-      "weightKg": 25.7,
+      "weightKg": 10.1,
       "serviceMinutes": 4
     },
     {
-      "id": "PKG-107",
-      "recipient": "Vaida Grigaitė",
-      "phone": "+37065608766",
-      "address": "L. Asanavičiūtės g. 23-6, Vilnius",
-      "location": {
-        "lat": 54.688299,
-        "lng": 25.210152
-      },
-      "priority": 2,
-      "window": {
-        "start": "09:00",
-        "end": "13:00"
-      },
-      "weightKg": 1.1,
-      "serviceMinutes": 3,
-      "note": "Palikti prie durų"
-    },
-    {
       "id": "PKG-108",
-      "recipient": "UAB „Dviračių centras“",
+      "recipient": "MB „Meistro dirbtuvės“",
+      "recipientType": "autoservice",
       "phone": "+37068937984",
       "address": "Apkasų g. 20, Vilnius",
       "location": {
@@ -1968,15 +2087,17 @@
       },
       "priority": 2,
       "window": {
-        "start": "09:30",
-        "end": "12:30"
+        "start": "08:00",
+        "end": "12:00"
       },
-      "weightKg": 7,
-      "serviceMinutes": 5
+      "weightKg": 9.5,
+      "serviceMinutes": 6,
+      "note": "Pristatyti į dirbtuves, priima meistras"
     },
     {
       "id": "PKG-109",
       "recipient": "Goda Butkutė",
+      "recipientType": "person",
       "phone": "+37064519616",
       "address": "Vilniaus g. 25, Vilnius",
       "location": {
@@ -1988,12 +2109,13 @@
         "start": "12:00",
         "end": "18:00"
       },
-      "weightKg": 13.4,
-      "serviceMinutes": 7
+      "weightKg": 10.1,
+      "serviceMinutes": 5
     },
     {
       "id": "PKG-110",
-      "recipient": "MB „Užupio keramika“",
+      "recipient": "Autoservisas „Šviesos ir stiklai“",
+      "recipientType": "autoservice",
       "phone": "+37069846412",
       "address": "Tauro g. 12, Vilnius",
       "location": {
@@ -2002,15 +2124,16 @@
       },
       "priority": 1,
       "window": {
-        "start": "13:00",
-        "end": "15:00"
+        "start": "09:00",
+        "end": "11:00"
       },
-      "weightKg": 24.5,
-      "serviceMinutes": 6
+      "weightKg": 25.4,
+      "serviceMinutes": 8
     },
     {
       "id": "PKG-111",
-      "recipient": "UAB „Žalias kodas“",
+      "recipient": "UAB „Kėbulų remontas“",
+      "recipientType": "autoservice",
       "phone": "+37069352414",
       "address": "Kauno g. 16, Vilnius",
       "location": {
@@ -2019,15 +2142,16 @@
       },
       "priority": 1,
       "window": {
-        "start": "09:00",
-        "end": "11:00"
+        "start": "08:00",
+        "end": "10:00"
       },
-      "weightKg": 5.5,
-      "serviceMinutes": 7
+      "weightKg": 7.9,
+      "serviceMinutes": 10
     },
     {
       "id": "PKG-112",
       "recipient": "Vilius Urbonas",
+      "recipientType": "person",
       "phone": "+37061262429",
       "address": "Universiteto g. 4-42, Vilnius",
       "location": {
@@ -2039,13 +2163,14 @@
         "start": "12:00",
         "end": "18:00"
       },
-      "weightKg": 1.2,
-      "serviceMinutes": 4,
+      "weightKg": 2.7,
+      "serviceMinutes": 3,
       "note": "Palikti prie durų"
     },
     {
       "id": "PKG-113",
-      "recipient": "UAB „Senamiesčio vaistinė“",
+      "recipient": "UAB „Auto diagnostika“",
+      "recipientType": "autoservice",
       "phone": "+37067505357",
       "address": "Plytinės g. 27, Vilnius",
       "location": {
@@ -2054,15 +2179,16 @@
       },
       "priority": 1,
       "window": {
-        "start": "13:00",
-        "end": "15:00"
+        "start": "09:00",
+        "end": "11:00"
       },
-      "weightKg": 8.5,
-      "serviceMinutes": 6
+      "weightKg": 11,
+      "serviceMinutes": 8
     },
     {
       "id": "PKG-114",
       "recipient": "Jonas Grigas",
+      "recipientType": "person",
       "phone": "+37066315692",
       "address": "Vytenio g. 9, Vilnius",
       "location": {
@@ -2074,12 +2200,13 @@
         "start": "12:00",
         "end": "18:00"
       },
-      "weightKg": 12.3,
+      "weightKg": 9.7,
       "serviceMinutes": 3
     },
     {
       "id": "PKG-115",
-      "recipient": "UAB „Žirmūnų odontologija“",
+      "recipient": "UAB „Amortizatorių centras“",
+      "recipientType": "autoservice",
       "phone": "+37060533496",
       "address": "Antakalnio g. 57, Vilnius",
       "location": {
@@ -2088,436 +2215,465 @@
       },
       "priority": 2,
       "window": {
-        "start": "14:00",
-        "end": "17:00"
-      },
-      "weightKg": 0.5,
-      "serviceMinutes": 3
-    },
-    {
-      "id": "PKG-116",
-      "recipient": "Ieva Grigaitė",
-      "phone": "+37067063946",
-      "address": "Sėlių g. 32-77, Vilnius",
-      "location": {
-        "lat": 54.697904,
-        "lng": 25.252382
-      },
-      "priority": 2,
-      "window": {
-        "start": "09:00",
+        "start": "10:00",
         "end": "13:00"
       },
-      "weightKg": 0.6,
+      "weightKg": 2,
       "serviceMinutes": 5
     },
     {
-      "id": "PKG-117",
-      "recipient": "Simona Ramanauskienė",
-      "phone": "+37065023330",
-      "address": "S. Stanevičiaus g. 30-54, Vilnius",
+      "id": "PKG-116",
+      "recipient": "MB „Ratlankių remontas“",
+      "recipientType": "autoservice",
+      "phone": "+37067225256",
+      "address": "Sėlių g. 32, Vilnius",
       "location": {
-        "lat": 54.729889,
-        "lng": 25.238213
+        "lat": 54.698127,
+        "lng": 25.251934
       },
-      "priority": 1,
+      "priority": 2,
       "window": {
-        "start": "09:30",
-        "end": "11:30"
+        "start": "08:00",
+        "end": "12:00"
+      },
+      "weightKg": 27,
+      "serviceMinutes": 6
+    },
+    {
+      "id": "PKG-117",
+      "recipient": "Vilius Urbonas",
+      "recipientType": "person",
+      "phone": "+37067730986",
+      "address": "S. Stanevičiaus g. 30-39, Vilnius",
+      "location": {
+        "lat": 54.730073,
+        "lng": 25.238429
+      },
+      "priority": 2,
+      "window": {
+        "start": "13:30",
+        "end": "15:30"
+      },
+      "weightKg": 4,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-118",
+      "recipient": "UAB „Dyzelio ekspertai“",
+      "recipientType": "autoservice",
+      "phone": "+37063827649",
+      "address": "Baltupio g. 2, Vilnius",
+      "location": {
+        "lat": 54.72847,
+        "lng": 25.277671
+      },
+      "priority": 2,
+      "window": {
+        "start": "08:00",
+        "end": "12:00"
+      },
+      "weightKg": 5.2,
+      "serviceMinutes": 6,
+      "note": "Automobilis ant keltuvo – skubu"
+    },
+    {
+      "id": "PKG-119",
+      "recipient": "Jūratė Grigaitė",
+      "recipientType": "person",
+      "address": "Justiniškių g. 64, Vilnius",
+      "location": {
+        "lat": 54.719689,
+        "lng": 25.213691
+      },
+      "priority": 3,
+      "window": {
+        "start": "12:00",
+        "end": "18:00"
+      },
+      "weightKg": 3.6,
+      "serviceMinutes": 3
+    },
+    {
+      "id": "PKG-120",
+      "recipient": "UAB „Pavarų dėžės servisas“",
+      "recipientType": "autoservice",
+      "phone": "+37061586134",
+      "address": "Tramvajų g. 7, Vilnius",
+      "location": {
+        "lat": 54.70051,
+        "lng": 25.32759
+      },
+      "priority": 2,
+      "window": {
+        "start": "12:00",
+        "end": "16:00"
+      },
+      "weightKg": 13.3,
+      "serviceMinutes": 5,
+      "note": "Įvažiavimas pro vartus"
+    },
+    {
+      "id": "PKG-121",
+      "recipient": "UAB „Kėbulų remontas“",
+      "recipientType": "autoservice",
+      "phone": "+37066931501",
+      "address": "Šv. Ignoto g. 8, Vilnius",
+      "location": {
+        "lat": 54.682892,
+        "lng": 25.284732
+      },
+      "priority": 2,
+      "window": {
+        "start": "12:00",
+        "end": "16:00"
       },
       "weightKg": 11.7,
       "serviceMinutes": 6
     },
     {
-      "id": "PKG-118",
-      "recipient": "UAB „Baltijos sprendimai“",
-      "phone": "+37064331091",
-      "address": "Baltupio g. 2, Vilnius",
+      "id": "PKG-122",
+      "recipient": "Autoservisas „Ratų centras“",
+      "recipientType": "autoservice",
+      "phone": "+37063329609",
+      "address": "Kalvarijų g. 204, Vilnius",
       "location": {
-        "lat": 54.728636,
-        "lng": 25.276949
-      },
-      "priority": 1,
-      "window": {
-        "start": "10:00",
-        "end": "12:00"
-      },
-      "weightKg": 2.5,
-      "serviceMinutes": 3
-    },
-    {
-      "id": "PKG-119",
-      "recipient": "UAB „Gintarinė prekyba“",
-      "phone": "+37060664507",
-      "address": "Justiniškių g. 64, Vilnius",
-      "location": {
-        "lat": 54.720019,
-        "lng": 25.21459
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 26.2,
-      "serviceMinutes": 10
-    },
-    {
-      "id": "PKG-120",
-      "recipient": "UAB „Baltijos sprendimai“",
-      "phone": "+37068341510",
-      "address": "Tramvajų g. 7, Vilnius",
-      "location": {
-        "lat": 54.700385,
-        "lng": 25.327251
+        "lat": 54.72696,
+        "lng": 25.287483
       },
       "priority": 2,
       "window": {
         "start": "08:00",
-        "end": "11:00"
+        "end": "12:00"
       },
-      "weightKg": 2.1,
-      "serviceMinutes": 8
+      "weightKg": 5.9,
+      "serviceMinutes": 5,
+      "note": "Padangų komplektas (4 vnt.)"
     },
     {
-      "id": "PKG-121",
-      "recipient": "Aistė Žukauskienė",
-      "phone": "+37060304884",
-      "address": "Šv. Ignoto g. 8, Vilnius",
+      "id": "PKG-123",
+      "recipient": "Marius Urbonas",
+      "recipientType": "person",
+      "phone": "+37067563871",
+      "address": "Saulėtekio al. 11-78, Vilnius",
       "location": {
-        "lat": 54.683071,
-        "lng": 25.284685
+        "lat": 54.722638,
+        "lng": 25.338029
+      },
+      "priority": 3,
+      "window": {
+        "start": "14:00",
+        "end": "18:00"
+      },
+      "weightKg": 5.1,
+      "serviceMinutes": 6
+    },
+    {
+      "id": "PKG-124",
+      "recipient": "UAB „Sankabų servisas“",
+      "recipientType": "autoservice",
+      "phone": "+37061393164",
+      "address": "Erfurto g. 22, Vilnius",
+      "location": {
+        "lat": 54.674037,
+        "lng": 25.211271
+      },
+      "priority": 2,
+      "window": {
+        "start": "08:00",
+        "end": "12:00"
+      },
+      "weightKg": 17.8,
+      "serviceMinutes": 6
+    },
+    {
+      "id": "PKG-125",
+      "recipient": "MB „Variklio klinika“",
+      "recipientType": "autoservice",
+      "phone": "+37060715632",
+      "address": "Konstitucijos pr. 26, Vilnius",
+      "location": {
+        "lat": 54.698883,
+        "lng": 25.26628
       },
       "priority": 2,
       "window": {
         "start": "10:00",
         "end": "13:00"
       },
-      "weightKg": 12.5,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-122",
-      "recipient": "Algirdas Stankevičius",
-      "address": "Kalvarijų g. 204, Vilnius",
-      "location": {
-        "lat": 54.727077,
-        "lng": 25.287975
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 10,
-      "serviceMinutes": 5
-    },
-    {
-      "id": "PKG-123",
-      "recipient": "Marius Jankauskas",
-      "address": "Saulėtekio al. 11, Vilnius",
-      "location": {
-        "lat": 54.722228,
-        "lng": 25.338186
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 3.2,
-      "serviceMinutes": 4,
-      "note": "Skambinti prieš atvykstant"
-    },
-    {
-      "id": "PKG-124",
-      "recipient": "UAB „Pilies spaustuvė“",
-      "phone": "+37067748617",
-      "address": "Erfurto g. 22, Vilnius",
-      "location": {
-        "lat": 54.674099,
-        "lng": 25.211064
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 13.9,
-      "serviceMinutes": 4
-    },
-    {
-      "id": "PKG-125",
-      "recipient": "Vaida Navickienė",
-      "phone": "+37067631778",
-      "address": "Konstitucijos pr. 26, Vilnius",
-      "location": {
-        "lat": 54.699259,
-        "lng": 25.265873
-      },
-      "priority": 2,
-      "window": {
-        "start": "12:30",
-        "end": "16:30"
-      },
-      "weightKg": 24.1,
-      "serviceMinutes": 4
+      "weightKg": 21.6,
+      "serviceMinutes": 6
     },
     {
       "id": "PKG-126",
-      "recipient": "Simona Žemaitienė",
-      "phone": "+37065488866",
-      "address": "P. Vileišio g. 18-29, Vilnius",
+      "recipient": "Vaida Kavaliauskienė",
+      "recipientType": "person",
+      "address": "P. Vileišio g. 18, Vilnius",
       "location": {
-        "lat": 54.703398,
-        "lng": 25.30664
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 7.4,
-      "serviceMinutes": 5,
-      "note": "Trapus siuntinys"
-    },
-    {
-      "id": "PKG-127",
-      "recipient": "Petras Žukauskas",
-      "phone": "+37069210344",
-      "address": "Šilo g. 5, Vilnius",
-      "location": {
-        "lat": 54.693428,
-        "lng": 25.319542
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 1.7,
-      "serviceMinutes": 7
-    },
-    {
-      "id": "PKG-128",
-      "recipient": "Žygimantas Navickas",
-      "phone": "+37061073551",
-      "address": "Šv. Jono g. 3-75, Vilnius",
-      "location": {
-        "lat": 54.682561,
-        "lng": 25.288424
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 16.3,
-      "serviceMinutes": 8
-    },
-    {
-      "id": "PKG-129",
-      "recipient": "UAB „Rūtos gėlės“",
-      "phone": "+37068831207",
-      "address": "Pamėnkalnio g. 7, Vilnius",
-      "location": {
-        "lat": 54.68385,
-        "lng": 25.272964
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 4.6,
-      "serviceMinutes": 4
-    },
-    {
-      "id": "PKG-130",
-      "recipient": "UAB „Medžio dirbtuvės“",
-      "address": "Pylimo g. 21, Vilnius",
-      "location": {
-        "lat": 54.680018,
-        "lng": 25.277107
-      },
-      "priority": 2,
-      "window": {
-        "start": "14:00",
-        "end": "17:00"
-      },
-      "weightKg": 29.5,
-      "serviceMinutes": 4
-    },
-    {
-      "id": "PKG-131",
-      "recipient": "Arūnas Stankevičius",
-      "phone": "+37060979727",
-      "address": "L. Asanavičiūtės g. 38-4, Vilnius",
-      "location": {
-        "lat": 54.690086,
-        "lng": 25.21928
-      },
-      "priority": 3,
-      "window": {
-        "start": "12:00",
-        "end": "18:00"
-      },
-      "weightKg": 5.7,
-      "serviceMinutes": 7
-    },
-    {
-      "id": "PKG-132",
-      "recipient": "Aistė Grigaitė",
-      "phone": "+37068649272",
-      "address": "Kalvarijų g. 11-53, Vilnius",
-      "location": {
-        "lat": 54.6964,
-        "lng": 25.281423
+        "lat": 54.70347,
+        "lng": 25.306383
       },
       "priority": 3,
       "window": {
         "start": "10:00",
         "end": "18:00"
       },
-      "weightKg": 9.8,
+      "weightKg": 12.2,
+      "serviceMinutes": 4
+    },
+    {
+      "id": "PKG-127",
+      "recipient": "Simona Šimkienė",
+      "recipientType": "person",
+      "phone": "+37064153706",
+      "address": "Šilo g. 5-33, Vilnius",
+      "location": {
+        "lat": 54.693786,
+        "lng": 25.319131
+      },
+      "priority": 3,
+      "window": {
+        "start": "12:00",
+        "end": "18:00"
+      },
+      "weightKg": 8.8,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-128",
+      "recipient": "Petras Žukauskas",
+      "recipientType": "person",
+      "phone": "+37069210344",
+      "address": "Šv. Jono g. 3, Vilnius",
+      "location": {
+        "lat": 54.682228,
+        "lng": 25.288542
+      },
+      "priority": 3,
+      "window": {
+        "start": "12:00",
+        "end": "18:00"
+      },
+      "weightKg": 3.4,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-129",
+      "recipient": "Žygimantas Navickas",
+      "recipientType": "person",
+      "phone": "+37061073551",
+      "address": "Pamėnkalnio g. 7-75, Vilnius",
+      "location": {
+        "lat": 54.684061,
+        "lng": 25.273724
+      },
+      "priority": 3,
+      "window": {
+        "start": "12:00",
+        "end": "18:00"
+      },
+      "weightKg": 11.1,
+      "serviceMinutes": 6
+    },
+    {
+      "id": "PKG-130",
+      "recipient": "Autoservisas „Važiuoklė“",
+      "recipientType": "autoservice",
+      "phone": "+37068831207",
+      "address": "Pylimo g. 21, Vilnius",
+      "location": {
+        "lat": 54.68005,
+        "lng": 25.277164
+      },
+      "priority": 3,
+      "window": {
+        "start": "08:00",
+        "end": "17:00"
+      },
+      "weightKg": 7,
+      "serviceMinutes": 6,
+      "note": "Padangų komplektas (4 vnt.)"
+    },
+    {
+      "id": "PKG-131",
+      "recipient": "Autoservisas „Greitas ratas“",
+      "recipientType": "autoservice",
+      "phone": "+37064027297",
+      "address": "L. Asanavičiūtės g. 38, Vilnius",
+      "location": {
+        "lat": 54.689887,
+        "lng": 25.220007
+      },
+      "priority": 2,
+      "window": {
+        "start": "12:00",
+        "end": "16:00"
+      },
+      "weightKg": 29.6,
+      "serviceMinutes": 6
+    },
+    {
+      "id": "PKG-132",
+      "recipient": "Arūnas Stankevičius",
+      "recipientType": "person",
+      "phone": "+37060979727",
+      "address": "Kalvarijų g. 11-4, Vilnius",
+      "location": {
+        "lat": 54.696586,
+        "lng": 25.28078
+      },
+      "priority": 3,
+      "window": {
+        "start": "12:00",
+        "end": "18:00"
+      },
+      "weightKg": 6.6,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-133",
+      "recipient": "Aistė Grigaitė",
+      "recipientType": "person",
+      "phone": "+37068649272",
+      "address": "Šiaurės g. 4-53, Vilnius",
+      "location": {
+        "lat": 54.7154,
+        "lng": 25.301923
+      },
+      "priority": 3,
+      "window": {
+        "start": "10:00",
+        "end": "18:00"
+      },
+      "weightKg": 8.6,
       "serviceMinutes": 3,
       "note": "Durų kodas 1234#"
     },
     {
-      "id": "PKG-133",
+      "id": "PKG-134",
       "recipient": "Gabija Paulauskaitė",
+      "recipientType": "person",
       "phone": "+37061601214",
-      "address": "Šiaurės g. 4, Vilnius",
+      "address": "Laisvės pr. 60, Vilnius",
       "location": {
-        "lat": 54.71526,
-        "lng": 25.301275
+        "lat": 54.71676,
+        "lng": 25.200775
       },
       "priority": 3,
       "window": {
         "start": "12:00",
         "end": "18:00"
       },
-      "weightKg": 9.8,
-      "serviceMinutes": 5
+      "weightKg": 8.6,
+      "serviceMinutes": 4
     },
     {
-      "id": "PKG-134",
+      "id": "PKG-135",
       "recipient": "Šarūnas Kazlauskas",
+      "recipientType": "person",
       "phone": "+37069801177",
-      "address": "Laisvės pr. 60-8, Vilnius",
+      "address": "Kriaušių g. 9-8, Vilnius",
       "location": {
-        "lat": 54.716694,
-        "lng": 25.200702
+        "lat": 54.679194,
+        "lng": 25.300202
       },
       "priority": 3,
       "window": {
         "start": "10:00",
         "end": "18:00"
       },
-      "weightKg": 2.4,
-      "serviceMinutes": 5
+      "weightKg": 4.2,
+      "serviceMinutes": 4
     },
     {
-      "id": "PKG-135",
+      "id": "PKG-136",
       "recipient": "Rasa Petrauskaitė",
+      "recipientType": "person",
       "phone": "+37067683052",
-      "address": "Kriaušių g. 9-34, Vilnius",
+      "address": "Mindaugo g. 11-34, Vilnius",
       "location": {
-        "lat": 54.679562,
-        "lng": 25.300202
+        "lat": 54.678062,
+        "lng": 25.274702
       },
       "priority": 1,
       "window": {
         "start": "10:00",
         "end": "12:00"
       },
-      "weightKg": 16.9,
-      "serviceMinutes": 6,
+      "weightKg": 11.3,
+      "serviceMinutes": 5,
       "note": "Trapus siuntinys"
     },
     {
-      "id": "PKG-136",
-      "recipient": "UAB „Dviračių centras“",
-      "address": "Mindaugo g. 11, Vilnius",
+      "id": "PKG-137",
+      "recipient": "MB „Meistro dirbtuvės“",
+      "recipientType": "autoservice",
+      "phone": "+37063360539",
+      "address": "Antakalnio g. 94, Vilnius",
       "location": {
-        "lat": 54.677857,
-        "lng": 25.274738
+        "lat": 54.703253,
+        "lng": 25.321774
       },
       "priority": 3,
       "window": {
-        "start": "14:00",
-        "end": "18:00"
+        "start": "08:00",
+        "end": "17:00"
       },
-      "weightKg": 22.7,
-      "serviceMinutes": 7
+      "weightKg": 23.8,
+      "serviceMinutes": 10
     },
     {
-      "id": "PKG-137",
+      "id": "PKG-138",
       "recipient": "Vilius Žemaitis",
+      "recipientType": "person",
       "phone": "+37063910119",
-      "address": "Antakalnio g. 94, Vilnius",
+      "address": "Lazdynų Pelėdos g. 6, Vilnius",
       "location": {
-        "lat": 54.703198,
-        "lng": 25.321823
+        "lat": 54.711198,
+        "lng": 25.299823
       },
       "priority": 3,
       "window": {
         "start": "08:00",
         "end": "18:00"
       },
-      "weightKg": 1.3,
-      "serviceMinutes": 5
+      "weightKg": 2.9,
+      "serviceMinutes": 4
     },
     {
-      "id": "PKG-138",
+      "id": "PKG-139",
       "recipient": "Vytautas Žukauskas",
+      "recipientType": "person",
       "phone": "+37069705654",
-      "address": "Lazdynų Pelėdos g. 6-57, Vilnius",
+      "address": "Rygos g. 23-57, Vilnius",
       "location": {
-        "lat": 54.710683,
-        "lng": 25.299882
+        "lat": 54.680683,
+        "lng": 25.199882
       },
       "priority": 2,
       "window": {
         "start": "12:30",
         "end": "15:30"
       },
-      "weightKg": 17.9,
-      "serviceMinutes": 5
+      "weightKg": 11.6,
+      "serviceMinutes": 4
     },
     {
-      "id": "PKG-139",
+      "id": "PKG-140",
       "recipient": "Šarūnas Šimkus",
+      "recipientType": "person",
       "phone": "+37069652659",
-      "address": "Rygos g. 23, Vilnius",
+      "address": "Ozo g. 18, Vilnius",
       "location": {
-        "lat": 54.680746,
-        "lng": 25.199791
+        "lat": 54.709246,
+        "lng": 25.262791
       },
       "priority": 1,
       "window": {
         "start": "10:00",
         "end": "12:00"
       },
-      "weightKg": 26.7,
-      "serviceMinutes": 6
-    },
-    {
-      "id": "PKG-140",
-      "recipient": "Vilius Jankauskas",
-      "phone": "+37064742712",
-      "address": "Ozo g. 18, Vilnius",
-      "location": {
-        "lat": 54.709293,
-        "lng": 25.263343
-      },
-      "priority": 2,
-      "window": {
-        "start": "12:30",
-        "end": "15:30"
-      },
-      "weightKg": 13.3,
-      "serviceMinutes": 7
+      "weightKg": 14.2,
+      "serviceMinutes": 4
     }
   ]
 }

@@ -1,6 +1,6 @@
 # Demo specifikacija: kurjerių maršrutų planavimas su Google Route Optimization API
 
-Versija: 0.4, 2026-11-07
+Versija: 0.5, 2026-11-07
 
 ## 1. Tikslas
 
@@ -46,6 +46,14 @@ Kiekvienas paketas turi:
 Visi paketai paimami sandėlyje dienos pradžioje (kurjeris startuoja iš sandėlio jau su
 savo paketais, todėl modelyje pickup = sandėlis, laiko kaštų jam neskiriame).
 
+### 3.1a Gavėjai
+Klientas daugiausia veža **fiziniams asmenims** ir **autoservisams** (`recipientType`:
+`person` / `autoservice`, numatyta 65 / 35 %, keičiama `autoservicePct` generuojant).
+- Autoservisai: darbo laikas 08:00–17:00, skubūs (p1) siuntiniai rytą („automobilis ant keltuvo"),
+  sunkesnės autodalys 2–30 kg (diskai, padangos, akumuliatoriai), aptarnavimas 5–10 min.
+- Fiziniai asmenys: smulkūs siuntiniai 0.5–15 kg, aptarnavimas 3–6 min, butų numeriai adresuose.
+- PDF ir dashboard autoservisą pažymi atskirai.
+
 ### 3.2 Kurjeriai
 10 kurjerių, kiekvienas:
 - `id`, `name`, telefonas (rodymui).
@@ -66,12 +74,18 @@ Route Optimization API neturi tiesioginio "prioriteto" lauko. Modeliuojame taip:
     (1 prioritetas vėluoti brangiausia),
   - `endTime` – kieta riba = darbo dienos pabaiga.
 
+- **Darbo krūvio balansavimas → `routeDurationLimit`**: kiekvienam kurjeriui kvadratinė maršruto
+  trukmės kaina nuo 0 h (`COST_TUNING.balanceCostPerSquareHour`, numatyta 8). Be jo API viską
+  sukrauna ant 3–5 kurjerių. Su juo `normal` rinkinyje dirba visi 10, už ~30 % daugiau km.
+
 Nepristatyti paketai (`skippedShipments`) rodomi suvestinėje atskirai su priežastimi.
 
 ## 4. Techninis sprendimas
 
 ### 4.1 Stekas
-- Node.js 20+, TypeScript, npm workspaces (du paketai: `cli` ir `dashboard`, bendri tipai `shared`).
+- Node.js 20+, TypeScript, npm workspaces: `@marsrutai/shared` (tipai, zod schemos, API kontraktas),
+  `@marsrutai/cli` (generatorius, optimizatoriai, PDF), `@marsrutai/server` (lokalus HTTP serveris, 5b),
+  `@marsrutai/dashboard` (Vite).
 - `@googlemaps/routeoptimization` – oficialus klientas (`optimizeTours`).
 - `pdfkit` – PDF generavimas.
 - Dashboard: Vite + React + TypeScript, `react-leaflet` su OpenStreetMap plytelėmis (nereikia
@@ -80,7 +94,8 @@ Nepristatyti paketai (`skippedShipments`) rodomi suvestinėje atskirai su priež
 - Maps Static API – žemėlapio paveikslėlis su maršruto polilinija kiekviename PDF (pasirinktinai,
   įjungiama su `--maps`; reikalauja API rakto).
 - `zod` – įvesties duomenų validacija.
-- Paleidimas: `npm run demo` (realus API) arba `npm run demo -- --mock`.
+- Paleidimas: `npm run demo` (realus API) arba `npm run demo -- --mock`; interaktyviai – `npm run dev`
+  (serveris + dashboard).
 
 ### 4.2 Autentifikacija ir API klientas
 - GCP projektas: `marsrutai-digimuza`, billing „Digimuza", `routeoptimization.googleapis.com` įjungtas.
@@ -95,44 +110,37 @@ Nepristatyti paketai (`skippedShipments`) rodomi suvestinėje atskirai su priež
 ### 4.3 Katalogų struktūra
 ```
 marsrutai-laurynas/
-  SPEC.md
-  package.json          # npm workspaces: packages/*
+  SPEC.md, README.md
+  package.json          # npm workspaces: packages/*; dev = server + dashboard (concurrently)
   .env.example
   data/
-    depot.json          # sandėlio koordinatės, darbo laikas
-    couriers.json       # 10 kurjerių
-    packages.json       # ~70 paketų
+    normal.json         # Vilniaus demo rinkinys (~70 paketų), Dataset
+    overload.json       # per daug paketų (~140), Dataset
+    scenarios/          # <miestas>.json – redaktoriaus scenarijai (gitignore)
   packages/
-    shared/             # Plan, Package, Courier tipai + zod schemos (naudoja cli ir dashboard)
-      src/types.ts
-    cli/
+    shared/             # @marsrutai/shared
+      src/types.ts      # Dataset, Plan, Optimizer + zod schemos
+      src/api.ts        # serverio HTTP kontraktas (5b)
+      src/names.ts      # slugify, courierPdfFileName (vienintelė PDF vardų taisyklė)
+      fixtures/sample-plan.json
+    cli/                # @marsrutai/cli (exports: ./api ./mock ./pdf ./generate ./load ./summary)
       src/
-        index.ts        # CLI įėjimo taškas
+        index.ts        # CLI įėjimo taškas (npm run demo)
         load.ts         # duomenų nuskaitymas ir validacija
-        model.ts        # domenas → OptimizeToursRequest
-        optimize.ts     # API iškvietimas
-        mock.ts         # lokalus fallback (--mock)
-        plan.ts         # OptimizeToursResponse → Plan
-        pdf.ts          # Plan → PDF kiekvienam kurjeriui
-        staticmap.ts    # (pasirinktinai) žemėlapio paveikslėlis PDF'ui
+        summary.ts      # summary.md ir konsolės lentelė
+        api/            # Route Optimization API: request.ts, client.ts, response.ts, auth.ts
+        mock/           # lokalus optimizatorius (--mock)
+        pdf/            # Plan → PDF kiekvienam kurjeriui (pdfkit)
+        generate/       # generatorius: miestai, kuruoti Vilniaus/Kauno adresai, kurjeriai
       scripts/
-        gen-data.ts     # sintetinių duomenų generatorius (deterministinis seed)
-    dashboard/          # Vite + React
-      index.html
-      vite.config.ts    # alias/serve `../../out` kaip `/out`
-      src/
-        main.tsx
-        App.tsx         # layout: šoninė juosta + žemėlapis
-        api.ts          # fetch('/out/plan.json')
-        components/
-          RouteMap.tsx      # Leaflet žemėlapis, sandėlis, maršrutai, stotelės
-          CourierList.tsx   # kurjerių sąrašas su metrikomis ir toggle
-          StopPopup.tsx     # stotelės informacija paspaudus
-          Summary.tsx       # bendri skaičiai, nepristatyti paketai
+        gen-data.ts     # data/normal.json ir overload.json (deterministinis seed)
+    server/             # @marsrutai/server (hono), žr. 5b
+      src/app.ts        # endpoint'ai
+      src/index.ts      # paleidimas, PORT (numatyta 8787)
+    dashboard/          # @marsrutai/dashboard, Vite + React
   out/                  # rezultatai (gitignore)
-    plan.json
-    summary.md
-    courier-01-vardas.pdf ... courier-10-...pdf
+    plan.json, summary.md, courier-NN-vardas.pdf   # CLI (npm run demo)
+    vilnius/, kaunas/   # serveris: plan.json, summary.md, PDF, pdfs.zip
 ```
 
 ### 4.3a Kontraktai
@@ -143,15 +151,15 @@ marsrutai-laurynas/
 
 ### 4.4 Duomenų srautas
 1. `load.ts` nuskaito ir validuoja `data/*.json`.
-2. `model.ts` sukuria `OptimizeToursRequest`:
+2. `api/request.ts` sukuria `OptimizeToursRequest`:
    - `model.globalStartTime/EndTime` – demo diena 08:00–18:00,
    - `shipments[]` – po vieną paketui: `deliveries[0]` su koordinatėmis, `duration`,
      `timeWindows`; `loadDemands.weight`; `penaltyCost`,
    - `vehicles[]` – po vieną kurjeriui: `startLocation`/`endLocation` = sandėlis,
      `startTimeWindows`/`endTimeWindows`, `loadLimits.weight`, `costPerHour`, `costPerKilometer`,
    - `populatePolylines: true`, `considerRoadTraffic: false` (demo determinizmui).
-3. `optimize.ts` kviečia `optimizeTours` (arba `mock.ts`, jei `--mock`).
-4. `plan.ts` paverčia atsakymą į `Plan`:
+3. `api/client.ts` kviečia `optimizeTours` (arba `mock/`, jei `--mock`).
+4. `api/response.ts` paverčia atsakymą į `Plan` (tikslus tipas – `PlanSchema` faile `shared/src/types.ts`):
    ```
    Plan {
      generatedAt, depot,
@@ -161,15 +169,21 @@ marsrutai-laurynas/
      metrics: { totalKm, totalHours, deliveredCount, skippedCount, lateCount }
    }
    ```
-5. `pdf.ts` generuoja PDF kiekvienam kurjeriui; `out/plan.json` ir `out/summary.md` – bendrai.
+5. `pdf/` generuoja PDF kiekvienam kurjeriui; `out/plan.json` ir `out/summary.md` – bendrai.
 6. Dashboard nuskaito `out/plan.json` ir nupiešia jį žemėlapyje (žr. 5a skyrių). `plan.json`
    yra vienintelė sąsaja tarp CLI ir dashboard, todėl juos galima vystyti atskirai.
 
 ### 4.5 Mock režimas
-Paprastas godus algoritmas: paketai rikiuojami pagal prioritetą ir lango pradžią,
-dalinami kurjeriams pagal talpą, kiekvieno kurjerio maršrutas – nearest-neighbour nuo
-sandėlio; atstumas – Haversine × 1.3, greitis 25 km/h mieste. Tikslas – kad PDF ir
+Godus *cheapest insertion* algoritmas: paketai rikiuojami pagal prioritetą ir lango pradžią,
+kiekvienas įterpiamas ten (bet kuris kurjeris, bet kuri pozicija), kur pigiausia, jei tenkinama
+talpa, grįžimas iki darbo pabaigos ir joks 1 prioriteto paketas nevėluoja; 2/3 prioritetas gali
+vėluoti su bauda. Kaina = kurjerio €/h ir €/km + vėlavimo baudos + krūvio balansavimas. Jei
+niekur netelpa – paketas `skipped` su priežastimi. Atstumas – Haversine × 1.3, greitis 25 km/h mieste. Tikslas – kad PDF ir
 suvestinė atrodytų realistiškai be GCP. PDF'e aiškiai pažymima "MOCK".
+
+**Kelių geometrija**: mock laikus skaičiuoja tiesėmis × 1.3, bet maršruto `path` gaunamas iš OSRM
+(`router.project-osrm.org`, keičiama `OSRM_URL`), kad žemėlapyje ir PDF maršrutas eitų gatvėmis.
+Jei OSRM nepasiekiamas, paliekamos tiesės su įspėjimu. Testuose išjungiama `MARSRUTAI_ROAD_GEOMETRY=off`.
 
 ## 5. PDF turinys (vienam kurjeriui)
 
@@ -193,7 +207,7 @@ Prioritetas žymimas spalva: 1 – raudona, 2 – geltona, 3 – pilka.
 nuoseklumas ir tikslios detalės. Produkto kontekstas laikomas `PRODUCT.md`, dizaino sistema
 `DESIGN.md`. Prieš pristatymą privalomi `impeccable polish` ir `impeccable audit`.
 
-Minimalus, vieno puslapio, be routing'o ir be backend'o. Paleidimas: `npm run dev -w dashboard`,
+Minimalus, vieno puslapio, be routing'o ir be backend'o. Paleidimas: `npm run dev:web` (arba kartu su serveriu `npm run dev`, žr. 5b),
 Vite dev serveris servuoja `out/` katalogą kaip `/out`, todėl `plan.json` ir PDF pasiekiami tiesiogiai.
 
 Layout: kairėje šoninė juosta (~320 px), dešinėje žemėlapis per visą likusį plotą.
@@ -260,9 +274,24 @@ per `npm run dev`. Vite proxy'ina `/api` ir `/out` į serverį.
 | POST | `/api/generate` | `{city, count, mix:{p1,p2,p3}, seed?}`, grąžina naujus `Package[]` (neįrašo) |
 | POST | `/api/optimize` | `{city, mode:"api"\|"mock"}`, grąžina `Plan` ir PDF failų sąrašą |
 | GET | `/api/pdfs.zip?city=vilnius` | visi to miesto PDF vienu ZIP |
+| GET | `/api/plan?city=vilnius` | paskutinis `OptimizeResponse` (atkuriamas iš `out/<miestas>/plan.json`) arba 404 |
 | GET | `/out/**` | statiniai rezultatai (plan.json, PDF) |
 
-Bendri užklausų / atsakymų tipai įrašomi į `packages/shared/src/api.ts`.
+Bendri užklausų / atsakymų tipai – `packages/shared/src/api.ts`.
+
+Realizacija (v0.5):
+- Serveris: `packages/server`, `hono` + `@hono/node-server`, `PORT` (numatyta 8787). Naudoja
+  `@marsrutai/cli` modulius (generatorius, optimizatoriai, PDF), kodas nedubliuojamas.
+- Miestai: Vilnius (sandėlis Kirtimai, Savanorių pr. 178) ir Kaunas (sandėlis Naujasodis,
+  Draugystės g. 19). Kauno adresai (167) geokoduoti per OpenStreetMap ir patikrinti, kad būtų
+  ≥ 50 m nuo vandens; jitter ≤ 40 m.
+- Naujas scenarijus: kita darbo diena (Europe/Vilnius), 10 kurjerių, 0 paketų. GET jo neįrašo.
+- PUT validuoja `ScenarioSchema` ir papildomai: unikalūs ID, pradžia < pabaiga.
+- Optimizavimas naudoja išsaugotą scenarijų; 0 paketų arba 0 kurjerių → 400. Vienu metu – vienas
+  optimizavimas miestui. Prieš generuojant PDF seni PDF ištrinami; `out/<miestas>/pdfs.zip`.
+- Klaidos – `ApiErrorSchema` JSON lietuviškai; validacijos klaidos `details.issues[{path, message}]`;
+  Google API / autentifikacijos klaidos → HTTP 502 su `details.hint`.
+- Stotelės `arrival` visur reiškia atvykimą prie durų; aptarnavimas prasideda `arrival + waitMinutes`.
 
 ## 6. Suvestinė (`out/summary.md` ir konsolė)
 
@@ -279,10 +308,10 @@ balansavimas, vėlavimų minimizavimas, kurie paketai netilpo.
 - [ ] PDF'e stotelių eiliškumas sutampa su API grąžinta `visits` tvarka.
 - [ ] Pakrovimo sąrašas = tiksliai tie paketai, kurie yra maršrute.
 - [ ] Duomenų generatorius deterministinis (tas pats seed → tie patys duomenys).
-- [ ] `npm run dev -w dashboard` atidaro žemėlapį su visais 10 maršrutų, sandėliu ir stotelėmis iš `out/plan.json`.
+- [ ] `npm run dev:web` atidaro žemėlapį su visais 10 maršrutų, sandėliu ir stotelėmis iš `out/plan.json`.
 - [ ] Kurjerių įjungimas / išjungimas ir „tik šis" veikia; paspaudus stotelę rodomas popup.
 - [ ] Nuoroda „PDF" dashboard'e atidaro atitinkamą kurjerio PDF.
-- [ ] `npm run build -w dashboard` sukuria statinį build'ą be klaidų.
+- [ ] `npm run build` sukuria statinį build'ą be klaidų.
 - [ ] Dashboard'e galima pasirinkti Vilnių arba Kauną ir sugeneruoti atsitiktinius paketus to miesto ribose.
 - [ ] Paspaudus žemėlapį, pridedamas paketas su pasirinktu prioritetu. Paketą galima redaguoti ir ištrinti.
 - [ ] Kurjerius galima pridėti, redaguoti ir ištrinti.

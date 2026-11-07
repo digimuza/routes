@@ -23,6 +23,7 @@ import {
   type Stop,
 } from "@marsrutai/shared";
 import { roadKm, travelMinutes } from "./geo.js";
+import { roadGeometryEnabled, withRoadGeometry } from "./roads.js";
 import { epochMinToZonedIso, toZonedIso, zonedTimeToEpochMin } from "./time.js";
 
 /** Vėlavimo bauda €/min pagal prioritetą (1 – vėluoti draudžiama). */
@@ -257,13 +258,21 @@ export function planMock(input: Dataset, now: Date = new Date()): Plan {
   });
 }
 
-/** Leidžia testams įšaldyti `generatedAt`. */
-export function createMockOptimizer(opts: { now?: () => Date } = {}): Optimizer {
+/**
+ * `now` leidžia testams įšaldyti `generatedAt`. `roads` įjungia tikrą kelių geometriją per OSRM
+ * (numatyta: tik `mockOptimizer`, išjungiama MARSRUTAI_ROAD_GEOMETRY=off).
+ */
+export function createMockOptimizer(opts: { now?: () => Date; roads?: boolean } = {}): Optimizer {
   const now = opts.now ?? (() => new Date());
   return {
     name: "mock",
-    optimize: async (dataset: Dataset) => planMock(dataset, now()),
+    optimize: async (dataset: Dataset) => {
+      const plan = planMock(dataset, now());
+      if (opts.roads && roadGeometryEnabled()) await withRoadGeometry(plan);
+      return plan;
+    },
   };
 }
 
-export const mockOptimizer: Optimizer = createMockOptimizer();
+export const mockOptimizer: Optimizer = createMockOptimizer({ roads: true });
+export { roadPath, withRoadGeometry } from "./roads.js";

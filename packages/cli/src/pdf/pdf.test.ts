@@ -111,3 +111,21 @@ test("big plan paginates, empty courier still gets a PDF", async () => {
   assert.ok(pageCount(big) >= 3, `expected >= 3 pages, got ${pageCount(big)}`);
   assert.equal(pageCount(empty), 1);
 });
+
+test("pastaba: laukimas / vėlavimas rodomi tik jei apvalinant >= 1 min", async () => {
+  const { remarkCell } = await import("./index.js");
+  const stop = (lateMinutes: number, waitMinutes: number): Stop => ({
+    seq: 1,
+    packageId: "PKG-001",
+    arrival: "2026-11-10T09:00:00+02:00",
+    departure: "2026-11-10T09:05:00+02:00",
+    lateMinutes,
+    waitMinutes,
+    distanceFromPrevKm: 1,
+  });
+  const texts = (c: unknown) =>
+    typeof c === "string" ? [] : (c as { lines: { text: string }[] }).lines.map((l) => l.text);
+  assert.equal(remarkCell(stop(0.4, 0.3), undefined), "");
+  assert.deepEqual(texts(remarkCell(stop(0.6, 1.4), undefined)), ["Vėluoja 1 min", "Laukti 1 min"]);
+  assert.deepEqual(texts(remarkCell(stop(12, 0), undefined)), ["Vėluoja 12 min"]);
+});

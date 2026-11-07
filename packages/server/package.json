@@ -1,0 +1,25 @@
+{
+  "name": "@marsrutai/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "MARSRUTAI_ROAD_GEOMETRY=off tsx --test 'src/**/*.test.ts'"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.6",
+    "@marsrutai/cli": "*",
+    "@marsrutai/shared": "*",
+    "fflate": "^0.8.3",
+    "hono": "^4.13.17",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

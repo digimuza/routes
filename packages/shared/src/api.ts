@@ -33,6 +33,8 @@ export const GenerateRequestSchema = z.object({
   /** Prioritetų dalys procentais, suma 100. */
   mix: z.object({ p1: z.number().min(0), p2: z.number().min(0), p3: z.number().min(0) }),
   seed: z.number().int().optional(),
+  /** Autoservisų dalis procentais (likusieji – fiziniai asmenys). Numatyta 35. */
+  autoservicePct: z.number().min(0).max(100).optional(),
   /** Kad sugeneruoti ID nesikirstų su jau esamais scenarijuje. */
   existingIds: z.array(z.string()).optional(),
 });
