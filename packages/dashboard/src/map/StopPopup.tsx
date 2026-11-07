@@ -2,6 +2,7 @@ import { PRIORITY_LABELS, type Courier, type Package, type Stop } from "@marsrut
 import { fmtKg, hhmm, toMinutes } from "../format";
 import { PriorityMark } from "../components/PriorityMark";
 import { inkOn } from "../lib/palette";
+import { RecipientTag } from "../components/RecipientTag";
 
 /** Vėlavimas / laukimas rodomas tik nuo 1 min. */
 const significant = (m: number) => Math.round(m) >= 1;
@@ -29,7 +30,9 @@ export function StopPopup({ stop, pkg, courier, fmtTime, stale }: {
         <span className="popup__id">{pkg.id}</span>
         <PriorityMark p={pkg.priority} size={18} label />
       </div>
-      <div className="popup__recipient">{pkg.recipient}</div>
+      <div className="popup__recipient">
+        {pkg.recipient} <RecipientTag pkg={pkg} />
+      </div>
       <div className="popup__addr">{pkg.address}</div>
       <dl className="popup__grid">
         <dt>Atvyksta</dt>
@@ -77,7 +80,9 @@ export function SkippedPopup({ pkg, reason }: { pkg: Package; reason: string }) 
         <span className="popup__id">{pkg.id}</span>
         <PriorityMark p={pkg.priority} size={18} label />
       </div>
-      <div className="popup__recipient">{pkg.recipient}</div>
+      <div className="popup__recipient">
+        {pkg.recipient} <RecipientTag pkg={pkg} />
+      </div>
       <div className="popup__addr">{pkg.address}</div>
       <dl className="popup__grid">
         <dt>Langas</dt>

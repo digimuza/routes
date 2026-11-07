@@ -2,12 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { PRIORITY_COLORS, PRIORITY_LABELS, type Package, type Priority } from "@marsrutai/shared";
 import { fmtKg, fmtNum } from "../format";
 import { PriorityMark } from "./PriorityMark";
+import { RecipientTag } from "./RecipientTag";
 import { Icon } from "./Icon";
 import { Segmented } from "./Segmented";
 
 export interface GenerateOptions {
   count: number;
   mix: { p1: number; p2: number; p3: number };
+  /** Autoservisų dalis procentais (likusieji – fiziniai asmenys). */
+  autoservicePct: number;
   replace: boolean;
 }
 
@@ -37,14 +40,16 @@ function GenerateForm({ onGenerate, generating, error, hasPackages, onDone }: {
   const [count, setCount] = useState(30);
   const [mix, setMix] = useState({ p1: 20, p2: 45, p3: 35 });
   const [replace, setReplace] = useState(false);
+  const [autoPct, setAutoPct] = useState(35);
   const sum = mix.p1 + mix.p2 + mix.p3;
   const countOk = Number.isInteger(count) && count >= 1 && count <= 300;
-  const valid = countOk && sum === 100;
+  const autoOk = Number.isFinite(autoPct) && autoPct >= 0 && autoPct <= 100;
+  const valid = countOk && sum === 100 && autoOk;
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!valid) return;
-    if (await onGenerate({ count, mix, replace })) onDone();
+    if (await onGenerate({ count, mix, autoservicePct: autoPct, replace })) onDone();
   };
 
   return (
@@ -88,6 +93,21 @@ function GenerateForm({ onGenerate, generating, error, hasPackages, onDone }: {
           <i key={p} style={{ flexGrow: Math.max(0, mix[`p${p}` as const]), background: PRIORITY_COLORS[p] }} />
         ))}
       </div>
+      <label className="field field--inline">
+        <span className="field__label">
+          <Icon name="wrench" size={14} /> Autoservisų dalis, %
+        </span>
+        <input
+          type="number"
+          min={0}
+          max={100}
+          value={Number.isNaN(autoPct) ? "" : autoPct}
+          onChange={(e) => setAutoPct(e.target.valueAsNumber)}
+          aria-invalid={!autoOk}
+        />
+        <span className="field__aside">likusieji – fiziniai asmenys</span>
+      </label>
+      {!autoOk && <p className="field__error">Autoservisų dalis nuo 0 iki 100 %.</p>}
       {sum !== 100 && <p className="field__error">Dalių suma turi būti 100 % (dabar {fmtNum(sum)} %).</p>}
       {!countOk && <p className="field__error">Kiekis nuo 1 iki 300.</p>}
       <div className="genform__row genform__row--end">
@@ -116,6 +136,7 @@ export function PackagesPanel(p: Props) {
   const [confirmClear, setConfirmClear] = useState(false);
   const counts = PRIOS.map((x) => p.packages.filter((k) => k.priority === x).length);
   const totalKg = p.packages.reduce((s, k) => s + k.weightKg, 0);
+  const autoCount = p.packages.filter((k) => k.recipientType === "autoservice").length;
   const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -174,6 +195,14 @@ export function PackagesPanel(p: Props) {
             </li>
           ))}
         </ul>
+        <p className="typecounts num" aria-label="Paketai pagal gavėjo tipą">
+          <span>
+            <Icon name="person" size={15} /> Fiziniai asmenys <strong>{fmtNum(p.packages.length - autoCount)}</strong>
+          </span>
+          <span>
+            <Icon name="wrench" size={15} /> Autoservisai <strong>{fmtNum(autoCount)}</strong>
+          </span>
+        </p>
 
         <div className="toolbar">
           <button type="button" className={`btn btn--secondary${genOpen ? " is-active" : ""}`} aria-expanded={genOpen} onClick={() => setGenOpen((o) => !o)}>
@@ -220,7 +249,9 @@ export function PackagesPanel(p: Props) {
                       <span className="row__title">
                         <span className="row__id num">{k.id}</span> {k.recipient}
                       </span>
-                      <span className="row__sub">{k.address}</span>
+                      <span className="row__sub">
+                        <RecipientTag pkg={k} compact /> {k.address}
+                      </span>
                     </span>
                     <span className="row__figs num">
                       <span>

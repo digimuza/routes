@@ -88,6 +88,7 @@ export function App() {
           pkg: {
             id: nextPackageId(scenario.packages),
             recipient: randomRecipient(),
+            recipientType: "person",
             address: fmtLatLng(p.lat, p.lng),
             location: p,
             priority: 2,
@@ -133,6 +134,7 @@ export function App() {
         city: ws.cityId,
         count: o.count,
         mix: o.mix,
+        autoservicePct: o.autoservicePct,
         existingIds: o.replace ? [] : scenario.packages.map((p) => p.id),
       });
       ws.update((d) => ({ ...d, packages: o.replace ? fresh : [...d.packages, ...fresh] }));

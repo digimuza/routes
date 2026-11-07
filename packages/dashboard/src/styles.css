@@ -1867,3 +1867,75 @@ button.row:hover,
     flex-wrap: wrap;
   }
 }
+
+/* gavėjo tipas (antrinis kodas, nekonkuruoja su prioritetu) */
+.mk--pkg {
+  position: relative;
+}
+.mk__badge {
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  line-height: 0;
+}
+.mk--hover .mk__badge,
+.mk--selected .mk__badge {
+  right: -7px;
+  top: -7px;
+}
+.rtag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 6px;
+  border-radius: var(--r-sm);
+  background: rgba(28, 33, 30, 0.07);
+  color: var(--ink);
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 20px;
+  vertical-align: 1px;
+  white-space: nowrap;
+}
+.rtag--compact {
+  padding: 0 3px;
+  line-height: 16px;
+  vertical-align: -2px;
+}
+.typecounts {
+  display: flex;
+  gap: 18px;
+  margin: -4px 0 14px;
+  font-family: var(--font-label);
+  font-weight: 500;
+  color: var(--ink-2);
+}
+.typecounts span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.typecounts strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.field--inline {
+  grid-template-columns: auto 72px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+.field--inline .field__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.field__aside {
+  font-size: 0.87rem;
+  color: var(--ink-3);
+}
+
+/* maršruto linija paspaudžiama pele; klaviatūrai tą patį daro kurjerio eilutė sąraše */
+.leaflet-overlay-pane path.leaflet-interactive:focus {
+  outline: none;
+}

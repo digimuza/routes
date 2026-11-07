@@ -21,3 +21,13 @@ export function priorityMarkSvg(p: Priority, size: number, outline: string | nul
     `font-family="'Barlow Semi Condensed', Barlow, sans-serif" fill="${inkOn(fill)}">${p}</text></svg>`
   );
 }
+
+/** Autoserviso ženkliukas: mažas veržliaraktis rašalo apskritime (antrinis, nekonkuruoja su prioritetu). */
+export const WRENCH_PATH = "M12.6 3.2a3.6 3.6 0 0 0-3.4 4.8l-5.6 5.6a1.5 1.5 0 0 0 2.1 2.1l5.6-5.6a3.6 3.6 0 0 0 4.8-3.4l-2.1 2.1-2.3-.6-.6-2.3z";
+export function wrenchBadgeSvg(size: number): string {
+  return (
+    `<svg viewBox="0 0 20 20" width="${size}" height="${size}" aria-hidden="true" focusable="false">` +
+    `<circle cx="10" cy="10" r="9.2" fill="#1c211e" stroke="#ffffff" stroke-width="1.6"/>` +
+    `<g transform="translate(2.2 2.2) scale(0.78)"><path d="${WRENCH_PATH}" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>`
+  );
+}

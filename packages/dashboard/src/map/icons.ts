@@ -1,6 +1,6 @@
 import L from "leaflet";
 import type { Priority } from "@marsrutai/shared";
-import { priorityMarkSvg } from "../lib/marks";
+import { priorityMarkSvg, wrenchBadgeSvg } from "../lib/marks";
 import { inkOn } from "../lib/palette";
 
 const cache = new Map<string, L.DivIcon>();
@@ -12,12 +12,13 @@ function cached(key: string, make: () => L.DivIcon): L.DivIcon {
 
 export type MarkState = "normal" | "hover" | "selected";
 
-export const packageIcon = (p: Priority, state: MarkState = "normal") =>
-  cached(`pkg|${p}|${state}`, () => {
+export const packageIcon = (p: Priority, state: MarkState = "normal", autoservice = false) =>
+  cached(`pkg|${p}|${state}|${autoservice}`, () => {
     const size = state === "normal" ? 22 : 28;
+    const badge = autoservice ? `<span class="mk__badge">${wrenchBadgeSvg(state === "normal" ? 13 : 15)}</span>` : "";
     return L.divIcon({
       className: `mk mk--pkg mk--${state}`,
-      html: priorityMarkSvg(p, size, "#ffffff"),
+      html: priorityMarkSvg(p, size, "#ffffff") + badge,
       iconSize: [size, size],
       iconAnchor: [size / 2, size / 2],
       popupAnchor: [0, -size / 2],

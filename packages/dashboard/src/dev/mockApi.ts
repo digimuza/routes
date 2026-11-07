@@ -20,7 +20,7 @@ import {
 } from "@marsrutai/shared";
 import samplePlan from "../../../shared/fixtures/sample-plan.json";
 import { COURIER_PALETTE } from "../lib/palette";
-import { freshCourierName, randomPhone, randomRecipient } from "../lib/names";
+import { AUTOSERVICE_NOTES, freshCourierName, randomAutoservice, randomPersonRecipient, randomPhone } from "../lib/names";
 import { addRoadGeometry, mockOptimize } from "./mockOptimize";
 import { makePdf, makeZip } from "./mockFiles";
 
@@ -126,7 +126,24 @@ function jitter(c: City) {
   return { lat: +(s + (n - s) * r()).toFixed(5), lng: +(w + (e - w) * r()).toFixed(5) };
 }
 
-function generate(city: City, count: number, mix: { p1: number; p2: number; p3: number }, existing: string[]): Package[] {
+const AUTO_WINDOWS: Record<Priority, (readonly [string, string])[]> = {
+  1: [["08:00", "10:00"], ["08:00", "11:00"], ["09:00", "11:00"]],
+  2: [["08:00", "12:00"], ["10:00", "14:00"], ["12:00", "16:00"]],
+  3: [["08:00", "17:00"], ["13:00", "17:00"], ["10:00", "17:00"]],
+};
+const round1 = (n: number) => Math.round(n * 10) / 10;
+
+/**
+ * Atsitiktiniai paketai (atitinka serverio generatoriaus taisykles): autoservisai – langai 08:00–17:00,
+ * skubūs (1) ryte, sunkesnės detalės 2–30 kg, dirbtuvių pastabos; fiziniai asmenys – smulkūs 0,5–15 kg.
+ */
+function generate(
+  city: City,
+  count: number,
+  mix: { p1: number; p2: number; p3: number },
+  existing: string[],
+  autoservicePct: number,
+): Package[] {
   const total = mix.p1 + mix.p2 + mix.p3 || 1;
   let n = 0;
   for (const id of existing) {
@@ -137,17 +154,21 @@ function generate(city: City, count: number, mix: { p1: number; p2: number; p3: 
   for (let i = 0; i < count; i++) {
     const r = Math.random() * total;
     const priority: Priority = r < mix.p1 ? 1 : r < mix.p1 + mix.p2 ? 2 : 3;
-    const [start, end] = WINDOWS[Math.floor(Math.random() * WINDOWS.length)];
+    const auto = Math.random() * 100 < autoservicePct;
+    const options = auto ? AUTO_WINDOWS[priority] : WINDOWS;
+    const [start, end] = options[Math.floor(Math.random() * options.length)];
     const streets = STREETS[city.id];
     out.push({
       id: `PKG-${String(++n).padStart(3, "0")}`,
-      recipient: randomRecipient(),
+      recipient: auto ? randomAutoservice() : randomPersonRecipient(),
+      recipientType: auto ? "autoservice" : "person",
       address: `${streets[Math.floor(Math.random() * streets.length)]} ${1 + Math.floor(Math.random() * 120)}, ${city.name}`,
       location: jitter(city),
       priority,
       window: { start, end },
-      weightKg: Math.round(1 + Math.random() * 24),
-      serviceMinutes: 5,
+      weightKg: auto ? Math.round(2 + Math.random() * 28) : round1(0.5 + Math.random() * 14.5),
+      serviceMinutes: auto ? 10 : 5,
+      ...(auto ? { note: AUTOSERVICE_NOTES[Math.floor(Math.random() * AUTOSERVICE_NOTES.length)] } : {}),
     });
   }
   return out;
@@ -209,7 +230,7 @@ async function handle(url: URL, init?: RequestInit): Promise<Response> {
     const p = GenerateRequestSchema.safeParse(body());
     if (!p.success) return fail(400, "Netinkama generavimo užklausa.", p.error.issues);
     const city = cityOf(p.data.city)!;
-    return json({ packages: generate(city, p.data.count, p.data.mix, p.data.existingIds ?? []) });
+    return json({ packages: generate(city, p.data.count, p.data.mix, p.data.existingIds ?? [], p.data.autoservicePct ?? 35) });
   }
 
   if (url.pathname === "/api/optimize" && method === "POST") {

@@ -7,6 +7,7 @@ import { depotIcon, draftIcon, packageIcon, skippedIcon, stopIcon } from "./icon
 import { CursorReadout, Neatline } from "./Neatline";
 import { SkippedPopup, StopPopup } from "./StopPopup";
 import { PriorityMark } from "../components/PriorityMark";
+import { wrenchBadgeSvg } from "../lib/marks";
 
 export type FocusRequest =
   | { kind: "courier"; id: string; n: number }
@@ -223,7 +224,7 @@ export function MapView(props: MapViewProps) {
                 <Marker
                   key={p.id}
                   position={ll(p.location)}
-                  icon={packageIcon(p.priority, selected ? "selected" : hovered ? "hover" : "normal")}
+                  icon={packageIcon(p.priority, selected ? "selected" : hovered ? "hover" : "normal", p.recipientType === "autoservice")}
                   zIndexOffset={selected ? 1500 : hovered ? 1200 : (3 - p.priority) * 100}
                   draggable={selected}
                   keyboard
@@ -240,7 +241,8 @@ export function MapView(props: MapViewProps) {
                 >
                   {!selected && (
                     <Tooltip direction="top" offset={[0, -12]} className="tip">
-                      <strong>{p.id}</strong> {p.recipient} · {p.window.start}–{p.window.end}
+                      <strong>{p.id}</strong> {p.recipientType === "autoservice" ? "Autoservisas · " : ""}
+                      {p.recipient} · {p.window.start}–{p.window.end}
                     </Tooltip>
                   )}
                 </Marker>
@@ -362,6 +364,12 @@ function MapLegend({ view }: { view: "scenario" | "plan" }) {
           <PriorityMark p={p} size={16} label />
         </li>
       ))}
+      {view === "scenario" && (
+        <li>
+          <span className="maplegend__sym" dangerouslySetInnerHTML={{ __html: wrenchBadgeSvg(16) }} />
+          Autoservisas
+        </li>
+      )}
       <li>
         <span className="maplegend__sym" dangerouslySetInnerHTML={{ __html: depotIcon().options.html as string }} />
         Sandėlis

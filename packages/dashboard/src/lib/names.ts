@@ -22,8 +22,27 @@ export function freshCourierName(couriers: Pick<Courier, "name">[]): string {
   return lithuanianPerson();
 }
 
+const AUTOSERVICES = ["Ratų centras", "Variklis", "Stabdžių meistrai", "Garažas 24", "Motorija", "Žibintas", "Pavarų dėžės", "Autodetalių taškas", "Kėbulų remontas", "Alyvos namai"];
+const AUTOSERVICE_FORMS = ["UAB", "MB", "Autoservisas"];
+export const AUTOSERVICE_NOTES = [
+  "Pristatyti į priėmimo zoną, vartai nr. 2",
+  "Atsiima meistras, skambinti atvykus",
+  "Dirbtuvės, iškrauti prie sandėliuko",
+  "Detalės skubiam remontui",
+  "Kvituoti dirbtuvių vadovui",
+];
+
+export function randomPersonRecipient(): string {
+  return lithuanianPerson();
+}
+
+export function randomAutoservice(): string {
+  return `${pick(AUTOSERVICE_FORMS)} „${pick(AUTOSERVICES)}“`;
+}
+
+/** Atsitiktinis gavėjas naujam paketui žemėlapyje (numatytai – fizinis asmuo). */
 export function randomRecipient(): string {
-  return Math.random() < 0.35 ? pick(COMPANIES) : lithuanianPerson();
+  return Math.random() < 0.15 ? pick(COMPANIES) : lithuanianPerson();
 }
 
 export function nextPackageId(packages: Pick<Package, "id">[]): string {

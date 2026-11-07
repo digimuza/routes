@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { PRIORITY_LABELS, type Courier, type Package, type Priority } from "@marsrutai/shared";
-import { fmtLatLng, VEHICLES } from "../lib/names";
+import { PRIORITY_LABELS, RECIPIENT_TYPE_LABELS, type Courier, type Package, type Priority, type RecipientType } from "@marsrutai/shared";
+import { fmtLatLng, randomAutoservice, randomPersonRecipient, VEHICLES } from "../lib/names";
 import { COURIER_PALETTE } from "../lib/palette";
 import { toMinutes } from "../format";
 import { PriorityMark } from "./PriorityMark";
@@ -66,13 +66,18 @@ export function PackageInspector({ pkg, isNew, onSave, onDelete, onClose }: {
 }) {
   const [f, setF] = useState(pkg);
   const [tried, setTried] = useState(false);
+  /** Ar langas keistas ranka – jei ne, tipo pasirinkimas jį užpildo. */
+  const [windowTouched, setWindowTouched] = useState(!isNew);
   const prevLoc = useRef(pkg.location);
+  const nameSeed = useRef(pkg.recipient);
   const first = useRef<HTMLInputElement>(null);
 
   // naujas paketas / kitas paketas – forma iš naujo
   useEffect(() => {
     setF(pkg);
     setTried(false);
+    setWindowTouched(!isNew);
+    nameSeed.current = pkg.recipient;
     prevLoc.current = pkg.location;
     first.current?.focus({ preventScroll: true });
   }, [pkg.id]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -115,6 +120,38 @@ export function PackageInspector({ pkg, isNew, onSave, onDelete, onClose }: {
     >
       <form className="form" onSubmit={submit} noValidate>
         <div className="field">
+          <span className="field__label">Gavėjas yra</span>
+          <Segmented<RecipientType>
+            label="Gavėjo tipas"
+            value={f.recipientType ?? "person"}
+            onChange={(v) => {
+              // naujo paketo nekeistas gavėjas pakeičiamas tipui tinkamu pavyzdžiu
+              let recipient = f.recipient;
+              if (isNew && f.recipient === nameSeed.current) {
+                recipient = v === "autoservice" ? randomAutoservice() : randomPersonRecipient();
+                nameSeed.current = recipient;
+              }
+              setF({
+                ...f,
+                recipientType: v,
+                recipient,
+                // nekeistas langas prisitaiko prie tipo: autoservisai dirba 08–17
+                window: windowTouched ? f.window : v === "autoservice" ? { start: "08:00", end: "17:00" } : pkg.window,
+              });
+            }}
+            options={(["person", "autoservice"] as RecipientType[]).map((t) => ({
+              value: t,
+              label: (
+                <span className="seg__prio">
+                  <Icon name={t === "autoservice" ? "wrench" : "person"} size={15} />
+                  {RECIPIENT_TYPE_LABELS[t]}
+                </span>
+              ),
+            }))}
+          />
+        </div>
+
+        <div className="field">
           <span className="field__label">Prioritetas</span>
           <Segmented<Priority>
             label="Prioritetas"
@@ -140,7 +177,10 @@ export function PackageInspector({ pkg, isNew, onSave, onDelete, onClose }: {
               type="time"
               step={300}
               value={f.window.start}
-              onChange={(e) => setF({ ...f, window: { ...f.window, start: e.target.value } })}
+              onChange={(e) => {
+                setWindowTouched(true);
+                setF({ ...f, window: { ...f.window, start: e.target.value } });
+              }}
               aria-invalid={tried && !windowOk}
             />
           </label>
@@ -150,7 +190,10 @@ export function PackageInspector({ pkg, isNew, onSave, onDelete, onClose }: {
               type="time"
               step={300}
               value={f.window.end}
-              onChange={(e) => setF({ ...f, window: { ...f.window, end: e.target.value } })}
+              onChange={(e) => {
+                setWindowTouched(true);
+                setF({ ...f, window: { ...f.window, end: e.target.value } });
+              }}
               aria-invalid={tried && !windowOk}
             />
           </label>
@@ -170,8 +213,13 @@ export function PackageInspector({ pkg, isNew, onSave, onDelete, onClose }: {
         {tried && !weightOk && <p className="field__error">Svoris turi būti didesnis nei 0.</p>}
 
         <label className="field">
-          <span className="field__label">Gavėjas</span>
-          <input value={f.recipient} onChange={(e) => setF({ ...f, recipient: e.target.value })} aria-invalid={tried && !recipientOk} />
+          <span className="field__label">{f.recipientType === "autoservice" ? "Autoservisas" : "Gavėjas"}</span>
+          <input
+            value={f.recipient}
+            onChange={(e) => setF({ ...f, recipient: e.target.value })}
+            aria-invalid={tried && !recipientOk}
+            placeholder={f.recipientType === "autoservice" ? "Pvz. Autoservisas „Ratų centras“" : "Vardas Pavardė"}
+          />
         </label>
         {tried && !recipientOk && <p className="field__error">Įrašykite gavėją.</p>}
 

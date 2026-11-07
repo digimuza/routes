@@ -4,6 +4,7 @@ import { fmtEur, fmtHours, fmtKg, fmtKm, fmtNum, formatDateTime, makeMinuteOfDay
 import { inkOn } from "../lib/palette";
 import { PriorityMark } from "./PriorityMark";
 import { Icon } from "./Icon";
+import { RecipientTag } from "./RecipientTag";
 
 interface Props {
   result: OptimizeResponse | null;
@@ -262,7 +263,9 @@ function PlanBody({ result, index, stale, hidden, hovered, busy, canOptimize, se
                                 {k && <PriorityMark p={k.priority} size={14} />}
                                 <span className="num">{s.packageId}</span>
                               </span>
-                              <span className="stops__who">{k?.recipient}</span>
+                              <span className="stops__who">
+                                {k && <RecipientTag pkg={k} compact />} {k?.recipient}
+                              </span>
                               {lateM >= 1 && <span className="tag tag--late">vėluoja {lateM} min</span>}
                               {waitM >= 1 && <span className="tag tag--wait">laukia {waitM} min</span>}
                             </td>
