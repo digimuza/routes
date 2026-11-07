@@ -21,7 +21,7 @@ import {
 import samplePlan from "../../../shared/fixtures/sample-plan.json";
 import { COURIER_PALETTE } from "../lib/palette";
 import { freshCourierName, randomPhone, randomRecipient } from "../lib/names";
-import { mockOptimize } from "./mockOptimize";
+import { addRoadGeometry, mockOptimize } from "./mockOptimize";
 import { makePdf, makeZip } from "./mockFiles";
 
 const CITIES: City[] = [
@@ -220,8 +220,9 @@ async function handle(url: URL, init?: RequestInit): Promise<Response> {
     if (ds.packages.length === 0) return fail(400, "Scenarijuje nėra paketų.");
     if (ds.couriers.length === 0) return fail(400, "Scenarijuje nėra kurjerių.");
     const t0 = performance.now();
-    await delay(p.data.mode === "api" ? 2200 : 900);
+    await delay(p.data.mode === "api" ? 1200 : 400);
     const plan = mockOptimize(ds);
+    await addRoadGeometry(plan);
     // fetch shim visada skaičiuoja lokaliai, todėl planas sąžiningai pažymimas "mock"
     localStorage.setItem(key("plan", city.id), JSON.stringify(plan));
     return json({ ...filesFor(city.id, plan), durationMs: Math.round(performance.now() - t0) });

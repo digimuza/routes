@@ -6,6 +6,7 @@ import { makeTimeFormatter, type PlanIndex } from "../format";
 import { depotIcon, draftIcon, packageIcon, skippedIcon, stopIcon } from "./icons";
 import { CursorReadout, Neatline } from "./Neatline";
 import { SkippedPopup, StopPopup } from "./StopPopup";
+import { PriorityMark } from "../components/PriorityMark";
 
 export type FocusRequest =
   | { kind: "courier"; id: string; n: number }
@@ -34,6 +35,10 @@ export interface MapViewProps {
   stale: boolean;
   hidden: Set<string>;
   hoveredCourier: string | null;
+  /** Pasirinktas kurjeris: jo maršrutas paryškintas, kiti beveik paslėpti. */
+  selectedCourier: string | null;
+  onCourierClick: (id: string) => void;
+  onClearCourier: () => void;
   focus: FocusRequest | null;
 }
 
@@ -94,10 +99,11 @@ function KeepVisible({ point }: { point: LatLng | null }) {
   return null;
 }
 
-function ClickLayer({ enabled, onClick }: { enabled: boolean; onClick: (p: LatLng) => void }) {
+function ClickLayer({ enabled, onClick, onBackground }: { enabled: boolean; onClick: (p: LatLng) => void; onBackground: () => void }) {
   const map = useMapEvents({
     click: (e) => {
       if (enabled) onClick({ lat: +e.latlng.lat.toFixed(5), lng: +e.latlng.lng.toFixed(5) });
+      else onBackground();
     },
   });
   useEffect(() => {
@@ -106,12 +112,17 @@ function ClickLayer({ enabled, onClick }: { enabled: boolean; onClick: (p: LatLn
   return null;
 }
 
-function RoutePolyline({ positions, color, highlighted, dimmed, stale }: {
+function RoutePolyline({ positions, color, highlighted, dimmed, faded, stale, name, onClick }: {
   positions: LL[];
   color: string;
   highlighted: boolean;
+  /** Užvedus kitą kurjerį. */
   dimmed: boolean;
+  /** Pasirinktas kitas kurjeris – beveik nematomas. */
+  faded: boolean;
   stale: boolean;
+  name: string;
+  onClick: () => void;
 }) {
   const ref = useRef<L.Polyline>(null);
   useEffect(() => {
@@ -120,7 +131,7 @@ function RoutePolyline({ positions, color, highlighted, dimmed, stale }: {
   return (
     <>
       {/* balta „užlieja“ po linija – kad ji skaitytųsi ant bet kokio pagrindo */}
-      {!stale && (
+      {!stale && !faded && (
         <Polyline
           positions={positions}
           interactive={false}
@@ -133,13 +144,28 @@ function RoutePolyline({ positions, color, highlighted, dimmed, stale }: {
         interactive={false}
         pathOptions={{
           color,
-          weight: stale ? 3 : highlighted ? 6 : 4,
-          opacity: stale ? 0.4 : dimmed ? 0.2 : 1,
+          weight: faded ? 2.5 : stale ? 3 : highlighted ? 6 : 4,
+          opacity: faded ? 0.14 : stale ? 0.4 : dimmed ? 0.2 : 1,
           dashArray: stale ? "6 8" : undefined,
           lineJoin: "round",
           lineCap: "round",
         }}
       />
+      {/* platesnė nematoma linija – kad maršrutą būtų lengva paspausti */}
+      <Polyline
+        positions={positions}
+        pathOptions={{ color: "#000", weight: 16, opacity: 0, lineJoin: "round", lineCap: "round" }}
+        eventHandlers={{
+          click: (e) => {
+            L.DomEvent.stopPropagation(e);
+            onClick();
+          },
+        }}
+      >
+        <Tooltip sticky className="tip">
+          {name}
+        </Tooltip>
+      </Polyline>
     </>
   );
 }
@@ -163,7 +189,11 @@ export function MapView(props: MapViewProps) {
       const r = index.routes.get(c.id);
       if (r && r.stops.length > 0 && !hidden.has(c.id)) visible.push({ courier: c, route: r });
     }
-  const hoverActive = hoveredCourier != null && !hidden.has(hoveredCourier);
+  const sel = props.selectedCourier && visible.some((v) => v.courier.id === props.selectedCourier) ? props.selectedCourier : null;
+  const hoverActive = hoveredCourier != null && visible.some((v) => v.courier.id === hoveredCourier);
+  // kelių geometrija: be `path` maršrutas piešiamas tiesėmis, ir tai pasakoma atvirai
+  const straight = view === "plan" && visible.some(({ route }) => !route.path || route.path.length < 2);
+  const selCourier = sel ? visible.find((v) => v.courier.id === sel)?.courier ?? null : null;
   const placing = view === "scenario";
 
   return (
@@ -178,7 +208,7 @@ export function MapView(props: MapViewProps) {
           <ScaleControl position="bottomright" imperial={false} />
           <ZoomButtons />
           <Controller city={city} focus={focus} lines={lines} packages={packages} plan={plan} index={index} />
-          <ClickLayer enabled={placing} onClick={props.onMapClick} />
+          <ClickLayer enabled={placing} onClick={props.onMapClick} onBackground={props.onClearCourier} />
           <KeepVisible
             point={view === "scenario" ? props.draft ?? packages.find((p) => p.id === props.selectedPackageId)?.location ?? null : null}
           />
@@ -237,15 +267,19 @@ export function MapView(props: MapViewProps) {
               key={courier.id}
               positions={lines.get(courier.id)!}
               color={courier.color}
-              highlighted={hoveredCourier === courier.id}
-              dimmed={hoverActive && hoveredCourier !== courier.id}
+              highlighted={hoveredCourier === courier.id || sel === courier.id}
+              dimmed={!sel && hoverActive && hoveredCourier !== courier.id}
+              faded={sel != null && sel !== courier.id}
               stale={stale}
+              name={courier.name}
+              onClick={() => props.onCourierClick(courier.id)}
             />
           ))}
 
           {index &&
             visible.map(({ courier, route }) => {
-              const dim = stale || (hoverActive && hoveredCourier !== courier.id);
+              if (sel && sel !== courier.id) return null;
+              const dim = stale || (!sel && hoverActive && hoveredCourier !== courier.id);
               return route.stops.map((s) => {
                 const p = index.packages.get(s.packageId);
                 if (!p) return null;
@@ -253,7 +287,7 @@ export function MapView(props: MapViewProps) {
                   <Marker
                     key={`${courier.id}-${s.packageId}`}
                     position={ll(p.location)}
-                    icon={stopIcon(courier.color, s.seq, hoveredCourier === courier.id ? "hover" : "normal")}
+                    icon={stopIcon(courier.color, s.seq, hoveredCourier === courier.id || sel === courier.id ? "hover" : "normal")}
                     opacity={dim ? (stale ? 0.45 : 0.3) : 1}
                     zIndexOffset={hoveredCourier === courier.id ? 1000 : 0}
                   >
@@ -272,7 +306,7 @@ export function MapView(props: MapViewProps) {
               const p = index.packages.get(s.packageId);
               if (!p) return null;
               return (
-                <Marker key={`skip-${s.packageId}`} position={ll(p.location)} icon={skippedIcon()} opacity={stale || hoverActive ? 0.45 : 1}>
+                <Marker key={`skip-${s.packageId}`} position={ll(p.location)} icon={skippedIcon()} opacity={stale || hoverActive || sel ? 0.45 : 1}>
                   <Popup maxWidth={320}>
                     <SkippedPopup pkg={p} reason={s.reason} />
                   </Popup>
@@ -294,10 +328,57 @@ export function MapView(props: MapViewProps) {
             </Popup>
           </Marker>
         </MapContainer>
-        <div className="readout-host" ref={setReadoutHost} />
+        {selCourier && (
+          <div className="selbar" role="status">
+            <span className="swatch" style={{ background: selCourier.color }} />
+            <span>
+              Rodomas tik <strong>{selCourier.name}</strong>
+            </span>
+            <button type="button" className="btn btn--secondary btn--sm" onClick={props.onClearCourier}>
+              Rodyti visus
+            </button>
+          </div>
+        )}
+        {straight && (
+          <div className="mapnotice" role="status">
+            Kelių geometrija nepasiekiama – rodomos tiesės
+          </div>
+        )}
       </div>
       <div className="neat-host" ref={setNeatHost} />
+      <div className="sheetfoot">
+        <div className="readout-host" ref={setReadoutHost} />
+        <MapLegend view={view} />
+      </div>
     </div>
+  );
+}
+
+function MapLegend({ view }: { view: "scenario" | "plan" }) {
+  return (
+    <ul className="maplegend" aria-label="Sutartiniai ženklai">
+      {([1, 2, 3] as const).map((p) => (
+        <li key={p}>
+          <PriorityMark p={p} size={16} label />
+        </li>
+      ))}
+      <li>
+        <span className="maplegend__sym" dangerouslySetInnerHTML={{ __html: depotIcon().options.html as string }} />
+        Sandėlis
+      </li>
+      {view === "plan" && (
+        <>
+          <li>
+            <span className="maplegend__stop">3</span>
+            Stotelė (eilės nr.)
+          </li>
+          <li>
+            <span className="maplegend__sym" dangerouslySetInnerHTML={{ __html: skippedIcon().options.html as string }} />
+            Nepristatomas
+          </li>
+        </>
+      )}
+    </ul>
   );
 }
 

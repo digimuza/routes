@@ -33,6 +33,8 @@ export function App() {
   const [hoverPkg, setHoverPkg] = useState<string | null>(null);
   const [hoverCourier, setHoverCourier] = useState<string | null>(null);
   const [hidden, setHidden] = useState<Set<string>>(() => new Set());
+  /** Pasirinktas kurjeris plane (tik jo maršrutas paryškintas). */
+  const [routeSel, setRouteSel] = useState<string | null>(null);
   const [focus, setFocus] = useState<FocusRequest | null>(null);
   const [generating, setGenerating] = useState(false);
   const [generateError, setGenerateError] = useState<string | null>(null);
@@ -43,6 +45,7 @@ export function App() {
   useEffect(() => {
     setSel(null);
     setHidden(new Set());
+    setRouteSel(null);
     setHoverPkg(null);
     setHoverCourier(null);
     setGenerateError(null);
@@ -50,7 +53,8 @@ export function App() {
 
   const plan = result?.plan ?? null;
   const index = useMemo(() => (plan ? indexPlan(plan) : null), [plan]);
-  const view = tab === "plan" ? "plan" : "scenario";
+  // Kurjerių skirtuke, kai planas yra, žemėlapis rodo maršrutus (kurjerį galima pasirinkti)
+  const view = tab === "plan" || (tab === "couriers" && plan) ? "plan" : "scenario";
 
   const packages = scenario?.packages ?? [];
   const couriers = scenario?.couriers ?? [];
@@ -178,6 +182,7 @@ export function App() {
     const res = await ws.optimize(mode);
     if (res) {
       setHidden(new Set());
+      setRouteSel(null);
       setTab("plan");
       setFocus({ kind: "plan", n: Date.now() });
     }
@@ -189,16 +194,32 @@ export function App() {
       else next.add(id);
       return next;
     });
-  const isolate = (id: string) => {
-    if (!plan) return;
-    setHidden(new Set(plan.dataset.couriers.map((c) => c.id).filter((c) => c !== id)));
+  const selectRoute = (id: string) => {
+    if (routeSel === id) {
+      setRouteSel(null);
+      setFocus({ kind: "plan", n: Date.now() });
+      return;
+    }
+    setRouteSel(id);
+    setHidden((prev) => {
+      if (!prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.delete(id);
+      return next;
+    });
     setFocus({ kind: "courier", id, n: Date.now() });
   };
+  const showAllRoutes = () => {
+    setRouteSel(null);
+    setHidden(new Set());
+    setFocus({ kind: "plan", n: Date.now() });
+  };
+  const stopCounts = useMemo(() => new Map((plan?.routes ?? []).map((r) => [r.courierId, r.stops.length])), [plan]);
 
   const switchTab = (t: Tab) => {
     setTab(t);
     if (t === "plan") setSel(null);
-    if (t === "plan" && plan) setFocus({ kind: "plan", n: Date.now() });
+    if ((t === "plan" || t === "couriers") && plan && !routeSel) setFocus({ kind: "plan", n: Date.now() });
   };
 
   if (ws.fatal && !scenario) {
@@ -224,6 +245,7 @@ export function App() {
         disabledReason={disabledReason}
         onOptimize={() => void optimize()}
         depotDate={scenario?.depot.date ?? null}
+        zip={result ? { url: result.zipUrl, fileName: `marsrutai-${ws.cityId}-${result.plan.dataset.depot.date}.zip`, stale } : null}
       />
 
       <div className="work">
@@ -282,8 +304,9 @@ export function App() {
                 couriers={couriers}
                 packages={packages}
                 selectedId={sel?.kind === "courier" ? sel.id : null}
-                onSelect={(id) => setSel({ kind: "courier", id })}
+                onEdit={(id) => setSel({ kind: "courier", id })}
                 onAdd={addCourier}
+                plan={plan ? { selected: routeSel, onSelect: selectRoute, stops: stopCounts } : null}
               />
             ) : (
               <PlanPanel
@@ -294,11 +317,11 @@ export function App() {
                 hovered={hoverCourier}
                 busy={ws.run != null}
                 canOptimize={disabledReason == null}
+                selected={routeSel}
+                onSelect={selectRoute}
                 onToggle={toggle}
-                onIsolate={isolate}
-                onShowAll={() => setHidden(new Set())}
+                onShowAll={showAllRoutes}
                 onHover={setHoverCourier}
-                onFocus={(id) => setFocus({ kind: "courier", id, n: Date.now() })}
                 onOptimize={() => void optimize()}
                 onFocusPlan={() => setFocus({ kind: "plan", n: Date.now() })}
               />
@@ -332,6 +355,14 @@ export function App() {
               stale={stale}
               hidden={hidden}
               hoveredCourier={hoverCourier}
+              selectedCourier={routeSel}
+              onCourierClick={(id) => {
+                if (tab !== "plan" && tab !== "couriers") setTab("plan");
+                selectRoute(id);
+              }}
+              onClearCourier={() => {
+                if (routeSel) showAllRoutes();
+              }}
               focus={focus}
             />
           ) : (

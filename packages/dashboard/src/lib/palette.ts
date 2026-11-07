@@ -1,22 +1,23 @@
 import type { Courier } from "@marsrutai/shared";
 
 /**
- * Kurjerių spalvos: 12 atspalvių be raudonos, geltonos ir pilkos (tos rezervuotos prioritetams,
- * PRIORITY_COLORS). Kaimyninės spalvos parinktos kuo labiau skirtingos.
+ * Kurjerių spalvos: 12 atspalvių be raudonos, geltonos ir šviesiai pilkos (rezervuotos prioritetams,
+ * PRIORITY_COLORS) ir be mėlynos (rezervuota veiksmui ir pasirinkimui). Kaimyninės – kuo skirtingesnės;
+ * kurjeris visada atpažįstamas ir pagal vardą bei stotelių numerius, ne vien spalvą.
  */
 export const COURIER_PALETTE = [
-  "#1f6fb2",
   "#2e7d32",
   "#7b3fa0",
-  "#c2185b",
   "#00838f",
-  "#3949ab",
   "#8d5524",
   "#689f38",
-  "#0097c4",
-  "#9c6ade",
+  "#ad5cc7",
   "#37474f",
-  "#d4458f",
+  "#5e35b1",
+  "#00695c",
+  "#9e7b2f",
+  "#4e6b2e",
+  "#6d4c41",
 ] as const;
 
 /** Pirma dar nepanaudota paletės spalva (arba ciklas, jei kurjerių daugiau nei spalvų). */

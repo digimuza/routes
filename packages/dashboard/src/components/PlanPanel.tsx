@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import type { OptimizeResponse } from "@marsrutai/shared";
-import { fmtEur, fmtHours, fmtKg, fmtKm, fmtNum, formatDateTime, makeMinuteOfDay, minToHours, toMinutes, type PlanIndex } from "../format";
+import { fmtEur, fmtHours, fmtKg, fmtKm, fmtNum, formatDateTime, makeMinuteOfDay, makeTimeFormatter, minToHours, toMinutes, type PlanIndex } from "../format";
 import { inkOn } from "../lib/palette";
 import { PriorityMark } from "./PriorityMark";
 import { Icon } from "./Icon";
@@ -13,11 +13,12 @@ interface Props {
   hovered: string | null;
   busy: boolean;
   canOptimize: boolean;
+  /** Pasirinktas kurjeris: rodomas tik jo maršrutas ir stotelių lentelė. */
+  selected: string | null;
+  onSelect: (id: string) => void;
   onToggle: (id: string) => void;
-  onIsolate: (id: string) => void;
   onShowAll: () => void;
   onHover: (id: string | null) => void;
-  onFocus: (id: string) => void;
   onOptimize: () => void;
   onFocusPlan: () => void;
 }
@@ -44,7 +45,7 @@ export function PlanPanel(p: Props) {
   return <PlanBody {...p} result={p.result} index={p.index} />;
 }
 
-function PlanBody({ result, index, stale, hidden, hovered, busy, canOptimize, onToggle, onIsolate, onShowAll, onHover, onFocus, onOptimize, onFocusPlan }: Props & {
+function PlanBody({ result, index, stale, hidden, hovered, busy, canOptimize, selected, onSelect, onToggle, onShowAll, onHover, onOptimize, onFocusPlan }: Props & {
   result: OptimizeResponse;
   index: PlanIndex;
 }) {
@@ -62,6 +63,12 @@ function PlanBody({ result, index, stale, hidden, hovered, busy, canOptimize, on
   const hours: number[] = [];
   for (let h = Math.ceil(dayStart / 120) * 2; h * 60 <= dayEnd; h += 2) hours.push(h);
   const visibleCount = couriers.filter((c) => !hidden.has(c.id)).length;
+  const fmtTime = useMemo(() => makeTimeFormatter(tz), [tz]);
+  const listRef = useRef<HTMLUListElement>(null);
+  useEffect(() => {
+    if (!selected) return;
+    listRef.current?.querySelector(`[data-id="${CSS.escape(selected)}"]`)?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [selected]);
 
   return (
     <div className="panel">
@@ -118,10 +125,6 @@ function PlanBody({ result, index, stale, hidden, hovered, busy, canOptimize, on
           {result.durationMs > 0 && <> · per {fmtNum(Math.max(1, Math.round(result.durationMs / 1000)))} s</>} · diena {plan.dataset.depot.date}
         </p>
         <div className="toolbar">
-          <a className="btn btn--secondary" href={result.zipUrl} download={`marsrutai-${plan.dataset.depot.date}.zip`}>
-            <Icon name="download" size={16} />
-            Atsisiųsti visus PDF (ZIP)
-          </a>
           <button type="button" className="btn btn--ghost" onClick={onFocusPlan}>
             <Icon name="focus" size={16} />
             Rodyti visą planą
@@ -134,10 +137,11 @@ function PlanBody({ result, index, stale, hidden, hovered, busy, canOptimize, on
           <h2 className="block__title">
             Maršrutai <span className="num count">{visibleCount}/{couriers.length}</span>
           </h2>
-          <button type="button" className="btn btn--ghost btn--sm" onClick={onShowAll} disabled={hidden.size === 0}>
+          <button type="button" className={`btn btn--sm ${selected ? "btn--secondary" : "btn--ghost"}`} onClick={onShowAll} disabled={hidden.size === 0 && !selected}>
             Rodyti visus
           </button>
         </div>
+        <p className="routes__hint">Spustelėkite kurjerį, kad matytumėte tik jo maršrutą ir stoteles.</p>
         <div className="axis" aria-hidden="true">
           {hours.map((h) => (
             <span key={h} style={{ left: pct(h * 60) }} className="num">
@@ -145,7 +149,7 @@ function PlanBody({ result, index, stale, hidden, hovered, busy, canOptimize, on
             </span>
           ))}
         </div>
-        <ul className="routes" onMouseLeave={() => onHover(null)}>
+        <ul className="routes" ref={listRef} onMouseLeave={() => onHover(null)}>
           {couriers.map((c) => {
             const route = index.routes.get(c.id);
             const stops = route?.stops ?? [];
@@ -153,83 +157,121 @@ function PlanBody({ result, index, stale, hidden, hovered, busy, canOptimize, on
             const kg = route?.totalWeightKg ?? 0;
             const fill = Math.min(1, kg / c.capacityKg);
             const isHidden = hidden.has(c.id);
+            const isSel = selected === c.id;
+            const dimmed = selected != null && !isSel;
             const pdf = pdfs.get(c.id);
             const startMin = route ? minuteOf(route.start) : NaN;
             const endMin = route ? minuteOf(route.end) : NaN;
+            const idle = stops.length === 0;
             return (
               <li
                 key={c.id}
-                className={`route${isHidden ? " is-hidden" : ""}${hovered === c.id ? " is-hover" : ""}${stops.length === 0 ? " is-idle" : ""}`}
-                onMouseEnter={() => onHover(c.id)}
+                data-id={c.id}
+                className={`route${isHidden ? " is-hidden" : ""}${hovered === c.id ? " is-hover" : ""}${idle ? " is-idle" : ""}${isSel ? " is-selected" : ""}${dimmed ? " is-dimmed" : ""}`}
+                onMouseEnter={idle ? undefined : () => onHover(c.id)}
               >
-                <div className="route__head">
-                  <input
-                    type="checkbox"
-                    className="check"
-                    checked={!isHidden}
-                    onChange={() => onToggle(c.id)}
-                    aria-label={`Rodyti ${c.name} maršrutą žemėlapyje`}
-                  />
-                  <span className="swatch" style={{ background: c.color }} />
-                  <button
-                    type="button"
-                    className="route__name"
-                    onClick={() => onFocus(c.id)}
-                    disabled={stops.length === 0}
-                    title={stops.length ? "Priartinti maršrutą žemėlapyje" : undefined}
-                  >
-                    {c.name}
-                  </button>
-                  <span className="route__actions">
-                    <button type="button" className="btn btn--ghost btn--xs" onClick={() => onIsolate(c.id)} disabled={stops.length === 0}>
-                      tik šis
-                    </button>
-                    {pdf ? (
-                      <a className="btn btn--ghost btn--xs" href={pdf} target="_blank" rel="noreferrer" title={`${c.name} maršruto lapas (PDF)`}>
-                        <Icon name="file" size={14} />
-                        PDF
-                      </a>
-                    ) : (
-                      <span className="btn btn--ghost btn--xs is-disabled" title="PDF nesugeneruotas">
-                        PDF
-                      </span>
-                    )}
+                <input
+                  type="checkbox"
+                  className="check route__check"
+                  checked={!isHidden}
+                  onChange={() => onToggle(c.id)}
+                  aria-label={`Rodyti ${c.name} maršrutą žemėlapyje`}
+                />
+                <button
+                  type="button"
+                  className="route__select"
+                  onClick={() => onSelect(c.id)}
+                  disabled={idle}
+                  aria-pressed={isSel}
+                  aria-label={idle ? `${c.name}: šiandien be paketų` : `${c.name}: ${isSel ? "rodyti visus maršrutus" : "rodyti tik šį maršrutą"}`}
+                >
+                  <span className="route__head">
+                    <span className="swatch" style={{ background: c.color }} />
+                    <span className="route__name">{c.name}</span>
                   </span>
-                </div>
-                {stops.length === 0 ? (
-                  <div className="route__idle">Šiandien be paketų</div>
-                ) : (
-                  <>
-                    <div className="route__figs num">
-                      <span>{fmtNum(stops.length)} stot.</span>
-                      <span>{fmtKm(route!.totalKm)}</span>
-                      <span>{fmtHours(minToHours(route!.totalMinutes))}</span>
-                      <span className={fill > 0.95 ? "is-full" : undefined}>
-                        {fmtKg(kg)}/{fmtKg(c.capacityKg)} kg
+                  {idle ? (
+                    <span className="route__idle">Šiandien be paketų</span>
+                  ) : (
+                    <>
+                      <span className="route__figs num">
+                        <span>{fmtNum(stops.length)} stot.</span>
+                        <span>{fmtKm(route!.totalKm)}</span>
+                        <span>{fmtHours(minToHours(route!.totalMinutes))}</span>
+                        <span className={fill > 0.95 ? "is-full" : undefined}>
+                          {fmtKg(kg)}/{fmtKg(c.capacityKg)} kg
+                        </span>
+                        {late > 0 && <span className="is-late">vėluoja {late}</span>}
                       </span>
-                      {late > 0 && <span className="is-late">vėluoja {late}</span>}
-                    </div>
-                    <div className="strip" aria-hidden="true">
-                      <span className="strip__shift" style={{ left: pct(toMinutes(c.shiftStart)), right: `calc(100% - ${pct(toMinutes(c.shiftEnd))})` }} />
-                      {!Number.isNaN(startMin) && !Number.isNaN(endMin) && (
-                        <span
-                          className="strip__run"
-                          style={{ left: pct(startMin), right: `calc(100% - ${pct(endMin)})`, background: c.color }}
-                        />
-                      )}
+                      <span className="strip" aria-hidden="true">
+                        <span className="strip__shift" style={{ left: pct(toMinutes(c.shiftStart)), right: `calc(100% - ${pct(toMinutes(c.shiftEnd))})` }} />
+                        {!Number.isNaN(startMin) && !Number.isNaN(endMin) && (
+                          <span className="strip__run" style={{ left: pct(startMin), right: `calc(100% - ${pct(endMin)})`, background: c.color }} />
+                        )}
+                        {stops.map((s) => {
+                          const isLate = Math.round(s.lateMinutes) >= 1;
+                          return (
+                            <i
+                              key={s.packageId}
+                              className={isLate ? "is-late" : undefined}
+                              style={{ left: pct(minuteOf(s.arrival)), ...(isLate ? {} : { background: inkOn(c.color) }) }}
+                            />
+                          );
+                        })}
+                      </span>
+                    </>
+                  )}
+                </button>
+                <span className="route__actions">
+                  {pdf ? (
+                    <a className="btn btn--ghost btn--xs" href={pdf} target="_blank" rel="noreferrer" title={`${c.name} maršruto lapas (PDF)`}>
+                      <Icon name="file" size={14} />
+                      PDF
+                    </a>
+                  ) : (
+                    <span className="btn btn--ghost btn--xs is-disabled" title="PDF nesugeneruotas">
+                      PDF
+                    </span>
+                  )}
+                </span>
+                {isSel && route && (
+                  <table className="stops">
+                    <caption className="sr-only">{c.name}: stotelės eilės tvarka</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Nr.</th>
+                        <th scope="col">Atvyksta</th>
+                        <th scope="col">Paketas</th>
+                        <th scope="col">Langas</th>
+                      </tr>
+                    </thead>
+                    <tbody>
                       {stops.map((s) => {
-                        const t = minuteOf(s.arrival);
-                        const isLate = Math.round(s.lateMinutes) >= 1;
+                        const k = index.packages.get(s.packageId);
+                        const lateM = Math.round(s.lateMinutes);
+                        const waitM = Math.round(s.waitMinutes);
                         return (
-                          <i
-                            key={s.packageId}
-                            className={isLate ? "is-late" : undefined}
-                            style={{ left: pct(t), ...(isLate ? {} : { background: inkOn(c.color) === "#ffffff" ? "#ffffff" : "#1c211e" }) }}
-                          />
+                          <tr key={s.packageId}>
+                            <td>
+                              <span className="stops__seq" style={{ background: c.color, color: inkOn(c.color) }}>
+                                {s.seq}
+                              </span>
+                            </td>
+                            <td className="num stops__eta">{fmtTime(s.arrival)}</td>
+                            <td className="stops__pkg">
+                              <span className="stops__id">
+                                {k && <PriorityMark p={k.priority} size={14} />}
+                                <span className="num">{s.packageId}</span>
+                              </span>
+                              <span className="stops__who">{k?.recipient}</span>
+                              {lateM >= 1 && <span className="tag tag--late">vėluoja {lateM} min</span>}
+                              {waitM >= 1 && <span className="tag tag--wait">laukia {waitM} min</span>}
+                            </td>
+                            <td className="num stops__win">{k ? `${k.window.start}–${k.window.end}` : ""}</td>
+                          </tr>
                         );
                       })}
-                    </div>
-                  </>
+                    </tbody>
+                  </table>
                 )}
               </li>
             );

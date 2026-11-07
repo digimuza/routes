@@ -158,3 +158,48 @@ export function mockOptimize(ds: Dataset): Plan {
     },
   };
 }
+
+// ---------------- kelių geometrija (OSRM) ----------------
+
+const OSRM = "https://router.project-osrm.org/route/v1/driving/";
+const MAX_COORDS = 100;
+
+async function osrmLeg(points: LatLng[]): Promise<[number, number][]> {
+  const coords = points.map((p) => `${p.lng.toFixed(6)},${p.lat.toFixed(6)}`).join(";");
+  const res = await fetch(`${OSRM}${coords}?overview=full&geometries=geojson`, { signal: AbortSignal.timeout(10000) });
+  if (!res.ok) throw new Error(`OSRM ${res.status}`);
+  const body = (await res.json()) as { code: string; routes?: { geometry: { coordinates: [number, number][] } }[] };
+  const line = body.routes?.[0]?.geometry.coordinates;
+  if (body.code !== "Ok" || !line || line.length < 2) throw new Error(`OSRM ${body.code}`);
+  return line.map(([lng, lat]) => [lat, lng]);
+}
+
+/**
+ * Prideda tikrą kelių geometriją (`route.path`) kiekvienam maršrutui: sandėlis → stotelės → sandėlis.
+ * Užklausos vykdomos paeiliui (viešas OSRM serveris), ilgi maršrutai skaidomi po ≤100 taškų.
+ * Nepavykus maršrutas paliekamas be `path` – dashboard'as tai aiškiai parodo žemėlapyje.
+ */
+export async function addRoadGeometry(plan: Plan): Promise<{ ok: number; failed: number }> {
+  const pkgs = new Map(plan.dataset.packages.map((p) => [p.id, p.location]));
+  const depot = plan.dataset.depot.location;
+  let ok = 0;
+  let failed = 0;
+  for (const r of plan.routes) {
+    if (r.stops.length === 0) continue;
+    const pts = [depot, ...r.stops.map((s) => pkgs.get(s.packageId)!).filter(Boolean), depot];
+    try {
+      const path: [number, number][] = [];
+      for (let i = 0; i < pts.length - 1; i += MAX_COORDS - 1) {
+        const leg = await osrmLeg(pts.slice(i, i + MAX_COORDS));
+        path.push(...(path.length ? leg.slice(1) : leg));
+      }
+      r.path = path;
+      ok++;
+    } catch (e) {
+      console.warn("[marsrutai] OSRM geometrija nepavyko", r.courierId, e);
+      delete r.path;
+      failed++;
+    }
+  }
+  return { ok, failed };
+}

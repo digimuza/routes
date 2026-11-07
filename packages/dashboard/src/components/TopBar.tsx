@@ -17,6 +17,8 @@ interface Props {
   disabledReason: string | null;
   onOptimize: () => void;
   depotDate: string | null;
+  /** Visų kurjerių PDF archyvas; `null`, kol planas nesudarytas. */
+  zip: { url: string; fileName: string; stale: boolean } | null;
 }
 
 function SaveIndicator({ save, onRetry }: { save: Props["save"]; onRetry: () => void }) {
@@ -112,6 +114,27 @@ export function TopBar(p: Props) {
             </>
           )}
         </button>
+        {p.zip ? (
+          <a
+            className="btn btn--secondary btn--lg btn--zip"
+            href={p.zip.url}
+            download={p.zip.fileName}
+            title={p.zip.stale ? "PDF atitinka paskutinį sudarytą planą (scenarijus po to keistas)" : "Visų kurjerių maršruto lapai vienu ZIP failu"}
+          >
+            <Icon name="download" size={18} />
+            Atsisiųsti visus PDF
+          </a>
+        ) : (
+          <span className="zipwrap" title="PDF atsiras, kai sudarysite maršrutus">
+            <button type="button" className="btn btn--secondary btn--lg btn--zip" disabled aria-describedby="zip-why">
+              <Icon name="download" size={18} />
+              Atsisiųsti visus PDF
+            </button>
+            <span id="zip-why" className="sr-only">
+              PDF atsiras, kai sudarysite maršrutus
+            </span>
+          </span>
+        )}
       </div>
     </header>
   );

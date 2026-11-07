@@ -142,7 +142,7 @@ pre {
 }
 .brand__sub {
   font-family: var(--font-label);
-  font-size: 0.8rem;
+  font-size: 0.87rem;
   font-weight: 500;
   color: var(--ink-2);
   white-space: nowrap;
@@ -786,7 +786,7 @@ button.row:hover,
 }
 .metrics dt {
   font-family: var(--font-label);
-  font-size: 0.8rem;
+  font-size: 0.87rem;
   font-weight: 500;
   color: var(--ink-2);
 }
@@ -814,10 +814,10 @@ button.row:hover,
 
 .axis {
   position: relative;
-  height: 16px;
-  margin: 2px 10px 0 44px;
+  height: 18px;
+  margin: 2px 78px 2px 64px;
   font-family: var(--font-label);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--ink-3);
 }
@@ -831,9 +831,55 @@ button.row:hover,
   padding: 0;
 }
 .route {
-  padding: 8px 10px 10px;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  column-gap: 9px;
+  align-items: start;
+  padding: 6px 8px 6px 10px;
   border-radius: var(--r-md);
   transition: background-color 0.12s, opacity 0.12s;
+}
+.route__check {
+  margin-top: 10px;
+}
+.route__select {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 6px 8px 8px;
+  margin: 0 -4px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+.route__select:hover:not(:disabled) {
+  background: rgba(28, 33, 30, 0.05);
+}
+.route__select:disabled {
+  cursor: default;
+}
+.route.is-selected {
+  background: var(--blue-wash);
+  box-shadow: inset 0 0 0 1px var(--blue);
+}
+.route.is-selected .route__select:hover {
+  background: transparent;
+}
+.route.is-dimmed {
+  opacity: 0.55;
+}
+.route.is-dimmed:hover {
+  opacity: 1;
+}
+.route__actions {
+  margin-top: 4px;
+}
+.routes__hint {
+  margin: 0 10px 6px;
+  font-size: 0.87rem;
+  color: var(--ink-2);
 }
 .route + .route {
   box-shadow: 0 -1px 0 var(--rule-soft);
@@ -848,6 +894,7 @@ button.row:hover,
   display: flex;
   align-items: center;
   gap: 9px;
+  min-width: 0;
 }
 .check {
   width: 18px;
@@ -858,22 +905,10 @@ button.row:hover,
 .route__name {
   flex: 1;
   min-width: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  text-align: left;
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  cursor: pointer;
-}
-.route__name:hover:not(:disabled) {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.route__name:disabled {
-  cursor: default;
 }
 .route__actions {
   display: flex;
@@ -883,7 +918,7 @@ button.row:hover,
   display: flex;
   flex-wrap: wrap;
   gap: 2px 12px;
-  margin: 3px 0 7px 34px;
+  margin: 0 0 3px 23px;
   font-family: var(--font-label);
   font-weight: 500;
   font-size: 0.9rem;
@@ -898,14 +933,15 @@ button.row:hover,
   font-weight: 600;
 }
 .route__idle {
-  margin: 2px 0 0 34px;
+  margin: 0 0 0 23px;
   font-size: 0.87rem;
   color: var(--ink-3);
 }
 .strip {
   position: relative;
+  display: block;
   height: 12px;
-  margin-left: 34px;
+  margin-left: 23px;
   background: var(--rule-soft);
   border-radius: 1px;
 }
@@ -1068,7 +1104,7 @@ button.row:hover,
 .mapframe {
   position: absolute;
   inset: 0;
-  padding: 30px 34px 30px 38px;
+  padding: 32px 36px 72px 40px;
 }
 .mapframe__inner {
   position: relative;
@@ -1090,8 +1126,8 @@ button.row:hover,
 }
 .neat-host {
   position: absolute;
-  top: 30px;
-  left: 38px;
+  top: 32px;
+  left: 40px;
   pointer-events: none;
 }
 .neat {
@@ -1143,7 +1179,7 @@ button.row:hover,
 .neat__label {
   position: absolute;
   font-family: var(--font-label);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--brown);
   white-space: nowrap;
@@ -1166,24 +1202,194 @@ button.row:hover,
   transform: translate(50%, -50%) rotate(90deg);
 }
 
-.readout-host {
+/* lapo apatinė paraštė: žymeklio koordinatės ir sutartiniai ženklai */
+.sheetfoot {
   position: absolute;
-  left: 10px;
-  bottom: 10px;
-  z-index: 800;
+  left: 40px;
+  right: 36px;
+  bottom: 8px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   pointer-events: none;
+}
+.readout-host {
+  min-width: 0;
 }
 .readout {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 5px 10px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid var(--ink);
-  border-radius: var(--r-sm);
+  gap: 12px;
+  font-family: var(--font-label);
+  font-size: 0.93rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.maplegend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
   font-family: var(--font-label);
   font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.maplegend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.maplegend .pmark__label {
+  color: var(--ink-2);
+}
+.maplegend__sym {
+  display: inline-flex;
+  line-height: 0;
+}
+.maplegend__sym svg {
+  width: 16px;
+  height: 16px;
+}
+.maplegend__stop {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ink-2);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.selbar {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 6px 6px 12px;
+  background: #fff;
+  border: 1px solid var(--ink);
+  border-radius: var(--r-md);
+  box-shadow: 0 2px 8px rgba(28, 33, 30, 0.14);
+  white-space: nowrap;
+}
+.mapnotice {
+  position: absolute;
+  left: 58px;
+  top: 12px;
+  z-index: 900;
+  padding: 5px 10px;
+  background: var(--brown-wash);
+  border: 1px solid #dcc3a4;
+  border-radius: var(--r-sm);
+  color: #5e3713;
+  font-family: var(--font-label);
+  font-size: 0.87rem;
+  font-weight: 600;
+}
+
+/* kurjerio stotelių lentelė (orientavimosi „kontrolinių punktų aprašas“) */
+.stops {
+  grid-column: 2 / -1;
+  width: calc(100% - 4px);
+  margin: 4px 0 6px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: var(--field);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+}
+.stops th {
+  padding: 5px 8px;
+  text-align: left;
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule);
+}
+.stops td {
+  padding: 5px 8px;
+  vertical-align: top;
+  border-top: 1px solid var(--rule-soft);
+}
+.stops__seq {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  border-radius: 11px;
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.stops__eta {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.stops__pkg {
+  min-width: 0;
+}
+.stops__id {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-label);
+  font-weight: 600;
+}
+.stops__who {
+  display: block;
+  color: var(--ink-2);
+  font-size: 0.87rem;
+}
+.stops .tag {
+  margin: 2px 4px 0 0;
+}
+.stops__win {
+  white-space: nowrap;
+  font-family: var(--font-label);
   font-weight: 500;
+}
+
+.row-with-action {
+  position: relative;
+}
+.row-with-action > .row {
+  padding-right: 44px;
+}
+.row__edit {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.row-with-action > .row .row__figs {
+  margin-right: 4px;
+}
+.row:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+.row.is-editing {
+  box-shadow: inset 0 0 0 1px var(--ink-3);
+}
+.zipwrap {
+  display: inline-flex;
+}
+.btn--zip {
+  min-width: 0;
 }
 .readout__coord {
   font-weight: 600;
@@ -1228,7 +1434,7 @@ button.row:hover,
   background: rgba(255, 255, 255, 0.9);
   font-family: var(--font-label);
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   color: var(--ink);
 }
 .leaflet-container .leaflet-control-attribution {
@@ -1282,11 +1488,11 @@ button.row:hover,
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   font-family: var(--font-label);
   font-weight: 700;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1;
 }
 .mk--hover .stop-dot {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .tip.leaflet-tooltip {

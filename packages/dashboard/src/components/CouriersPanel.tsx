@@ -5,12 +5,15 @@ import { Icon } from "./Icon";
 interface Props {
   couriers: Courier[];
   packages: Package[];
+  /** Redaguojamas kurjeris (inspektorius). */
   selectedId: string | null;
-  onSelect: (id: string) => void;
+  onEdit: (id: string) => void;
   onAdd: () => void;
+  /** Kai planas yra: eilutė pasirenka kurjerio maršrutą žemėlapyje. */
+  plan: { selected: string | null; onSelect: (id: string) => void; stops: Map<string, number> } | null;
 }
 
-export function CouriersPanel({ couriers, packages, selectedId, onSelect, onAdd }: Props) {
+export function CouriersPanel({ couriers, packages, selectedId, onEdit, onAdd, plan }: Props) {
   const capacity = couriers.reduce((s, c) => s + c.capacityKg, 0);
   const demand = packages.reduce((s, p) => s + p.weightKg, 0);
   const over = demand > capacity;
@@ -35,6 +38,7 @@ export function CouriersPanel({ couriers, packages, selectedId, onSelect, onAdd 
           </span>
           {over && <span className="loadline__warn">Dalis paketų netilps</span>}
         </div>
+        {plan && <p className="block__foot">Spustelėkite kurjerį – žemėlapyje bus rodomas tik jo maršrutas. Redaguoti – pieštuku.</p>}
       </section>
 
       <section className="block block--list">
@@ -47,14 +51,17 @@ export function CouriersPanel({ couriers, packages, selectedId, onSelect, onAdd 
           </div>
         ) : (
           <ul className="rows">
-            {couriers.map((c) => (
-              <li key={c.id}>
-                <button type="button" className={`row${c.id === selectedId ? " is-selected" : ""}`} onClick={() => onSelect(c.id)}>
+            {couriers.map((c) => {
+              const routeSel = plan?.selected === c.id;
+              const stops = plan?.stops.get(c.id) ?? 0;
+              const body = (
+                <>
                   <span className="swatch" style={{ background: c.color }} />
                   <span className="row__main">
                     <span className="row__title">{c.name}</span>
                     <span className="row__sub">
                       {c.vehicle} · <span className="num">{c.id}</span>
+                      {plan && <> · {stops ? `${fmtNum(stops)} stot.` : "be paketų"}</>}
                     </span>
                   </span>
                   <span className="row__figs num">
@@ -63,9 +70,34 @@ export function CouriersPanel({ couriers, packages, selectedId, onSelect, onAdd 
                     </span>
                     <span className="row__muted">{fmtKg(c.capacityKg)} kg</span>
                   </span>
-                </button>
-              </li>
-            ))}
+                </>
+              );
+              return (
+                <li key={c.id} className={plan ? "row-with-action" : undefined}>
+                  {plan ? (
+                    <>
+                      <button
+                        type="button"
+                        className={`row${routeSel ? " is-selected" : ""}${c.id === selectedId ? " is-editing" : ""}`}
+                        onClick={() => plan.onSelect(c.id)}
+                        disabled={stops === 0}
+                        aria-pressed={routeSel}
+                        title={stops ? (routeSel ? "Rodyti visus maršrutus" : "Rodyti tik šio kurjerio maršrutą") : "Šiandien be paketų"}
+                      >
+                        {body}
+                      </button>
+                      <button type="button" className="iconbtn row__edit" onClick={() => onEdit(c.id)} aria-label={`Redaguoti: ${c.name}`} title="Redaguoti">
+                        <Icon name="pencil" size={16} />
+                      </button>
+                    </>
+                  ) : (
+                    <button type="button" className={`row${c.id === selectedId ? " is-selected" : ""}`} onClick={() => onEdit(c.id)}>
+                      {body}
+                    </button>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         )}
       </section>

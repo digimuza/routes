@@ -32,6 +32,13 @@ Raises:
 - From botanical folio: every courier's day drawn on the same 08:00–18:00 time strip.
 - From event catalog: package code and map position link both ways (row → fly to marker, marker → row).
 
+Recorded adaptations:
+- Tabs: "Paketai" and "Kurjeriai" (both scenario editing) sit left of a divider, "Maršrutai" (the plan) right of it. Splitting the contract's single "Scenarijus" tab gives each list (up to 300 packages, 10+ couriers) the full panel height; the divider keeps the edit/plan division visible. With a plan present, the Kurjeriai tab shows routes on the map so a courier can be selected there too.
+- Cursor readout and legend live in the bottom sheet margin, below the coordinate labels, not inside the map.
+- Courier selection (client feedback 2026-11-07): clicking a courier row or its route selects it; the others fade to 14 % and lose their stops; the row expands into its stop table. "Rodyti visus" (list header and on-map bar) returns to all routes.
+- "Atsisiųsti visus PDF" lives in the title-block bar next to "Sudaryti maršrutus"; disabled with an explanation until a plan exists.
+- Routes are drawn from `route.path` (road geometry). When a route lacks it, the map says so ("kelių geometrija nepasiekiama – rodomos tiesės"); straight lines are never silent.
+
 Signature move: the graduated neatline with live coordinates; a clicked point becomes a surveyed package ("54.6872, 25.2797").
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
