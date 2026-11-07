@@ -4,7 +4,7 @@ import { api, errorMessage } from "./api";
 import { fmtNum, indexPlan } from "./format";
 import { useWorkspace, type OptimizeMode } from "./state/useWorkspace";
 import { fmtLatLng, freshCourierName, nextCourierId, nextPackageId, randomPhone, randomRecipient } from "./lib/names";
-import { nextCourierColor } from "./lib/palette";
+import { displayColors, nextCourierColor } from "./lib/palette";
 import { TopBar } from "./components/TopBar";
 import { PackagesPanel, type GenerateOptions } from "./components/PackagesPanel";
 import { CouriersPanel } from "./components/CouriersPanel";
@@ -59,13 +59,29 @@ export function App() {
     setGenerateError(null);
   }, [ws.cityId]);
 
-  const plan = result?.plan ?? null;
+  // Rodymo spalvos: serverio priskirtos spalvos, kurios painiojasi su prioritetų ar veiksmo spalvomis,
+  // žemėlapyje ir sąrašuose pakeičiamos paletės spalvomis (duomenys nekeičiami).
+  const colorMap = useMemo(() => {
+    const list = [...(scenario?.couriers ?? [])];
+    for (const c of result?.plan.dataset.couriers ?? []) if (!list.some((x) => x.id === c.id)) list.push(c);
+    return displayColors(list);
+  }, [scenario?.couriers, result]);
+  const recolor = useCallback(<T extends { id: string; color: string }>(c: T): T => {
+    const col = colorMap.get(c.id);
+    return col && col !== c.color ? { ...c, color: col } : c;
+  }, [colorMap]);
+  const plan = useMemo(() => {
+    const p = result?.plan;
+    if (!p) return null;
+    return { ...p, dataset: { ...p.dataset, couriers: p.dataset.couriers.map(recolor) } };
+  }, [result, recolor]);
+  const displayResult = useMemo(() => (result && plan ? { ...result, plan } : null), [result, plan]);
   const index = useMemo(() => (plan ? indexPlan(plan) : null), [plan]);
   // Kurjerių skirtuke, kai planas yra, žemėlapis rodo maršrutus (kurjerį galima pasirinkti)
   const view = tab === "plan" || (tab === "couriers" && plan) ? "plan" : "scenario";
 
   const packages = scenario?.packages ?? [];
-  const couriers = scenario?.couriers ?? [];
+  const couriers = useMemo(() => (scenario?.couriers ?? []).map(recolor), [scenario?.couriers, recolor]);
 
   const assigned = useMemo(() => {
     if (!index || stale) return null;
@@ -173,7 +189,7 @@ export function App() {
         shiftEnd: scenario.depot.close,
         costPerHour: 12,
         costPerKm: 0.3,
-        color: nextCourierColor(scenario.couriers),
+        color: nextCourierColor(couriers),
       },
     });
   };
@@ -322,7 +338,7 @@ export function App() {
               />
             ) : (
               <PlanPanel
-                result={result}
+                result={displayResult}
                 index={index}
                 stale={stale}
                 hidden={hidden}

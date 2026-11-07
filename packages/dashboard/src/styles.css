@@ -815,7 +815,7 @@ button.row:hover,
 .axis {
   position: relative;
   height: 18px;
-  margin: 2px 78px 2px 64px;
+  margin: 2px 12px 2px 64px;
   font-family: var(--font-label);
   font-size: 0.85rem;
   font-weight: 500;
@@ -832,7 +832,7 @@ button.row:hover,
 }
 .route {
   display: grid;
-  grid-template-columns: 18px minmax(0, 1fr) auto;
+  grid-template-columns: 18px minmax(0, 1fr);
   column-gap: 9px;
   align-items: start;
   padding: 6px 8px 6px 10px;
@@ -874,7 +874,8 @@ button.row:hover,
   opacity: 1;
 }
 .route__actions {
-  margin-top: 4px;
+  grid-column: 2;
+  margin: -2px 0 2px 23px;
 }
 .routes__hint {
   margin: 0 10px 6px;
@@ -1538,6 +1539,7 @@ button.row:hover,
   margin-bottom: 6px;
 }
 .popup__seq {
+  flex: none;
   display: inline-grid;
   place-items: center;
   min-width: 24px;
@@ -1943,12 +1945,12 @@ button.row:hover,
 /* kurjerio navigacija (Google Maps) – antriniai veiksmai */
 .route__actions {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 2px;
 }
-.route__actions .btn--xs {
-  justify-content: flex-start;
+.route__actions .btn--xs:first-child {
+  margin-left: -8px;
 }
 .btn--xs.is-active {
   background: var(--blue-wash);
