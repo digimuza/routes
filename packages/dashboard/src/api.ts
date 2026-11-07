@@ -1,78 +1,145 @@
-import { PlanSchema, type Plan } from "@marsrutai/shared";
+import {
+  ApiErrorSchema,
+  CitiesResponseSchema,
+  GenerateResponseSchema,
+  OptimizeResponseSchema,
+  ScenarioSchema,
+  type City,
+  type CityId,
+  type Dataset,
+  type GenerateRequest,
+  type OptimizeRequest,
+  type OptimizeResponse,
+  type Package,
+} from "@marsrutai/shared";
+import type { ZodType, ZodTypeDef } from "zod";
 
-export const DEFAULT_PLAN_URL = "/out/plan.json";
+/**
+ * - `network`: serveris nepasiekiamas (nėra ryšio arba Vite proxy negali prisijungti);
+ * - `http`: serveris atsakė klaida (ApiError žinutė perduodama vartotojui);
+ * - `invalid`: atsakymas neatitinka kontrakto (@marsrutai/shared zod schemų).
+ */
+export type ApiErrorKind = "network" | "http" | "invalid";
 
-export type PlanSource = "file" | "sample";
-
-export interface LoadedPlan {
-  plan: Plan;
-  url: string;
-  source: PlanSource;
-}
-
-export class PlanLoadError extends Error {
+export class ApiError extends Error {
   constructor(
     message: string,
-    public readonly url: string,
-    public readonly kind: "missing" | "invalid" | "network",
+    public readonly kind: ApiErrorKind,
+    public readonly status?: number,
     public readonly details?: string,
   ) {
     super(message);
+    this.name = "ApiError";
   }
 }
 
-/** Plano URL: `?plan=/out/plan.mock.json` arba numatytas `/out/plan.json`. */
-export function planUrlFromLocation(): { url: string; explicit: boolean } {
-  const q = new URLSearchParams(window.location.search).get("plan");
-  return q ? { url: q, explicit: true } : { url: DEFAULT_PLAN_URL, explicit: false };
+export const isServerDown = (e: unknown) => e instanceof ApiError && e.kind === "network";
+
+function describeIssues(issues: { path: (string | number)[]; message: string }[]): string {
+  return issues
+    .slice(0, 6)
+    .map((i) => `${i.path.join(".") || "(šaknis)"}: ${i.message}`)
+    .join("\n");
 }
 
-function parsePlan(raw: unknown, url: string): Plan {
-  const res = PlanSchema.safeParse(raw);
-  if (!res.success) {
-    const details = res.error.issues
-      .slice(0, 8)
-      .map((i) => `${i.path.join(".") || "(šaknis)"}: ${i.message}`)
-      .join("\n");
-    throw new PlanLoadError("Planas neatitinka schemos (PlanSchema).", url, "invalid", details);
-  }
-  return res.data;
-}
-
-async function fetchPlan(url: string): Promise<Plan> {
+async function request<T>(
+  method: "GET" | "PUT" | "POST",
+  path: string,
+  schema: ZodType<T, ZodTypeDef, unknown>,
+  body?: unknown,
+): Promise<T> {
   let res: Response;
   try {
-    res = await fetch(url, { cache: "no-store" });
+    res = await fetch(path, {
+      method,
+      cache: "no-store",
+      headers: body === undefined ? undefined : { "Content-Type": "application/json" },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    });
   } catch (e) {
-    throw new PlanLoadError("Nepavyko pasiekti serverio.", url, "network", String(e));
+    throw new ApiError("Serveris nepasiekiamas.", "network", undefined, String(e));
   }
-  if (res.status === 404) throw new PlanLoadError("Plano failas nerastas.", url, "missing");
-  if (!res.ok) throw new PlanLoadError(`Serveris grąžino ${res.status}.`, url, "network");
+
   const text = await res.text();
-  let raw: unknown;
-  try {
-    raw = JSON.parse(text);
-  } catch {
-    // Vite SPA fallback gali grąžinti index.html vietoje trūkstamo failo
-    if (/^\s*</.test(text)) throw new PlanLoadError("Plano failas nerastas.", url, "missing");
-    throw new PlanLoadError("Plano failas nėra galiojantis JSON.", url, "invalid");
+  let raw: unknown = undefined;
+  let isJson = false;
+  if (text) {
+    try {
+      raw = JSON.parse(text);
+      isJson = true;
+    } catch {
+      /* ne JSON */
+    }
   }
-  return parsePlan(raw, url);
+
+  if (!res.ok) {
+    const parsed = isJson ? ApiErrorSchema.safeParse(raw) : null;
+    if (parsed?.success) {
+      const d = parsed.data.details;
+      throw new ApiError(
+        parsed.data.error,
+        "http",
+        res.status,
+        d == null ? undefined : typeof d === "string" ? d : JSON.stringify(d, null, 2),
+      );
+    }
+    // Vite proxy be veikiančio serverio grąžina 5xx be JSON kūno
+    if (res.status >= 500 && !isJson) {
+      throw new ApiError("Serveris nepasiekiamas.", "network", res.status);
+    }
+    throw new ApiError(`Serveris grąžino klaidą ${res.status}.`, "http", res.status);
+  }
+
+  if (!isJson) {
+    // SPA fallback (index.html) reiškia, kad /api nėra proxy'inamas į serverį
+    throw new ApiError("Serveris nepasiekiamas.", "network", res.status);
+  }
+  const parsed = schema.safeParse(raw);
+  if (!parsed.success) {
+    throw new ApiError(
+      `Serverio atsakymas (${method} ${path.split("?")[0]}) neatitinka kontrakto.`,
+      "invalid",
+      res.status,
+      describeIssues(parsed.error.issues),
+    );
+  }
+  return parsed.data;
 }
 
-/**
- * Nuskaito planą. Dev režime, jei numatytas `/out/plan.json` dar nesugeneruotas,
- * naudojamas pavyzdinis planas iš `@marsrutai/shared` fixtures.
- */
-export async function loadPlan(): Promise<LoadedPlan> {
-  const { url, explicit } = planUrlFromLocation();
-  try {
-    return { plan: await fetchPlan(url), url, source: "file" };
-  } catch (e) {
-    if (import.meta.env.DEV && !explicit && e instanceof PlanLoadError && e.kind === "missing") {
-      const mod = await import("../../shared/fixtures/sample-plan.json");
-      return { plan: parsePlan(mod.default, "sample-plan.json"), url: "sample-plan.json", source: "sample" };
+const q = (city: CityId) => `city=${encodeURIComponent(city)}`;
+
+export const api = {
+  async cities(): Promise<City[]> {
+    return (await request("GET", "/api/cities", CitiesResponseSchema)).cities;
+  },
+  scenario(city: CityId): Promise<Dataset> {
+    return request("GET", `/api/scenario?${q(city)}`, ScenarioSchema);
+  },
+  saveScenario(city: CityId, dataset: Dataset): Promise<Dataset> {
+    return request("PUT", `/api/scenario?${q(city)}`, ScenarioSchema, dataset);
+  },
+  async generate(req: GenerateRequest): Promise<Package[]> {
+    return (await request("POST", "/api/generate", GenerateResponseSchema, req)).packages;
+  },
+  optimize(req: OptimizeRequest): Promise<OptimizeResponse> {
+    return request("POST", "/api/optimize", OptimizeResponseSchema, req);
+  },
+  /** Paskutinis to miesto planas arba `null` (404). */
+  async plan(city: CityId): Promise<OptimizeResponse | null> {
+    try {
+      return await request("GET", `/api/plan?${q(city)}`, OptimizeResponseSchema);
+    } catch (e) {
+      if (e instanceof ApiError && e.kind === "http" && e.status === 404) return null;
+      throw e;
     }
-    throw e;
-  }
+  },
+  zipUrl(city: CityId): string {
+    return `/api/pdfs.zip?${q(city)}`;
+  },
+};
+
+export function errorMessage(e: unknown): string {
+  if (e instanceof ApiError) return e.message;
+  if (e instanceof Error) return e.message;
+  return String(e);
 }
