@@ -188,6 +188,11 @@ Prioritetas žymimas spalva: 1 – raudona, 2 – geltona, 3 – pilka.
 
 ## 5a. Dashboard (Vite)
 
+**UI kūrimo taisyklė**: visas dashboard UI kuriamas ir tobulinamas su `impeccable` skill'u
+(`pbakaus/impeccable`). Paviršiaus režimas yra „Operate", todėl svarbiausia skaitomumas,
+nuoseklumas ir tikslios detalės. Produkto kontekstas laikomas `PRODUCT.md`, dizaino sistema
+`DESIGN.md`. Prieš pristatymą privalomi `impeccable polish` ir `impeccable audit`.
+
 Minimalus, vieno puslapio, be routing'o ir be backend'o. Paleidimas: `npm run dev -w dashboard`,
 Vite dev serveris servuoja `out/` katalogą kaip `/out`, todėl `plan.json` ir PDF pasiekiami tiesiogiai.
 
