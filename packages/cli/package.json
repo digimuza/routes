@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "exports": {
+    "./api": "./src/api/index.ts",
+    "./mock": "./src/mock/index.ts",
+    "./pdf": "./src/pdf/index.ts",
+    "./generate": "./src/generate/index.ts",
+    "./load": "./src/load.ts",
+    "./summary": "./src/summary.ts"
+  },
   "scripts": {
     "gen-data": "tsx scripts/gen-data.ts",
     "demo": "tsx src/index.ts",
