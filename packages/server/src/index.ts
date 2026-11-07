@@ -46,11 +46,30 @@ if (hasDashboard) {
   });
 }
 
-serve({ fetch: app.fetch, port }, (info) => {
+const server = serve({ fetch: app.fetch, port }, (info) => {
   console.log(`Maršrutų serveris: http://localhost:${info.port}  (API /api/*, rezultatai /out/*)`);
   console.log(
     hasDashboard
       ? `Dashboard: http://localhost:${info.port}`
       : "Dashboard nesukompiliuotas – paleiskite npm run start (arba npm run dev).",
   );
+});
+
+// Užimtas prievadas: jei ten jau veikia šis demo – pasakome adresą, kitaip – kaip pakeisti prievadą.
+server.on("error", async (err: NodeJS.ErrnoException) => {
+  if (err.code !== "EADDRINUSE") throw err;
+  let ours = false;
+  try {
+    const res = await fetch(`http://localhost:${port}/api/cities`, { signal: AbortSignal.timeout(2000) });
+    ours = res.ok && JSON.stringify(await res.json()).includes("vilnius");
+  } catch {
+    ours = false;
+  }
+  if (ours) {
+    console.log(`\nDemo jau veikia: http://localhost:${port}  (antrą kartą paleisti nereikia).`);
+    console.log(`Norėdami paleisti iš naujo, sustabdykite seną procesą:  lsof -ti tcp:${port} | xargs kill`);
+    process.exit(0);
+  }
+  console.error(`\nPrievadas ${port} užimtas kitos programos. Paleiskite kitu prievadu, pvz.:  PORT=8788 npm run start`);
+  process.exit(1);
 });
