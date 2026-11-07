@@ -294,7 +294,7 @@ export function MapView(props: MapViewProps) {
                     zIndexOffset={hoveredCourier === courier.id ? 1000 : 0}
                   >
                     <Popup maxWidth={320}>
-                      <StopPopup stop={s} pkg={p} courier={courier} fmtTime={fmtTime} stale={stale} />
+                      <StopPopup stop={s} pkg={p} courier={courier} fmtTime={fmtTime} stale={stale} dataset={plan!.dataset} />
                     </Popup>
                   </Marker>
                 );

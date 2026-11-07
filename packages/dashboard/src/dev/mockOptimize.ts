@@ -1,4 +1,4 @@
-import type { Dataset, LatLng, Package, Plan, Route, Skipped, Stop } from "@marsrutai/shared";
+import { stopMinutesOf, type Dataset, type LatLng, type Package, type Plan, type Route, type Skipped, type Stop } from "@marsrutai/shared";
 
 /** Mock optimizatorius (SPEC 4.5): godus paskirstymas + nearest-neighbour, Haversine × 1.3, 25 km/h. */
 
@@ -100,7 +100,8 @@ export function mockOptimize(ds: Dataset): Plan {
       const wait = Math.max(0, toMin(p.window.start) - arrival);
       const serviceStart = arrival + wait;
       const late = Math.max(0, serviceStart - toMin(p.window.end));
-      const departure = serviceStart + p.serviceMinutes;
+      // stotelėje: ėjimas iki kliento ir atgal + perdavimas
+      const departure = serviceStart + stopMinutesOf(ds, p);
       const back = departure + travelMin(roadKm(p.location, depot));
       if (back > shiftEnd) {
         skipped.push({ packageId: p.id, reason: "Netelpa į kurjerio pamainą" });

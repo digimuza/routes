@@ -1,4 +1,4 @@
-import { PRIORITY_LABELS, type Courier, type Package, type Stop } from "@marsrutai/shared";
+import { PRIORITY_LABELS, walkMinutesOf, type Courier, type Dataset, type Package, type Stop } from "@marsrutai/shared";
 import { fmtKg, hhmm, toMinutes } from "../format";
 import { PriorityMark } from "../components/PriorityMark";
 import { inkOn } from "../lib/palette";
@@ -7,13 +7,17 @@ import { RecipientTag } from "../components/RecipientTag";
 /** Vėlavimas / laukimas rodomas tik nuo 1 min. */
 const significant = (m: number) => Math.round(m) >= 1;
 
-export function StopPopup({ stop, pkg, courier, fmtTime, stale }: {
+export function StopPopup({ stop, pkg, courier, fmtTime, stale, dataset }: {
   stop: Stop;
   pkg: Package;
   courier: Courier;
   fmtTime: (iso: string) => string;
   stale: boolean;
+  /** Plano duomenys: ėjimo laikas, su kuriuo planas sudarytas. */
+  dataset: Pick<Dataset, "settings">;
 }) {
+  const walk = walkMinutesOf(dataset);
+  const service = pkg.serviceMinutes ?? 5;
   const arrival = fmtTime(stop.arrival);
   const wait = significant(stop.waitMinutes) ? Math.round(stop.waitMinutes) : 0;
   const late = significant(stop.lateMinutes) ? Math.round(stop.lateMinutes) : 0;
@@ -47,6 +51,13 @@ export function StopPopup({ stop, pkg, courier, fmtTime, stale }: {
             <dd>nuo {serviceStart}</dd>
           </>
         )}
+        <dt>Stotelėje</dt>
+        <dd>
+          {walk + service} min{" "}
+          <span className="popup__muted">
+            (ėjimas {walk} + perdavimas {service})
+          </span>
+        </dd>
         <dt>Langas</dt>
         <dd>
           {pkg.window.start}–{pkg.window.end}

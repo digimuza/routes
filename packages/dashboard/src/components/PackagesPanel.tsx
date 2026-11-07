@@ -26,6 +26,46 @@ interface Props {
   onSelect: (id: string) => void;
   onHover: (id: string | null) => void;
   assigned: Map<string, { color: string; seq: number; name: string }> | null;
+  /** Ėjimas iki kliento ir atgal, min (scenarijaus nustatymas). */
+  walkMinutes: number;
+  onWalkMinutes: (m: number) => void;
+}
+
+function WalkSetting({ value, onChange }: { value: number; onChange: (m: number) => void }) {
+  const [text, setText] = useState(String(value));
+  useEffect(() => setText(String(value)), [value]);
+  const n = Number(text);
+  const ok = text.trim() !== "" && Number.isInteger(n) && n >= 0 && n <= 60;
+  return (
+    <div className="walk">
+      <label className="walk__label" htmlFor="walk-min">
+        <Icon name="person" size={15} />
+        Ėjimas iki kliento ir atgal
+      </label>
+      <span className="walk__input">
+        <input
+          id="walk-min"
+          type="number"
+          min={0}
+          max={60}
+          step={1}
+          value={text}
+          aria-invalid={!ok}
+          aria-describedby="walk-help"
+          onChange={(e) => {
+            setText(e.target.value);
+            const v = Number(e.target.value);
+            if (e.target.value.trim() !== "" && Number.isInteger(v) && v >= 0 && v <= 60 && v !== value) onChange(v);
+          }}
+          onBlur={() => !ok && setText(String(value))}
+        />
+        min
+      </span>
+      <span id="walk-help" className={`walk__help${ok ? "" : " is-error"}`}>
+        {ok ? "Pridedama prie kiekvieno pristatymo laiko." : "Sveikas skaičius nuo 0 iki 60."}
+      </span>
+    </div>
+  );
 }
 
 const PRIOS: Priority[] = [1, 2, 3];
@@ -203,6 +243,8 @@ export function PackagesPanel(p: Props) {
             <Icon name="wrench" size={15} /> Autoservisai <strong>{fmtNum(autoCount)}</strong>
           </span>
         </p>
+
+        <WalkSetting value={p.walkMinutes} onChange={p.onWalkMinutes} />
 
         <div className="toolbar">
           <button type="button" className={`btn btn--secondary${genOpen ? " is-active" : ""}`} aria-expanded={genOpen} onClick={() => setGenOpen((o) => !o)}>

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { Courier, LatLng, Package } from "@marsrutai/shared";
+import { walkMinutesOf, type Courier, type LatLng, type Package } from "@marsrutai/shared";
 import { api, errorMessage } from "./api";
 import { fmtNum, indexPlan } from "./format";
 import { useWorkspace, type OptimizeMode } from "./state/useWorkspace";
@@ -308,6 +308,8 @@ export function App() {
                 }}
                 onHover={setHoverPkg}
                 assigned={assigned}
+                walkMinutes={walkMinutesOf(scenario)}
+                onWalkMinutes={(m) => ws.update((d) => ({ ...d, settings: { ...d.settings, walkMinutes: m } }))}
               />
             ) : tab === "couriers" ? (
               <CouriersPanel
