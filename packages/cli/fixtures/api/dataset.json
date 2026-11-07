@@ -1,0 +1,167 @@
+{
+  "depot": {
+    "id": "D1",
+    "name": "Sandėlis Vilnius",
+    "address": "Savanorių pr. 178, Vilnius",
+    "location": {
+      "lat": 54.672,
+      "lng": 25.241
+    },
+    "date": "2026-11-10",
+    "timezone": "Europe/Vilnius",
+    "open": "08:00",
+    "close": "18:00"
+  },
+  "couriers": [
+    {
+      "id": "C01",
+      "name": "Jonas Petraitis",
+      "phone": "+37060000001",
+      "vehicle": "Furgonas",
+      "capacityKg": 150,
+      "shiftStart": "08:00",
+      "shiftEnd": "18:00",
+      "costPerHour": 12,
+      "costPerKm": 0.3,
+      "color": "#1e88e5"
+    },
+    {
+      "id": "C02",
+      "name": "Rūta Žemaitė",
+      "phone": "+37060000002",
+      "vehicle": "Lengvasis",
+      "capacityKg": 80,
+      "shiftStart": "08:00",
+      "shiftEnd": "18:00",
+      "costPerHour": 12,
+      "costPerKm": 0.25,
+      "color": "#43a047"
+    },
+    {
+      "id": "C03",
+      "name": "Tomas Jankauskas",
+      "phone": "+37060000003",
+      "vehicle": "Furgonas",
+      "capacityKg": 150,
+      "shiftStart": "08:00",
+      "shiftEnd": "18:00",
+      "costPerHour": 12,
+      "costPerKm": 0.3,
+      "color": "#8e24aa"
+    }
+  ],
+  "packages": [
+    {
+      "id": "PKG-001",
+      "recipient": "UAB Šviesa",
+      "address": "Gedimino pr. 9, Vilnius",
+      "location": {
+        "lat": 54.6872,
+        "lng": 25.2797
+      },
+      "priority": 1,
+      "window": {
+        "start": "09:00",
+        "end": "11:00"
+      },
+      "weightKg": 12,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-002",
+      "recipient": "Aistė Kazlauskienė",
+      "address": "Žirmūnų g. 68, Vilnius",
+      "location": {
+        "lat": 54.7105,
+        "lng": 25.299
+      },
+      "priority": 2,
+      "window": {
+        "start": "10:00",
+        "end": "14:00"
+      },
+      "weightKg": 4,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-003",
+      "recipient": "Kavinė „Ąžuolas“",
+      "address": "Pylimo g. 21, Vilnius",
+      "location": {
+        "lat": 54.6791,
+        "lng": 25.2775
+      },
+      "priority": 3,
+      "window": {
+        "start": "12:00",
+        "end": "17:00"
+      },
+      "weightKg": 8,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-004",
+      "recipient": "Mindaugas Čepulis",
+      "address": "Antakalnio g. 40, Vilnius",
+      "location": {
+        "lat": 54.699,
+        "lng": 25.316
+      },
+      "priority": 1,
+      "window": {
+        "start": "09:00",
+        "end": "12:00"
+      },
+      "weightKg": 20,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-005",
+      "recipient": "UAB Ūkis",
+      "address": "Ukmergės g. 220, Vilnius",
+      "location": {
+        "lat": 54.732,
+        "lng": 25.242
+      },
+      "priority": 3,
+      "window": {
+        "start": "13:00",
+        "end": "18:00"
+      },
+      "weightKg": 35,
+      "serviceMinutes": 5
+    },
+    {
+      "id": "PKG-006",
+      "recipient": "UAB Sunkus",
+      "address": "Laisvės pr. 3, Vilnius",
+      "location": {
+        "lat": 54.704,
+        "lng": 25.2
+      },
+      "priority": 3,
+      "window": {
+        "start": "10:00",
+        "end": "16:00"
+      },
+      "weightKg": 200,
+      "serviceMinutes": 10
+    },
+    {
+      "id": "PKG-007",
+      "recipient": "Ona Skubi",
+      "address": "Trakų Vokė, Vilnius",
+      "location": {
+        "lat": 54.633,
+        "lng": 25.11
+      },
+      "priority": 2,
+      "window": {
+        "start": "08:00",
+        "end": "08:15"
+      },
+      "weightKg": 3.5,
+      "serviceMinutes": 5
+    }
+  ]
+}

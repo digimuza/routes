@@ -6,8 +6,17 @@
   "scripts": {
     "gen-data": "tsx scripts/gen-data.ts",
     "demo": "tsx src/index.ts",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "tsx --test 'src/**/*.test.ts'"
   },
-  "dependencies": { "@marsrutai/shared": "*", "zod": "^3.23.8" },
-  "devDependencies": { "tsx": "^4.19.2", "typescript": "^5.6.3", "@types/node": "^22.9.0" }
+  "dependencies": {
+    "@marsrutai/shared": "*",
+    "google-auth-library": "^11.3.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
 }

@@ -1,0 +1,337 @@
+{
+  "routes": [
+    {
+      "vehicleLabel": "C01",
+      "vehicleStartTime": "2026-11-10T10:47:49Z",
+      "vehicleEndTime": "2026-11-10T11:39:05Z",
+      "visits": [
+        {
+          "shipmentIndex": 4,
+          "startTime": "2026-11-10T11:00:00Z",
+          "detour": "0s",
+          "shipmentLabel": "PKG-005",
+          "loadDemands": {
+            "weight_kg": {
+              "amount": "-35"
+            }
+          },
+          "visitType": "DELIVER_SHIPMENT"
+        },
+        {
+          "shipmentIndex": 2,
+          "startTime": "2026-11-10T11:21:44Z",
+          "detour": "1380s",
+          "shipmentLabel": "PKG-003",
+          "loadDemands": {
+            "weight_kg": {
+              "amount": "-8"
+            }
+          },
+          "visitType": "DELIVER_SHIPMENT"
+        }
+      ],
+      "transitions": [
+        {
+          "travelDuration": "731s",
+          "travelDistanceMeters": 8395,
+          "waitDuration": "0s",
+          "totalDuration": "731s",
+          "startTime": "2026-11-10T10:47:49Z",
+          "vehicleLoads": {
+            "weight_kg": {
+              "amount": "43"
+            }
+          }
+        },
+        {
+          "travelDuration": "1004s",
+          "travelDistanceMeters": 8010,
+          "waitDuration": "0s",
+          "totalDuration": "1004s",
+          "startTime": "2026-11-10T11:05:00Z",
+          "vehicleLoads": {
+            "weight_kg": {
+              "amount": "8"
+            }
+          }
+        },
+        {
+          "travelDuration": "741s",
+          "travelDistanceMeters": 3527,
+          "waitDuration": "0s",
+          "totalDuration": "741s",
+          "startTime": "2026-11-10T11:26:44Z",
+          "vehicleLoads": {
+            "weight_kg": {}
+          }
+        }
+      ],
+      "routePolyline": {
+        "points": "uculIez`yCPb@^t@S|@CRIXCAC?CAAACGEIwAiCSc@Q]Oj@e@v@]n@e@{@Uc@CGcBoDy@kBiAoCyByEUc@YaAOYCEcBeCw@eAm@w@c@e@[YWWSQOMYUa@W_@UqAo@[KYKWKwBg@eAWQEu@Ma@GKCc@G{@WyAa@oAk@EA}@g@MGg@]MGk@a@WSAAAAWUA?MQMQKOMWEGUe@Yy@GOSq@AGKg@QeAIu@AEE_@A]EgACq@C}@MyEAUIkAQiBMmA?GMuAQiBMkBAIGiAE{AA{@?SAa@?M?qC?cA?y@Ac@Ca@Em@CSCS?GEUE[AGAIAEMe@GSOa@M_@OYQ_@W]SYOQWQa@Yi@WICKC]Ck@IeAFe@FSDI?gBDgA?_@CGAE?_@CcBKa@E}B_@c@E]EOEWGMEYGoAUu@Q}@Uk@Oq@Uo@Sc@OcA[c@OgBi@_B]eAWOAUAS?U?c@Ak@AaADS@O?o@BM@w@BiADu@BS@Q?cAH}@BI@g@Bq@F}@Hs@DE@s@F{@Fw@H]@c@F}A]uEgA]OGAu@IM?A?M@_@FQDGDKFQJUNKFIDEFMJQ^{@dBMXGPENSv@Ih@G\\S`CUlDEh@Eh@Cf@O`CKfAAHGn@?@Ih@SbAY|@Ul@QXe@bAYX]`@{BbCu@p@IHIJm@l@aAbAOLwAvAk@l@k@l@eCbCUTcAdAgAhAULs@\\aClASPWTu@t@GDg@h@ED{@t@o@p@oAjAe@`@_Ar@g@`@u@h@q@d@kAx@_@Vq@b@aAh@wBfAuBdAaF~BiDlBKDSJIB}At@aEvBMHa@RQJyDjBEB{@^mAj@q@\\eBv@a@TuBhAiD|AIBa@T}@`@MFsAn@kAj@YLaAf@EBMDgD`BcClAqAn@}@f@A@A?]RMFs@^i@\\uAz@CBgBdA}AbAEBwAbAWVi@`@i@`@A@IFOLa@\\EAWEECAAA?GKCGCGCIAIAICUG_AAM?GKiACg@CUSeCI]e@yCQy@]yAMe@_@mAMWMRU`@IPEt@AHAHCJELDMBK@I@IDu@HQTa@LSLV^lALd@\\xAPx@d@xC?f@JbC@`@B`@RMj@g@p@YVKD?F@B@@@DDDHBJF^BXFdAB^Bb@B\\@N@NB^Bb@Bh@@BD`@@NBNBR@D?BBJ@F@JFTDRFTDPBLJb@FXHb@`@Yl@{@dCiCPOEYy@eGIy@Ae@HIbEwCbDoBb@SpE{BzDgBh@Yr@]hAi@ZOfD{Ax@]h@Sv@_@~@c@nBoAzAu@jAs@JGlB_Ax@a@l@[p@[b@Q`@SRIZQZKf@Q@Ah@Mj@Mz@[dAe@x@YPGvBgA`Ao@bAg@fAm@DAFEpAq@RMf@W|EkCl@]t@c@p@e@dAu@^Yl@g@LMNKpCkCbD}Cv@u@Z[|A{At@aATMfAiAbAeATUdCcCj@m@j@m@vAwANM`AcAl@m@HKHIt@q@zBcC\\a@XYf@_@b@e@v@_Az@gAN]J[Lc@H[Ji@Ji@F]Fc@\\oBNc@TsATsANy@RaAZaAf@y@\\e@RWf@a@^Wz@[r@M|@MNALCFAnCQd@G`BMbAIn@Gr@GdAIf@EZCXCr@CB?NAF?P?P?P?ZAVAZA|@E~@CJ?@?x@CHAP@vA?tA?D?p@DfAVrAZz@Tx@T\\JZHh@Nt@VhA\\vA\\pAZvAVB?d@HNDb@F^DzBh@r@FrAHAjDAv@?BAx@?NAHAFENI?G?E?E?ECCECGCKCQDk@?I@MDe@?C?KDk@HgABSBk@BQ?E@GFk@?A?A?K?QASEMCEGG@Y?c@@kA@Q@YBW@QHy@TiDTiCTeCDm@Fc@XaEBi@H_ALsCB[NmCF{@HyABe@LiBDg@h@AD?b@?b@?fAAZ?`@Ad@?`@DTB^CPEJIHMHWH]Jm@TmBBKTwAHc@BMDGFIJKFEHAF?D?P@L@\\Jf@HdAVfAVj@PL@PFb@Jh@L\\HnBb@p@Xx@ZJBN@BIJe@bAeEJo@?CHo@JgAHw@HcAJiBl@@ZAVCH?HARENKLGHGd@YRMFEHIHGNOHI[kBAEYNXO@DZjBHKJKbAyA|A}BT]VhA^hBDHHZFR@HLd@f@hB`@zAV`ABLNh@Nh@XdAXhAPp@XlA`@zABJH`@v@rCFVJ^Hf@Nh@Nn@`@dBNj@FXNf@Rz@b@nBJd@Pr@TbAjAnENb@Rp@DL`@~AL`@@P@FDL@FDN?@?B?@?D@D@BB@@?N^DLFHzAhEfBvEb@nAz@vBr@jBBLd@nAlAbDVr@`@`AAP@D?FTr@Vv@SZEJWf@ABABANKRc@n@eAhB}@xAGAA?A@k@~@GJe@p@qA|BS\\S^W^GLCBEFABCVa@r@cAzAq@jAa@p@S\\Wj@IPS^aAbB_A~Ay@xAu@pAUj@fBfEN`@rA~CnAzC^|@f@hAPd@|CpHLZ|@vBTj@xAlD|ArDL\\iB~C]p@w@vA}@zA_@r@P\\Rb@vAhCDHBF@@B@B?B@HYBSR}@_@u@Qc@"
+      },
+      "metrics": {
+        "performedShipmentCount": 2,
+        "travelDuration": "2476s",
+        "waitDuration": "0s",
+        "delayDuration": "0s",
+        "breakDuration": "0s",
+        "visitDuration": "600s",
+        "totalDuration": "3076s",
+        "travelDistanceMeters": 19932,
+        "maxLoads": {
+          "weight_kg": {
+            "amount": "43"
+          }
+        },
+        "performedShipmentPenaltyCostSum": 200
+      },
+      "routeCosts": {
+        "model.vehicles.cost_per_hour": 10.253333333333334,
+        "model.vehicles.cost_per_kilometer": 5.9796
+      },
+      "routeTotalCost": 16.232933333333335,
+      "vehicleFullness": {
+        "maxFullness": 0.2866666666666667,
+        "maxLoad": 0.2866666666666667,
+        "activeSpan": 0.08544444444444445
+      }
+    },
+    {
+      "vehicleIndex": 1,
+      "vehicleLabel": "C02",
+      "vehicleStartTime": "2026-11-10T06:00:00Z",
+      "vehicleEndTime": "2026-11-10T06:43:55Z",
+      "visits": [
+        {
+          "shipmentIndex": 6,
+          "startTime": "2026-11-10T06:19:02Z",
+          "detour": "0s",
+          "shipmentLabel": "PKG-007",
+          "loadDemands": {
+            "weight_kg": {
+              "amount": "-4"
+            }
+          },
+          "visitType": "DELIVER_SHIPMENT"
+        }
+      ],
+      "transitions": [
+        {
+          "travelDuration": "1142s",
+          "travelDistanceMeters": 12975,
+          "waitDuration": "0s",
+          "totalDuration": "1142s",
+          "startTime": "2026-11-10T06:00:00Z",
+          "vehicleLoads": {
+            "weight_kg": {
+              "amount": "4"
+            }
+          }
+        },
+        {
+          "travelDuration": "1193s",
+          "travelDistanceMeters": 12835,
+          "waitDuration": "0s",
+          "totalDuration": "1193s",
+          "startTime": "2026-11-10T06:24:02Z",
+          "vehicleLoads": {
+            "weight_kg": {}
+          }
+        }
+      ],
+      "routePolyline": {
+        "points": "uculIez`yCPb@^t@S|@CRIXCAC?CAAACGEIwAiCSc@Q]Oj@e@v@]n@FLPV@BZj@bBtBFFRTRNlA~@FD|@l@DBdAl@B@PJNDd@P^HLBb@D`@@L?x@CNCFATEp@IdAKNFPFH?P@L?F@VF^PRH@?j@PxCz@p@Lr@NJ@v@LZFt@PzBl@f@TlBdAXLZPXNTLRL`@RVLLJbB~@HFtBhAXNvFbD`Bz@lBhAl@^D@vAfAh@t@V^h@hAvBtEfA~BzDlILZFJlDtHhBzDvBrEXj@d@fALVLXFNdDbHJTLVHPhAdC|CrGZr@bEzI~@nBXl@fAzBLVZt@tA|CbCjFN\\Xj@h@hAp@xAJTrArC|CrGJTDJFJFPNZNZDHfCxFRb@|AhDPd@xAlD?@d@dBb@zATv@FX`@bBTx@nBvIXnAJb@J`@H^@DHVXhAzAjGJ\\FZPn@zBdJHZHX`Mjg@FRNdAV~A@R@VD|@Dz@?BCx@A|@ATCf@C\\C\\Kz@CRId@EVI\\Qt@Sp@Of@EJUp@kAnDy@~@w@x@[Ri@Zo@VaA\\w@b@QHQPQPKVK`@Ip@?LAn@@VB\\DRFLP\\NPz@jAFHNN?@FHFH@@NRHJtCdEV\\JRvAnBxBdDLRp@hAl@bAhDtHJVN\\Vj@rDfIfDfIDNDLj@jBx@rCNr@DRDJBLVjA`@zBj@rDVfCTnBZhDTxDHzBxAx^@VFxA`AjU?z@?F?FFhAHhAb@hGH|@Bf@HjA@TFt@HrAP|AFr@HdAH|@BTNhAJz@BLLfAPtA@B@DHJJr@@JD\\^jDRhAXjB@F?@NbANjA?@f@|DZ`CJx@j@xD@JLz@F`@Hp@x@|FBL@LBPLx@XrBJx@@F~@zGJv@NfAHj@DZJt@@BJx@Jx@VfBBPZ~BB`@Hn@f@~Dl@`FPlALdA@DTlBn@zEXxB@B?@JTVdBtAlJDVJx@Jx@BHHn@dBnMFd@BRJp@@F`BbMDTLbAT~AlA~Id@jDRrALx@N~@L~@d@~CNhAAR?RBN?BB\\Db@Hl@Fl@L`AL~@`@tCf@pDJp@UNs@l@sAdAwAdAMHGFqA`AcAv@yAdAwAfAmAz@]Rg@XM@w@De@?wBA?dE[xF]rHIvC}DKqBAyACq@?aAEGAaBSReDF{@Do@Bi@@Q@I@CLw@H_@DWHc@H}@?qA?Y?c@?[?a@?}@?kA?UGuAKKEGSK_A?UEIGCCCGCOCO?S@O@EADAN?RBNBNBFBBHFTD~@?RJDFJJTSLSDM@GDa@@]@S?U@E?A@??@DVBNR~AF^HZ@DDh@DRDHDHBBB@FALBN?F?CnDApA?^G\\]jAUpAKv@I~@Ef@AT?P@`@AjACbCp@?xABpB@|DJHwC\\sHZyF?eEvB@d@?v@ELAf@Y\\SlA{@vAgAxAeAbAw@pAaAFGLIvAeArAeAr@m@TORQKm@I{@M_AY}BeAkHMaAG[CIACCCOiAe@_DM_AO_AMy@SsAe@kDmA_JU_BMcAEUaBcMAGKq@CSGe@eBoMIo@CIKy@Ky@EWuAmJWeB?[?Ce@}DUiBa@aDACMgAMaACMIm@yAoKAIM_@[_CCQWgBKy@Ky@ACKu@E[Ik@OgAKw@_A{GAGKy@YsBMy@CQAMCMy@}FIq@Ga@M{@AKk@yDKy@[aCg@}D?AOkAOcA?AAGYkBSiA_@kDE]AKKs@?WAEA]MqAEc@Gq@Ea@Iw@QqBG}@Gg@GeAEo@Ce@?YI{@MoAGo@CQEc@[sDGi@IeAWsC?GAEKk@aAkUGyAAWyAy^I{BUyD[iDUoBWgCk@sDa@{BWkACMEKESOs@y@sCk@kBEMEOgDgIsDgIWk@O]KWiDuHm@cAq@iAMSyBeD?I?EAIAIGSeAwDW}BIwACwA?YB{ABg@\\sCLo@r@iDRo@@CDKnAyDRq@Tq@DMFQHW@GLg@BOJe@DMP}A@GF{@?I@G@U@U@M?C?U@w@GkBKcBWqAIg@[qAq@oCqIo]Qs@Kc@U_AIYI[gCcKOm@_AwDCKEOQs@g@oBAEI]GWACI[I[[sAuCuLGYEMMq@AI}A{Fe@mAOg@?AcB{Dk@qAyAiDcAaCWk@Ym@Qa@Se@IS_@{@uDaI{AeDcBqDgAaCqAqCq@{Ac@eAS]o@gA_AoBmC}FsAmC}BcFISGKkC{FgDmHMYQ_@EKA?EMQ_@MWiBqDwB}EkCuFoDsHiA_C}C_Hu@}AUa@U]IMW[}@{@MIyA{@A?c@WmEsBaAk@}BqAwF_Da@UYQ]SCCCAOGUMaB{@UMqAq@SM[OQISIMEqA_@YAoASiBYiBi@c@MA?}@]A?_@QSIYGQCEAG?E?GAI?E@KFONeAJq@HUDG@OBy@BM?a@Ac@EMC_@Ie@QOEQKCAeAm@EC}@m@GEmA_ASOSUGGcBuB[k@ACQWGM\\o@d@w@Nk@P\\Rb@vAhCDHBF@@B@B?B@HYBSR}@_@u@Qc@"
+      },
+      "metrics": {
+        "performedShipmentCount": 1,
+        "travelDuration": "2335s",
+        "waitDuration": "0s",
+        "delayDuration": "0s",
+        "breakDuration": "0s",
+        "visitDuration": "300s",
+        "totalDuration": "2635s",
+        "travelDistanceMeters": 25810,
+        "maxLoads": {
+          "weight_kg": {
+            "amount": "4"
+          }
+        },
+        "performedShipmentPenaltyCostSum": 1000
+      },
+      "routeCosts": {
+        "model.shipments.deliveries.time_windows.cost_per_hour_after_soft_end_time": 6.722222222222222,
+        "model.vehicles.cost_per_kilometer": 6.4525,
+        "model.vehicles.cost_per_hour": 8.783333333333333
+      },
+      "routeTotalCost": 21.958055555555557,
+      "vehicleFullness": {
+        "maxFullness": 0.07319444444444445,
+        "maxLoad": 0.05,
+        "activeSpan": 0.07319444444444445
+      }
+    },
+    {
+      "vehicleIndex": 2,
+      "vehicleLabel": "C03",
+      "vehicleStartTime": "2026-11-10T07:21:58Z",
+      "vehicleEndTime": "2026-11-10T08:21:52Z",
+      "visits": [
+        {
+          "startTime": "2026-11-10T07:32:34Z",
+          "detour": "0s",
+          "shipmentLabel": "PKG-001",
+          "loadDemands": {
+            "weight_kg": {
+              "amount": "-12"
+            }
+          },
+          "visitType": "DELIVER_SHIPMENT"
+        },
+        {
+          "shipmentIndex": 3,
+          "startTime": "2026-11-10T07:46:16Z",
+          "detour": "489s",
+          "shipmentLabel": "PKG-004",
+          "loadDemands": {
+            "weight_kg": {
+              "amount": "-20"
+            }
+          },
+          "visitType": "DELIVER_SHIPMENT"
+        },
+        {
+          "shipmentIndex": 1,
+          "startTime": "2026-11-10T08:00:00Z",
+          "detour": "1429s",
+          "shipmentLabel": "PKG-002",
+          "loadDemands": {
+            "weight_kg": {
+              "amount": "-4"
+            }
+          },
+          "visitType": "DELIVER_SHIPMENT"
+        }
+      ],
+      "transitions": [
+        {
+          "travelDuration": "636s",
+          "travelDistanceMeters": 4890,
+          "waitDuration": "0s",
+          "totalDuration": "636s",
+          "startTime": "2026-11-10T07:21:58Z",
+          "vehicleLoads": {
+            "weight_kg": {
+              "amount": "36"
+            }
+          }
+        },
+        {
+          "travelDuration": "522s",
+          "travelDistanceMeters": 3368,
+          "waitDuration": "0s",
+          "totalDuration": "522s",
+          "startTime": "2026-11-10T07:37:34Z",
+          "vehicleLoads": {
+            "weight_kg": {
+              "amount": "24"
+            }
+          }
+        },
+        {
+          "travelDuration": "524s",
+          "travelDistanceMeters": 2751,
+          "waitDuration": "0s",
+          "totalDuration": "524s",
+          "startTime": "2026-11-10T07:51:16Z",
+          "vehicleLoads": {
+            "weight_kg": {
+              "amount": "4"
+            }
+          }
+        },
+        {
+          "travelDuration": "1012s",
+          "travelDistanceMeters": 9167,
+          "waitDuration": "0s",
+          "totalDuration": "1012s",
+          "startTime": "2026-11-10T08:05:00Z",
+          "vehicleLoads": {
+            "weight_kg": {}
+          }
+        }
+      ],
+      "routePolyline": {
+        "points": "uculIez`yCPb@^t@S|@CRIXCAC?CAAACGEIwAiCSc@Q]Oj@e@v@]n@e@{@Uc@CGcBoDy@kBiAoCyByEUc@YaAOYCEcBeCw@eAm@w@c@e@[YWWSQOMYUa@W_@UqAo@[KYKWKwBg@eAWQEu@Ma@GKCc@G{@WyAa@oAk@EA}@g@MGg@]MGk@a@WSAAAAWUA?MQMQKOMWEGUe@Yy@GOGo@CIAGIe@Ec@C_@?CAEAWC_@C_@Ak@Cq@GcACm@AOUsHAa@EmAGgAEa@E]E[Ge@ESI_@S_AEKQm@O]Ui@OSGK[g@Q[GKS[GKS[Yg@GIS[?Ao@q@MM_@[ECAAIKAEAEWIYOYKg@I{@Oa@CiEe@c@EUCOA[EGAC?WEGAKAK?CAC?UCa@GMAeAMSCKAWC[Ek@I_@Ea@EICcAK[CoAQa@G]I}@WGA_A][OEA[Og@WKGUMc@U_@WIGu@u@IIm@s@kA{AKMiAaCUu@OeAMc@CKAGAOAGCO?MAE?g@Ca@?UAg@A[@mABw@Dq@Ba@H}@LiAHg@RcAViAV{@h@kAd@}@p@cApCyFtBiEd@gATg@Pg@p@yBDIx@}C^cCL_AP}APiCFy@Le@BONwAZuEHq@BSF[L_@JWL[Xo@P_@R}@Je@JQ?AXa@BEHILO~@Q\\Kt@@pC\\X?HA^DTDN@XDfATVFWGgAUYEOAUE_@EI@Y?qC]u@A]J_APo@Hu@GgAC_@@?KBy@HqEDeEB]@[DWD_@F]Hc@Lo@Ps@T{@Rq@Nc@FO\\w@~AgD`@m@Zk@^q@d@kAb@kADMj@wBVaADiA?GCeACu@M}AMkCKyBGuAC]Ck@GiAG}@ASI]YgAOo@uAiGMg@gBuHY{@M]Ma@aAsC]aAK]O_@Qg@So@e@sAIWmAqD[eAeC_I}@kCSi@[}@Q{@CKCKAMAIAYBKBK@K?M@M?KAMAMAGAGAGAGCEAGCECEGGECGCGAI?G?GBEBSCYIA?SKWK}@qA{@sAcA{AGK}AkCi@_AC]CQAMCKg@gBc@aBAEMaACWe@cDM{@Mg@IWEKSe@w@uAyAcCoCsEHm@Hi@BGBMBIFM^q@_@cAGGCCIESGqCaAPgBDaAD{@?E@a@@eA?_B?[GMkBoAaBdCWf@Wv@w@pDiAlGoB{@mDwAqAa@aDqAaA]uB{@GVw@`FWxAWzAIn@In@QdAb@Xd@Ve@jEMlAUrCGn@MnACVSnBMxACVKlAE~@AZGnAEbAEbAE`AEr@Cp@GrAAR?JC\\A\\ATAXA\\KXSAq@Ce@CE?aDIuFSO?mCIqEO[AK?e@?e@@C?Q@M?U@I?_@A?v@?L?\\?xD?lB?H@~K?LAb@@|D?D?pDRHh@PLsAt@XPFQGu@YMrAi@QSICj@Gr@u@zHGh@{@`IOhBYfCUvBM|@Gd@kAzHU|AIl@[lBO`AG\\Ih@?FGb@AJAJALAH?LCr@Ah@ElAEdBAp@wAG{@Ew@CUA_ABY?WBBz@BjA@^Bd@@ZB^Dj@Dd@DZHr@Pz@Lj@J`@V|@Vr@@DJXt@tBT~@\\rA@HJ^TxAHf@BVJ~@RhDf@jIBt@BXRtFLtGB`@Bv@D~@@tFCnICtAAf@?HAH?P?N?B?R?R?@?b@?P@l@CFABA@AFAN?JADCF?@ER?@EHGFEFGBKBK?I?EEICEEIMGMGOCKAOAM?K?M@MBQDOFQDIDEJG`@Ol@HH@f@Hb@FdB\\vBn@dBh@xBfAxE~B|GpDfDdB@@~CrAx@^l@VD@VH@?B@f@Lf@Lr@Fx@HFBD?NF@@LDj@V^X`@d@`@f@r@t@r@dARVl@v@TX\\h@FH^l@BBDHR\\DFl@lAd@z@R^f@a@^Wz@[r@M|@MNALCFAnCQd@G`BMbAIn@Gr@GdAIf@EZCXCr@CB?NAF?P?P?P?ZAVAZA|@E~@CJ?@?x@CHAP@vA?tA?D?p@DfAVrAZz@Tx@T\\JZHh@Nt@VhA\\vA\\pAZvAVB?d@HNDb@F^DzBh@r@FrAHl@DH@`ADr@@j@A@?TCF?HA|@INAfAQHAV?B?TDLBNBLBNHPLRN\\`@\\b@T`@^z@FRHXFXHXJp@Jx@D|@Bh@@`@?DC~GDnCBfAHjCF`@@NXrBNfA\\|DD`ADv@@RBh@@XFbBFnBDv@B`@Dp@Hn@@BHb@Pt@Tz@@DLd@Rh@NZNVLTHLBDBBTVFH@@XR@@~@x@@?x@d@d@ZXLd@Vx@\\TJDBn@RlDnAJB|@ZpAd@^N|@^FBdA`@v@X~@b@n@ZLHb@VTL|AtAHF|@jAvAzBJLb@f@Tb@xBxEhAnCx@jBbBnDBFTb@d@z@FLPV@BZj@bBtBFFRTXl@JPTXNNHFHHtAlA`Al@x@\\|@VnCJh@LDHDHDFFFDFFDFDFDDDFBDDFBFBF@F@D@F@H?B?D@D?D?D?B?D?DADAFCFCHGFGFGDIFIDK?A@A?A@A?A@A?A@CBEBIBG@IBGBI@I@E@C?A?CBKBQ?G@I@E@M?S@Q?S?SAKAKAKAICK?CAECKCII]MYEIEIACGGIK?AQOQMQGAASCIAKAI??@I?I@IBIBIDKFIHKJIJILGLINGPCJAJCLCLALAJAN?LYj@KNMJQDG?W?aAIGOCGCICKAG@KF[Ny@mCcBsCcBBSR}@_@u@Qc@"
+      },
+      "metrics": {
+        "performedShipmentCount": 3,
+        "travelDuration": "2694s",
+        "waitDuration": "0s",
+        "delayDuration": "0s",
+        "breakDuration": "0s",
+        "visitDuration": "900s",
+        "totalDuration": "3594s",
+        "travelDistanceMeters": 20176,
+        "maxLoads": {
+          "weight_kg": {
+            "amount": "36"
+          }
+        },
+        "performedShipmentPenaltyCostSum": 201000
+      },
+      "routeCosts": {
+        "model.vehicles.cost_per_kilometer": 6.0528,
+        "model.vehicles.cost_per_hour": 11.98
+      },
+      "routeTotalCost": 18.0328,
+      "vehicleFullness": {
+        "maxFullness": 0.24,
+        "maxLoad": 0.24,
+        "activeSpan": 0.09983333333333333
+      }
+    }
+  ],
+  "skippedShipments": [
+    {
+      "index": 5,
+      "label": "PKG-006",
+      "reasons": [
+        {
+          "code": "DEMAND_EXCEEDS_VEHICLE_CAPACITY",
+          "exampleVehicleIndex": 0,
+          "exampleExceededCapacityType": "weight_kg"
+        }
+      ],
+      "estimatedIncompatibleVehicleRatio": 1,
+      "penaltyCost": 100
+    }
+  ],
+  "metrics": {
+    "aggregatedRouteMetrics": {
+      "performedShipmentCount": 6,
+      "travelDuration": "7505s",
+      "waitDuration": "0s",
+      "delayDuration": "0s",
+      "breakDuration": "0s",
+      "visitDuration": "1800s",
+      "totalDuration": "9305s",
+      "travelDistanceMeters": 65918,
+      "maxLoads": {
+        "weight_kg": {
+          "amount": "43"
+        }
+      },
+      "performedShipmentPenaltyCostSum": 202200
+    },
+    "usedVehicleCount": 3,
+    "earliestVehicleStartTime": "2026-11-10T06:00:00Z",
+    "latestVehicleEndTime": "2026-11-10T11:39:05Z",
+    "totalCost": 156.2237888888889,
+    "costs": {
+      "model.shipments.penalty_cost": 100,
+      "model.vehicles.cost_per_kilometer": 18.4849,
+      "model.vehicles.cost_per_hour": 31.01666666666667,
+      "model.shipments.deliveries.time_windows.cost_per_hour_after_soft_end_time": 6.722222222222222
+    }
+  }
+}
