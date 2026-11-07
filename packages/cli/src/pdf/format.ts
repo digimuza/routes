@@ -67,18 +67,4 @@ export function formatDuration(minutes: number): string {
   return `${h} val. ${m} min`;
 }
 
-/** "Rūta Žemaitė" → "ruta-zemaite" (diakritikai transliteruojami). */
-export function slugify(s: string): string {
-  return s
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-/** Failo vardas: courier-01-jonas-petraitis.pdf (indeksas pagal kurjerių tvarką, nuo 1). */
-export function courierPdfFileName(index: number, name: string): string {
-  const slug = slugify(name) || "kurjeris";
-  return `courier-${String(index + 1).padStart(2, "0")}-${slug}.pdf`;
-}
+export { courierPdfFileName, slugify } from "@marsrutai/shared";
