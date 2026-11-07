@@ -4,7 +4,10 @@ import { createWriteStream } from "node:fs";
 import { mkdir } from "node:fs/promises";
 import { join } from "node:path";
 import PDFDocument from "pdfkit";
+import QRCode from "qrcode";
 import {
+  courierNavLinks,
+  type NavLink,
   PRIORITY_COLORS,
   PRIORITY_LABELS,
   type Courier,
@@ -144,6 +147,51 @@ function note(ctx: Ctx, text: string): void {
   doc.font(FONT.regular).fontSize(8.5).fillColor(COLORS.muted).text(text, left, doc.y, { width });
   doc.x = left;
   doc.y += 5;
+}
+
+// ---------------------------------------------------------------- navigacija
+
+/** QR kodai paruošiami iš anksto (QRCode.toBuffer asinchroninis), piešiama sinchroniškai. */
+async function navQrs(links: NavLink[]): Promise<Buffer[]> {
+  return Promise.all(
+    links.map((l) => QRCode.toBuffer(l.url, { errorCorrectionLevel: "M", margin: 1, scale: 4, color: { dark: "#1f2933", light: "#ffffff" } })),
+  );
+}
+
+function drawNavigation(ctx: Ctx, links: NavLink[], qrs: Buffer[]): void {
+  if (!links.length) return;
+  const { doc, left, width } = ctx;
+  const QR = 74;
+  const GAP = 10;
+  const perRow = 3;
+  const cardW = (width - GAP * (perRow - 1)) / perRow;
+  const cardH = QR + 16;
+  sectionTitle(ctx, "Navigacija Google Maps", cardH);
+  note(
+    ctx,
+    links.length > 1
+      ? `Nuskenuokite QR kodą telefonu arba paspauskite nuorodą. Google Maps vienoje nuorodoje leidžia iki 10 stotelių, todėl maršrutas padalintas į ${links.length} dalis – pabaigę vieną, atidarykite kitą.`
+      : "Nuskenuokite QR kodą telefonu arba paspauskite nuorodą – Google Maps atidarys visą maršrutą su stotelėmis eilės tvarka.",
+  );
+  for (let i = 0; i < links.length; i += perRow) {
+    ensureSpace(ctx, cardH + 6);
+    const y = doc.y;
+    links.slice(i, i + perRow).forEach((l, k) => {
+      const x = left + k * (cardW + GAP);
+      doc.save().roundedRect(x, y, cardW, cardH, 6).lineWidth(0.8).strokeColor(COLORS.border).stroke().restore();
+      doc.image(qrs[i + k]!, x + 8, y + 8, { width: QR, height: QR });
+      const tx = x + QR + 16;
+      const tw = cardW - QR - 24;
+      doc.font(FONT.bold).fontSize(9).fillColor(COLORS.text).text(`${l.part} dalis iš ${l.parts}`, tx, y + 12, { width: tw });
+      doc.font(FONT.regular).fontSize(8.5).fillColor(COLORS.muted).text(l.label, tx, doc.y + 1, { width: tw });
+      const ly = doc.y + 6;
+      doc.font(FONT.bold).fontSize(8.5).fillColor(COLORS.apiBadge).text("Atidaryti Google Maps ›", tx, ly, { width: tw, link: l.url, underline: false });
+      doc.link(x, y, cardW, cardH, l.url);
+    });
+    doc.x = left;
+    doc.y = y + cardH + 8;
+  }
+  doc.y += 4;
 }
 
 // ---------------------------------------------------------------- lentelės
@@ -369,6 +417,9 @@ export async function renderCourierPdf(plan: Plan, courierId: string, outFile: s
     .sort((a, b) => a.seq - b.seq)
     .map((stop) => ({ stop, pkg: pkgById.get(stop.packageId) }));
 
+  const navLinks = courierNavLinks(plan, courierId);
+  const navQrCodes = await navQrs(navLinks);
+
   const doc = new PDFDocument({
     size: PAGE.size,
     margin: PAGE.margin,
@@ -406,6 +457,7 @@ export async function renderCourierPdf(plan: Plan, courierId: string, outFile: s
   if (stops.length === 0) {
     drawEmpty(ctx);
   } else {
+    drawNavigation(ctx, navLinks, navQrCodes);
     drawLoadingList(ctx);
     drawRouteTable(ctx);
     drawSketch(ctx);

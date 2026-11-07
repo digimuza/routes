@@ -196,6 +196,12 @@ Puslapis A4, 1–2 lapai:
 3. **Maršrutas**: lentelė `Eil. nr.`, `Atvykimas`, `Paketo ID`, `Gavėjas`, `Adresas`,
    `Langas`, `Prioritetas`, `Pastaba` (pvz. "vėluoja 12 min" raudonai).
 4. **Žemėlapis** (jei `--maps`): Static Maps paveikslėlis su sunumeruotais taškais ir polilinija.
+4a. **Navigacija Google Maps** (iškart po antrašte): QR kodas ir paspaudžiama nuoroda
+   `https://www.google.com/maps/dir/?api=1&origin=…&waypoints=…&destination=…&travelmode=driving`
+   su stotelėmis eilės tvarka. Google Maps vienoje nuorodoje leidžia iki 9 tarpinių taškų, todėl
+   ilgas maršrutas skaidomas į dalis po ≤ 10 stotelių: kita dalis prasideda paskutine ankstesnės
+   stotele, paskutinė grįžta į sandėlį. Logika bendra: `courierNavLinks` iš `@marsrutai/shared`
+   (naudoja ir dashboard).
 5. **Poraštė**: "Sugeneruota su Google Route Optimization API" arba "MOCK režimas".
 
 Prioritetas žymimas spalva: 1 – raudona, 2 – geltona, 3 – pilka.
