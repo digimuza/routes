@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { describe, test } from "node:test";
 import {
+  stopMinutesOf,
   DatasetSchema,
   PlanSchema,
   type Courier,
@@ -106,7 +107,7 @@ function assertPlanInvariants(plan: Plan) {
       const arr = Date.parse(s.arrival);
       const dep = Date.parse(s.departure);
       assert.ok(arr >= prevDeparture);
-      assert.equal(dep - arr, (s.waitMinutes + p.serviceMinutes) * 60_000);
+      assert.equal(dep - arr, (s.waitMinutes + stopMinutesOf(plan.dataset, p)) * 60_000);
       const serviceStart = arr + s.waitMinutes * 60_000;
       assert.ok(serviceStart >= windowMs(p.window.start), `${p.id} served before window`);
       assert.equal(s.lateMinutes, Math.max(0, (serviceStart - windowMs(p.window.end)) / 60_000));
@@ -199,4 +200,19 @@ describe("mockOptimizer", () => {
     assert.ok(plan.routes.every((r) => r.stops.length === 0 && r.totalKm === 0));
     assert.equal(plan.metrics.deliveredCount, 0);
   });
+});
+
+test("ėjimo laikas: numatyta +10 min prie kiekvienos stotelės, keičiamas nustatymuose", async () => {
+  const base = DatasetSchema.parse(sampleDataset);
+  const at = (walk?: number) => {
+    const ds = { ...base, settings: walk === undefined ? undefined : { walkMinutes: walk } };
+    const plan = planMock(ds, new Date("2026-11-07T10:00:00Z"));
+    const s = plan.routes.flatMap((r) => r.stops)[0]!;
+    return (Date.parse(s.departure) - Date.parse(s.arrival)) / 60_000 - s.waitMinutes;
+  };
+  const pkg = base.packages[0]!;
+  assert.equal(stopMinutesOf(base, pkg), 10 + pkg.serviceMinutes);
+  assert.equal(at(), 10 + pkg.serviceMinutes);
+  assert.equal(at(0), pkg.serviceMinutes);
+  assert.equal(at(4), 4 + pkg.serviceMinutes);
 });

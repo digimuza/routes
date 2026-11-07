@@ -21,6 +21,7 @@ import {
   type Route,
   type Skipped,
   type Stop,
+  stopMinutesOf,
 } from "@marsrutai/shared";
 import { roadKm, travelMinutes } from "./geo.js";
 import { roadGeometryEnabled, withRoadGeometry } from "./roads.js";
@@ -47,6 +48,8 @@ interface Job {
   pkg: Package;
   winStart: number;
   winEnd: number;
+  /** Ėjimas iki kliento ir atgal + perdavimas, minutėmis. */
+  stopMinutes: number;
 }
 
 interface Vehicle {
@@ -100,7 +103,7 @@ function simulate(v: Vehicle, jobs: Job[], depot: LatLng): Schedule {
     const arrival = t + travelMinutes(legKm);
     const serviceStart = Math.max(arrival, job.winStart);
     const late = Math.max(0, serviceStart - job.winEnd);
-    const departure = serviceStart + job.pkg.serviceMinutes;
+    const departure = serviceStart + job.stopMinutes;
     if (late > 0) {
       if (job.pkg.priority === 1) feasible = false;
       else latePenalty += late * LATE_PENALTY_PER_MIN[job.pkg.priority];
@@ -122,9 +125,10 @@ function simulate(v: Vehicle, jobs: Job[], depot: LatLng): Schedule {
   return { start, end, km, stops, feasible, cost };
 }
 
-function prepareJob(pkg: Package, date: string, tz: string): Job {
+function prepareJob(pkg: Package, date: string, tz: string, stopMinutes: number): Job {
   return {
     pkg,
+    stopMinutes,
     winStart: zonedTimeToEpochMin(date, pkg.window.start, tz),
     winEnd: zonedTimeToEpochMin(date, pkg.window.end, tz),
   };
@@ -160,7 +164,7 @@ export function planMock(input: Dataset, now: Date = new Date()): Plan {
   const schedules = new Map<Vehicle, Schedule>(vehicles.map((v) => [v, simulate(v, [], depot.location)]));
   const maxCapacity = Math.max(0, ...dataset.couriers.map((c) => c.capacityKg));
 
-  const jobs = dataset.packages.map((p) => prepareJob(p, depot.date, tz)).sort(byPriorityThenWindow);
+  const jobs = dataset.packages.map((p) => prepareJob(p, depot.date, tz, stopMinutesOf(dataset, p))).sort(byPriorityThenWindow);
   const skipped: Skipped[] = [];
 
   for (const job of jobs) {

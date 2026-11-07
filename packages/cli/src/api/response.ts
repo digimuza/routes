@@ -1,5 +1,5 @@
 // (Dataset, OptimizeToursResponse) → Plan. Gryna funkcija, be I/O.
-import { PlanSchema, type Dataset, type Plan, type Route, type Skipped, type Stop } from "@marsrutai/shared";
+import { PlanSchema, stopMinutesOf, type Dataset, type Plan, type Route, type Skipped, type Stop } from "@marsrutai/shared";
 import { localToUtcMs, parseDurationSec, toLocalIso } from "./time.js";
 import { decodePolyline } from "./polyline.js";
 
@@ -113,7 +113,7 @@ export function buildPlan(dataset: Dataset, response: OptimizeToursResponse, gen
       const tr = transitions[i];
       const waitSec = parseDurationSec(tr?.waitDuration);
       const arrivalMs = startMs - waitSec * 1000;
-      const endMs = startMs + (p.serviceMinutes ?? 5) * 60_000;
+      const endMs = startMs + stopMinutesOf(dataset, p) * 60_000;
       const windowEndMs = localToUtcMs(depot.date, p.window.end, tz);
       return {
         seq: i + 1,

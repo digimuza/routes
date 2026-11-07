@@ -5,7 +5,8 @@ import { DatasetSchema } from "@marsrutai/shared";
 import { buildRequest, COST_TUNING } from "./request.js";
 
 const fx = (f: string) => JSON.parse(readFileSync(new URL(`../../fixtures/api/${f}`, import.meta.url), "utf8"));
-const dataset = DatasetSchema.parse(fx("dataset.json"));
+// Įrašyta reali užklausa/atsakymas sukurti be ėjimo laiko, todėl jis čia išjungtas.
+const dataset = DatasetSchema.parse({ ...fx("dataset.json"), settings: { walkMinutes: 0 } });
 
 test("buildRequest atitinka įrašytą realią užklausą (be vėliau pridėto balansavimo)", () => {
   // Įrašas padarytas prieš routeDurationLimit balansavimą; jį tikriname atskirai žemiau.

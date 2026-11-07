@@ -1,6 +1,6 @@
 // Dataset → OptimizeToursRequest (REST JSON). Gryna funkcija, be I/O.
 // Modeliavimas pagal SPEC 3.3: prioritetas → penaltyCost, langas → timeWindows su minkšta pabaiga.
-import type { Dataset, Priority } from "@marsrutai/shared";
+import { stopMinutesOf, type Dataset, type Priority } from "@marsrutai/shared";
 import { durationStr, localToRfc3339 } from "./time.js";
 
 /**
@@ -105,7 +105,7 @@ export function buildRequest(dataset: Dataset): OptimizeToursRequest {
       deliveries: [
         {
           arrivalLocation: ll(p.location),
-          duration: durationStr((p.serviceMinutes ?? 5) * 60),
+          duration: durationStr(stopMinutesOf(dataset, p) * 60),
           timeWindows: [
             {
               startTime: t(start),
