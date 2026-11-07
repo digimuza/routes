@@ -66,6 +66,10 @@ Route Optimization API neturi tiesioginio "prioriteto" lauko. Modeliuojame taip:
     (1 prioritetas vėluoti brangiausia),
   - `endTime` – kieta riba = darbo dienos pabaiga.
 
+- **Darbo krūvio balansavimas → `routeDurationLimit`**: kiekvienam kurjeriui kvadratinė maršruto
+  trukmės kaina nuo 0 h (`COST_TUNING.balanceCostPerSquareHour`, numatyta 8). Be jo API viską
+  sukrauna ant 3–5 kurjerių. Su juo `normal` rinkinyje dirba visi 10, už ~30 % daugiau km.
+
 Nepristatyti paketai (`skippedShipments`) rodomi suvestinėje atskirai su priežastimi.
 
 ## 4. Techninis sprendimas

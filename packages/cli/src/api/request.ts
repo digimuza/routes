@@ -12,6 +12,11 @@ import { durationStr, localToRfc3339 } from "./time.js";
  * Vėlavimo kaina per valandą mažesnė už baudą, todėl geriau pavėluoti nei nepristatyti,
  * bet 1 prioritetui vėluoti brangiausia.
  */
+const hhmmToMin = (hhmm: string) => {
+  const [h, m] = hhmm.split(":").map(Number);
+  return h * 60 + m;
+};
+
 export const COST_TUNING = {
   /** Bauda, jei paketas nepristatomas. */
   penaltyCost: { 1: 100_000, 2: 1_000, 3: 100 } satisfies Record<Priority, number>,
@@ -22,6 +27,12 @@ export const COST_TUNING = {
   searchMode: "RETURN_FAST",
   considerRoadTraffic: false,
   populatePolylines: true,
+  /**
+   * Darbo krūvio balansavimas: kaina už kiekvieną maršruto trukmės valandą kvadratu
+   * (routeDurationLimit.costPerSquareHourAfterQuadraticSoftMax nuo 0 h). Be jo API
+   * sukrauna viską ant kelių kurjerių, nes taip pigiausia. 0 išjungia balansavimą.
+   */
+  balanceCostPerSquareHour: 8,
 } as const;
 
 // ---- Minimalūs REST tipai (tik naudojami laukai) ----
@@ -55,6 +66,11 @@ export interface VehicleJson {
   loadLimits: Record<string, { maxLoad: string }>;
   costPerHour: number;
   costPerKilometer: number;
+  routeDurationLimit?: {
+    maxDuration: string;
+    quadraticSoftMaxDuration: string;
+    costPerSquareHourAfterQuadraticSoftMax: number;
+  };
 }
 export interface OptimizeToursRequest {
   model: {
@@ -115,6 +131,15 @@ export function buildRequest(dataset: Dataset): OptimizeToursRequest {
     loadLimits: { [load]: { maxLoad: String(Math.floor(c.capacityKg)) } },
     costPerHour: c.costPerHour,
     costPerKilometer: c.costPerKm,
+    ...(COST_TUNING.balanceCostPerSquareHour > 0
+      ? {
+          routeDurationLimit: {
+            maxDuration: durationStr(Math.max(0, hhmmToMin(c.shiftEnd) - hhmmToMin(c.shiftStart)) * 60),
+            quadraticSoftMaxDuration: "0s",
+            costPerSquareHourAfterQuadraticSoftMax: COST_TUNING.balanceCostPerSquareHour,
+          },
+        }
+      : {}),
   }));
 
   return {
