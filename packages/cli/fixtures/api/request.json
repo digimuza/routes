@@ -1,0 +1,282 @@
+{
+  "model": {
+    "globalStartTime": "2026-11-10T06:00:00Z",
+    "globalEndTime": "2026-11-10T16:00:00Z",
+    "shipments": [
+      {
+        "label": "PKG-001",
+        "deliveries": [
+          {
+            "arrivalLocation": {
+              "latitude": 54.6872,
+              "longitude": 25.2797
+            },
+            "duration": "300s",
+            "timeWindows": [
+              {
+                "startTime": "2026-11-10T07:00:00Z",
+                "softEndTime": "2026-11-10T09:00:00Z",
+                "costPerHourAfterSoftEndTime": 500,
+                "endTime": "2026-11-10T16:00:00Z"
+              }
+            ]
+          }
+        ],
+        "loadDemands": {
+          "weight_kg": {
+            "amount": "12"
+          }
+        },
+        "penaltyCost": 100000
+      },
+      {
+        "label": "PKG-002",
+        "deliveries": [
+          {
+            "arrivalLocation": {
+              "latitude": 54.7105,
+              "longitude": 25.299
+            },
+            "duration": "300s",
+            "timeWindows": [
+              {
+                "startTime": "2026-11-10T08:00:00Z",
+                "softEndTime": "2026-11-10T12:00:00Z",
+                "costPerHourAfterSoftEndTime": 100,
+                "endTime": "2026-11-10T16:00:00Z"
+              }
+            ]
+          }
+        ],
+        "loadDemands": {
+          "weight_kg": {
+            "amount": "4"
+          }
+        },
+        "penaltyCost": 1000
+      },
+      {
+        "label": "PKG-003",
+        "deliveries": [
+          {
+            "arrivalLocation": {
+              "latitude": 54.6791,
+              "longitude": 25.2775
+            },
+            "duration": "300s",
+            "timeWindows": [
+              {
+                "startTime": "2026-11-10T10:00:00Z",
+                "softEndTime": "2026-11-10T15:00:00Z",
+                "costPerHourAfterSoftEndTime": 20,
+                "endTime": "2026-11-10T16:00:00Z"
+              }
+            ]
+          }
+        ],
+        "loadDemands": {
+          "weight_kg": {
+            "amount": "8"
+          }
+        },
+        "penaltyCost": 100
+      },
+      {
+        "label": "PKG-004",
+        "deliveries": [
+          {
+            "arrivalLocation": {
+              "latitude": 54.699,
+              "longitude": 25.316
+            },
+            "duration": "300s",
+            "timeWindows": [
+              {
+                "startTime": "2026-11-10T07:00:00Z",
+                "softEndTime": "2026-11-10T10:00:00Z",
+                "costPerHourAfterSoftEndTime": 500,
+                "endTime": "2026-11-10T16:00:00Z"
+              }
+            ]
+          }
+        ],
+        "loadDemands": {
+          "weight_kg": {
+            "amount": "20"
+          }
+        },
+        "penaltyCost": 100000
+      },
+      {
+        "label": "PKG-005",
+        "deliveries": [
+          {
+            "arrivalLocation": {
+              "latitude": 54.732,
+              "longitude": 25.242
+            },
+            "duration": "300s",
+            "timeWindows": [
+              {
+                "startTime": "2026-11-10T11:00:00Z",
+                "softEndTime": "2026-11-10T16:00:00Z",
+                "costPerHourAfterSoftEndTime": 20,
+                "endTime": "2026-11-10T16:00:00Z"
+              }
+            ]
+          }
+        ],
+        "loadDemands": {
+          "weight_kg": {
+            "amount": "35"
+          }
+        },
+        "penaltyCost": 100
+      },
+      {
+        "label": "PKG-006",
+        "deliveries": [
+          {
+            "arrivalLocation": {
+              "latitude": 54.704,
+              "longitude": 25.2
+            },
+            "duration": "600s",
+            "timeWindows": [
+              {
+                "startTime": "2026-11-10T08:00:00Z",
+                "softEndTime": "2026-11-10T14:00:00Z",
+                "costPerHourAfterSoftEndTime": 20,
+                "endTime": "2026-11-10T16:00:00Z"
+              }
+            ]
+          }
+        ],
+        "loadDemands": {
+          "weight_kg": {
+            "amount": "200"
+          }
+        },
+        "penaltyCost": 100
+      },
+      {
+        "label": "PKG-007",
+        "deliveries": [
+          {
+            "arrivalLocation": {
+              "latitude": 54.633,
+              "longitude": 25.11
+            },
+            "duration": "300s",
+            "timeWindows": [
+              {
+                "startTime": "2026-11-10T06:00:00Z",
+                "softEndTime": "2026-11-10T06:15:00Z",
+                "costPerHourAfterSoftEndTime": 100,
+                "endTime": "2026-11-10T16:00:00Z"
+              }
+            ]
+          }
+        ],
+        "loadDemands": {
+          "weight_kg": {
+            "amount": "4"
+          }
+        },
+        "penaltyCost": 1000
+      }
+    ],
+    "vehicles": [
+      {
+        "label": "C01",
+        "travelMode": "DRIVING",
+        "startLocation": {
+          "latitude": 54.672,
+          "longitude": 25.241
+        },
+        "endLocation": {
+          "latitude": 54.672,
+          "longitude": 25.241
+        },
+        "startTimeWindows": [
+          {
+            "startTime": "2026-11-10T06:00:00Z"
+          }
+        ],
+        "endTimeWindows": [
+          {
+            "endTime": "2026-11-10T16:00:00Z"
+          }
+        ],
+        "loadLimits": {
+          "weight_kg": {
+            "maxLoad": "150"
+          }
+        },
+        "costPerHour": 12,
+        "costPerKilometer": 0.3
+      },
+      {
+        "label": "C02",
+        "travelMode": "DRIVING",
+        "startLocation": {
+          "latitude": 54.672,
+          "longitude": 25.241
+        },
+        "endLocation": {
+          "latitude": 54.672,
+          "longitude": 25.241
+        },
+        "startTimeWindows": [
+          {
+            "startTime": "2026-11-10T06:00:00Z"
+          }
+        ],
+        "endTimeWindows": [
+          {
+            "endTime": "2026-11-10T16:00:00Z"
+          }
+        ],
+        "loadLimits": {
+          "weight_kg": {
+            "maxLoad": "80"
+          }
+        },
+        "costPerHour": 12,
+        "costPerKilometer": 0.25
+      },
+      {
+        "label": "C03",
+        "travelMode": "DRIVING",
+        "startLocation": {
+          "latitude": 54.672,
+          "longitude": 25.241
+        },
+        "endLocation": {
+          "latitude": 54.672,
+          "longitude": 25.241
+        },
+        "startTimeWindows": [
+          {
+            "startTime": "2026-11-10T06:00:00Z"
+          }
+        ],
+        "endTimeWindows": [
+          {
+            "endTime": "2026-11-10T16:00:00Z"
+          }
+        ],
+        "loadLimits": {
+          "weight_kg": {
+            "maxLoad": "150"
+          }
+        },
+        "costPerHour": 12,
+        "costPerKilometer": 0.3
+      }
+    ]
+  },
+  "searchMode": "RETURN_FAST",
+  "considerRoadTraffic": false,
+  "populatePolylines": true
+}
