@@ -15,7 +15,7 @@
     "gen-data": "tsx scripts/gen-data.ts",
     "demo": "tsx src/index.ts",
     "typecheck": "tsc -p tsconfig.json",
-    "test": "tsx --test 'src/**/*.test.ts'",
+    "test": "MARSRUTAI_ROAD_GEOMETRY=off tsx --test 'src/**/*.test.ts'",
     "test:pdf": "tsx --test src/pdf/pdf.test.ts",
     "try-mock": "tsx scripts/try-mock.ts",
     "try-api": "tsx scripts/try-api.ts",

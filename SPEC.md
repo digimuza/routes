@@ -173,6 +173,10 @@ vėluoti su bauda. Kaina = kurjerio €/h ir €/km + vėlavimo baudos + krūvio
 niekur netelpa – paketas `skipped` su priežastimi. Atstumas – Haversine × 1.3, greitis 25 km/h mieste. Tikslas – kad PDF ir
 suvestinė atrodytų realistiškai be GCP. PDF'e aiškiai pažymima "MOCK".
 
+**Kelių geometrija**: mock laikus skaičiuoja tiesėmis × 1.3, bet maršruto `path` gaunamas iš OSRM
+(`router.project-osrm.org`, keičiama `OSRM_URL`), kad žemėlapyje ir PDF maršrutas eitų gatvėmis.
+Jei OSRM nepasiekiamas, paliekamos tiesės su įspėjimu. Testuose išjungiama `MARSRUTAI_ROAD_GEOMETRY=off`.
+
 ## 5. PDF turinys (vienam kurjeriui)
 
 Puslapis A4, 1–2 lapai:

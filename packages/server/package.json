@@ -7,7 +7,7 @@
     "dev": "tsx watch src/index.ts",
     "start": "tsx src/index.ts",
     "typecheck": "tsc -p tsconfig.json",
-    "test": "tsx --test 'src/**/*.test.ts'"
+    "test": "MARSRUTAI_ROAD_GEOMETRY=off tsx --test 'src/**/*.test.ts'"
   },
   "dependencies": {
     "@hono/node-server": "^2.1.6",
